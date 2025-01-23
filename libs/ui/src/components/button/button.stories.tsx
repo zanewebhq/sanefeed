@@ -10,6 +10,7 @@ export default meta;
 export const Primary: StoryObj<ButtonProps> = {
   args: {
     children: 'Click me',
-    disabled: false
+    variant: 'primary',
+    disabled: false,
   },
 };

@@ -1,13 +1,22 @@
 import styles from './button.module.css';
 
+export type ButtonVariant = 'primary' | 'secondary';
+
 export interface ButtonProps {
-  children: React.ReactNode;
+  children: string;
+  variant?: ButtonVariant;
   disabled?: boolean;
 }
 
-export default function Button({ children, disabled = false }: ButtonProps) {
+export default function Button({
+  children,
+  variant = 'primary',
+  disabled = false,
+}: ButtonProps) {
+  const className = `${styles.button} ${styles[variant]}`;
+
   return (
-    <button className={styles.button} disabled={disabled}>
+    <button className={className} disabled={disabled}>
       {children}
     </button>
   );
