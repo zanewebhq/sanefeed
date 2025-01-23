@@ -59,4 +59,6 @@
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
+
+  --transition-micro: 150ms ease-out;
 }

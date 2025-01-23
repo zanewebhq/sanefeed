@@ -1,0 +1,28 @@
+.button {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary-300);
+  color: var(--color-text-light-100);
+  font-family: var(--font-family);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  transition: background var(--transition-micro),
+    outline-color var(--transition-micro);
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-primary-400);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--color-primary-400);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    background-color: var(--color-primary-500);
+  }
+}
