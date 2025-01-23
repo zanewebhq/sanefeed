@@ -1,3 +1,5 @@
+import '@sanefeed/ui/styles/globals.css';
+
 export const metadata = {
   title: 'SaneFeed',
   description: 'A user-friendly, feature-rich RSS reader',

@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@sanefeed/ui": ["libs/ui/src/index.ts"]
+      "@sanefeed/ui": ["libs/ui/src/index.ts"],
+      "@sanefeed/ui/styles/*": ["libs/ui/src/styles/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

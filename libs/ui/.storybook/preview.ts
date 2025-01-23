@@ -1,1 +1,1 @@
-import './preview.css';
+import '../src/styles/globals.css';
