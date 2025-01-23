@@ -2,7 +2,16 @@
   "name": "@sanefeed/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "web:dev": "nx dev web",
+    "web:build": "nx build web",
+    "web:lint": "nx lint web",
+    "web:test": "nx test web",
+    "web:e2e": "nx e2e web-e2e",
+    "ui:dev": "nx storybook ui",
+    "ui:build": "nx build-storybook ui",
+    "ui:test": "nx test-storybook ui --url http://localhost:36843/"
+  },
   "private": true,
   "dependencies": {
     "next": "~15.1.4",
