@@ -11,6 +11,7 @@
   transition: background var(--transition-micro),
     outline-color var(--transition-micro);
   cursor: pointer;
+  user-select: none;
 
   &:hover,
   &:focus-visible {
