@@ -1,4 +1,13 @@
 import '@sanefeed/ui/styles/globals.css';
+import { Fira_Sans } from 'next/font/google';
+
+const firaSans = Fira_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  fallback: ['sans-serif'],
+});
 
 export const metadata = {
   title: 'SaneFeed',
@@ -11,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={firaSans.className}>
       <body>{children}</body>
     </html>
   );
