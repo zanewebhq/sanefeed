@@ -36,6 +36,8 @@
 
   /* Fonts */
 
+  --font-family: 'Fira Sans', sans-serif;
+
   --font-size-5xl: 3rem;
   --font-size-4xl: 2rem;
   --font-size-3xl: 1.75rem;
@@ -53,7 +55,7 @@
   --line-height-normal: 100%;
   --line-height-heading: 120%;
   --line-height-body: 150%;
-  
+
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
