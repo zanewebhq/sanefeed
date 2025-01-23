@@ -28,13 +28,15 @@
   --color-text-dark-200: hsl(53, 11%, 15%);
   --color-text-dark-300: hsl(0, 0%, 0%);
 
-  --color-primary-100: #00cccc;
-  --color-primary-200: #00a3a3;
-  --color-primary-300: #008080;
-  --color-primary-400: #005c5c;
-  --color-primary-500: #003333;
+  --color-primary-100: hsl(180, 100%, 40%);
+  --color-primary-200: hsl(180, 100%, 32%);
+  --color-primary-300: hsl(180, 100%, 25%);
+  --color-primary-400: hsl(180, 100%, 18%);
+  --color-primary-500: hsl(180, 100%, 10%);
 
   /* Fonts */
+
+  --font-family: 'Fira Sans', sans-serif;
 
   --font-size-5xl: 3rem;
   --font-size-4xl: 2rem;
@@ -53,8 +55,22 @@
   --line-height-normal: 100%;
   --line-height-heading: 120%;
   --line-height-body: 150%;
-  
+
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
+
+  --transition-micro: 150ms ease-out;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
 }

@@ -1,10 +1,10 @@
-import { Ui } from '@sanefeed/ui';
+import { Button } from '@sanefeed/ui';
 
 export default function HomePage() {
   return (
     <>
       <div>SaneFeed</div>
-      <Ui />
+      <Button>New Feed</Button>
     </>
   );
 }
