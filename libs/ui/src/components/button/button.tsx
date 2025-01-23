@@ -8,7 +8,7 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
-export default function Button({
+export function Button({
   children,
   variant = 'primary',
   disabled = false,
@@ -21,3 +21,5 @@ export default function Button({
     </button>
   );
 }
+
+export default Button;
