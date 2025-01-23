@@ -26,4 +26,10 @@
   &:active {
     background-color: var(--color-primary-500);
   }
+
+  &:disabled {
+    background-color: var(--color-neutral-100);
+    color: var(--color-text-dark-100);
+    cursor: not-allowed;
+  }
 }
