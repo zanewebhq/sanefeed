@@ -1,0 +1,60 @@
+:root {
+  /* Colors */
+
+  --color-neutral-0: hsl(0, 0%, 100%);
+  --color-neutral-50: hsl(0, 0%, 95%);
+  --color-neutral-100: hsl(0, 0%, 90%);
+  --color-neutral-200: hsl(0, 0%, 80%);
+  --color-neutral-300: hsl(0, 0%, 70%);
+  --color-neutral-400: hsl(0, 0%, 60%);
+  --color-neutral-500: hsl(0, 0%, 50%);
+  --color-neutral-600: hsl(0, 0%, 40%);
+  --color-neutral-700: hsl(0, 0%, 30%);
+  --color-neutral-800: hsl(0, 0%, 20%);
+  --color-neutral-900: hsl(0, 0%, 10%);
+  --color-neutral-1000: hsl(0, 0%, 0%);
+
+  --color-background-100: hsl(0, 0%, 100%);
+  --color-background-200: hsl(45, 40%, 98%);
+  --color-background-300: hsl(42, 38%, 95%);
+  --color-background-400: hsl(44, 29%, 90%);
+  --color-background-500: hsl(52, 10%, 55%);
+
+  --color-text-light-100: hsl(0, 0%, 100%);
+  --color-text-light-200: hsl(51, 52%, 95%);
+  --color-text-light-300: hsl(55, 49%, 90%);
+
+  --color-text-dark-100: hsl(54, 5%, 40%);
+  --color-text-dark-200: hsl(53, 11%, 15%);
+  --color-text-dark-300: hsl(0, 0%, 0%);
+
+  --color-primary-100: #00cccc;
+  --color-primary-200: #00a3a3;
+  --color-primary-300: #008080;
+  --color-primary-400: #005c5c;
+  --color-primary-500: #003333;
+
+  /* Fonts */
+
+  --font-size-5xl: 3rem;
+  --font-size-4xl: 2rem;
+  --font-size-3xl: 1.75rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-xl: 1.25rem;
+  --font-size-lg: 1.125rem;
+  --font-size-md: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --line-height-normal: 100%;
+  --line-height-heading: 120%;
+  --line-height-body: 150%;
+  
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+}
