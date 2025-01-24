@@ -12,6 +12,7 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-normal);
+  text-decoration: none;
   cursor: pointer;
   user-select: none;
 }
