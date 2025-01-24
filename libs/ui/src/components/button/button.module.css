@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
+  width: 100%;
   height: 3rem;
   padding: 0 2rem;
   border: none;
@@ -11,6 +12,7 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-normal);
+  text-decoration: none;
   cursor: pointer;
   user-select: none;
 }
@@ -18,7 +20,7 @@
 .primary {
   background-color: var(--color-primary-300);
   color: var(--color-text-light-100);
-  transition: background var(--transition-micro),
+  transition: background-color var(--transition-micro),
     outline-color var(--transition-micro);
 
   &:hover,
@@ -46,7 +48,7 @@
   background-color: transparent;
   color: var(--color-primary-300);
   border: 2px solid var(--color-primary-300);
-  transition: background var(--transition-micro),
+  transition: background-color var(--transition-micro),
     border-color var(--transition-micro), outline-color var(--transition-micro);
 
   &:hover,
