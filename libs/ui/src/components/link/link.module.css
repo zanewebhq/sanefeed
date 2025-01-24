@@ -1,0 +1,48 @@
+.link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  border-bottom: 2px solid;
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+
+  color: var(--color-primary-300);
+  border-color: var(--color-primary-300);
+  box-shadow: 0 0 0 2px transparent;
+  transition: background var(--transition-micro), color var(--transition-micro),
+    border-color var(--transition-micro), box-shadow var(--transition-micro);
+
+  &:hover,
+  &:focus-visible {
+    border-radius: 1px;
+  }
+
+  &:hover {
+    color: var(--color-text-light-100);
+    border-color: var(--color-primary-200);
+    box-shadow: 0 0 0 3px var(--color-primary-200);
+    background-color: var(--color-primary-200);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--color-primary-300);
+    outline-offset: 2px;
+    border: none;
+    color: var(--color-primary-300);
+    box-shadow: 0 0 0 3px transparent;
+    background-color: transparent;
+  }
+
+  &:active {
+    color: var(--color-text-light-100);
+    border-color: var(--color-primary-400);
+    box-shadow: 0 0 0 3px var(--color-primary-400);
+    background-color: var(--color-primary-400);
+  }
+}
