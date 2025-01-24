@@ -14,3 +14,20 @@ export const Primary: StoryObj<ButtonProps> = {
     disabled: false,
   },
 };
+
+export const Secondary: StoryObj<ButtonProps> = {
+  args: {
+    children: 'Click me',
+    variant: 'secondary',
+    disabled: false,
+  },
+};
+
+export const WithIcon: StoryObj<ButtonProps> = {
+  args: {
+    children: 'New Feed',
+    variant: 'primary',
+    disabled: false,
+    iconLeft: 'plus',
+  },
+};
