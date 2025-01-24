@@ -10,5 +10,6 @@ export default meta;
 export const Primary: StoryObj<IconProps> = {
   args: {
     name: 'arrow-back',
+    size: 'md',
   },
 };
