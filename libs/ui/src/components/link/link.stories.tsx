@@ -19,5 +19,6 @@ export const External: StoryObj<LinkProps> = {
     children: 'Terms of Service',
     href: '#',
     iconRight: 'external',
+    openNewTab: true,
   },
 };
