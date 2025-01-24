@@ -19,7 +19,7 @@
 .primary {
   background-color: var(--color-primary-300);
   color: var(--color-text-light-100);
-  transition: background var(--transition-micro),
+  transition: background-color var(--transition-micro),
     outline-color var(--transition-micro);
 
   &:hover,
@@ -47,7 +47,7 @@
   background-color: transparent;
   color: var(--color-primary-300);
   border: 2px solid var(--color-primary-300);
-  transition: background var(--transition-micro),
+  transition: background-color var(--transition-micro),
     border-color var(--transition-micro), outline-color var(--transition-micro);
 
   &:hover,

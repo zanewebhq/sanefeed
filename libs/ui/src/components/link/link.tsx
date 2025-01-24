@@ -3,10 +3,11 @@ import styles from './link.module.css';
 
 export interface LinkProps {
   children: string;
-  href: string;
+  href?: string;
   openNewTab?: boolean;
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
+  onClick?: () => void;
 }
 
 export function Link({
@@ -15,18 +16,25 @@ export function Link({
   openNewTab = false,
   iconLeft,
   iconRight,
+  onClick,
 }: LinkProps) {
-  return (
+  return href ? (
     <a
       href={href}
-      className={styles.link}
       target={openNewTab ? '_blank' : '_self'}
       rel={openNewTab ? 'noopener noreferrer' : undefined}
+      className={styles.link}
     >
       {iconLeft && <Icon name={iconLeft} size="sm" />}
       <span>{children}</span>
       {iconRight && <Icon name={iconRight} size="sm" />}
     </a>
+  ) : (
+    <button type="button" onClick={onClick} className={styles.link}>
+      {iconLeft && <Icon name={iconLeft} size="sm" />}
+      <span>{children}</span>
+      {iconRight && <Icon name={iconRight} size="sm" />}
+    </button>
   );
 }
 

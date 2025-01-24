@@ -22,3 +22,12 @@ export const External: StoryObj<LinkProps> = {
     openNewTab: true,
   },
 };
+
+export const AsButton: StoryObj<LinkProps> = {
+  args: {
+    onClick: () => alert('Button clicked'),
+    children: 'Go back',
+    iconLeft: 'arrow-back',
+    openNewTab: true,
+  },
+};
