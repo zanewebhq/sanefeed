@@ -1,6 +1,33 @@
+import { cx } from '../../utils';
 import Icon, { IconProps } from '../icon/icon';
 import Text from '../text/text';
 import styles from './text-field.module.css';
+
+interface GetInputPaddingClassesParams {
+  iconLeft?: IconProps['name'];
+  iconRight?: IconProps['name'];
+  error?: string;
+}
+
+const getInputPaddingClasses = ({
+  iconLeft,
+  iconRight,
+  error,
+}: GetInputPaddingClassesParams) => {
+  const classes = [];
+
+  if (iconLeft) {
+    classes.push(styles.inputWithIconLeft);
+  }
+
+  if (iconRight && error) {
+    classes.push(styles.inputWithDoubleIconRight);
+  } else if (iconRight || error) {
+    classes.push(styles.inputWithIconRight);
+  }
+
+  return classes;
+};
 
 export interface TextFieldProps {
   name: string;
@@ -8,6 +35,7 @@ export interface TextFieldProps {
   label?: string;
   placeholder?: string;
   helper?: string;
+  error?: string;
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
 }
@@ -18,10 +46,17 @@ export const TextField = ({
   label,
   placeholder,
   helper,
+  error,
   iconLeft,
   iconRight,
 }: TextFieldProps) => {
   const helperId = `${name}-helper`;
+
+  const inputPaddingClasses = getInputPaddingClasses({
+    iconLeft,
+    iconRight,
+    error,
+  });
 
   const focusInput = () => {
     document.getElementById(name)?.focus();
@@ -38,18 +73,28 @@ export const TextField = ({
       )}
 
       <div className={styles.inputWrapper} onClick={focusInput}>
-        {iconLeft && <Icon name={iconLeft} size="md" className={styles.icon} />}
+        {iconLeft && (
+          <div className={cx(styles.icons, styles.iconsLeft)}>
+            <Icon name={iconLeft} size="md" />
+          </div>
+        )}
+
         <input
           type={type}
           id={name}
           name={name}
           placeholder={placeholder}
-          className={styles.input}
+          className={cx(styles.input, ...inputPaddingClasses)}
           aria-describedby={helperId}
         />
-        {iconRight && (
-          <Icon name={iconRight} size="md" className={styles.icon} />
-        )}
+
+        <div className={cx(styles.icons, styles.iconsRight)}>
+          {iconRight && <Icon name={iconRight} size="md" />}
+
+          {error && (
+            <Icon name="error" size="md" className={styles.errorIcon} />
+          )}
+        </div>
       </div>
 
       {helper && (
