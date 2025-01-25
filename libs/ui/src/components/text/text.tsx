@@ -18,6 +18,7 @@ export type TextSize =
 
 export interface TextProps {
   children: React.ReactNode;
+  id?: string;
   className?: string;
   as?: TextTag;
   type?: TextType;
@@ -26,6 +27,7 @@ export interface TextProps {
 
 export const Text = ({
   children,
+  id,
   className,
   as: Tag = 'p',
   type = 'body',
@@ -38,7 +40,11 @@ export const Text = ({
     className
   );
 
-  return <Tag className={classes}>{children}</Tag>;
+  return (
+    <Tag id={id} className={classes}>
+      {children}
+    </Tag>
+  );
 };
 
 export default Text;

@@ -6,7 +6,7 @@ const meta: Meta<typeof Button> = {
   title: 'Button',
   decorators: [
     (Story) => (
-      <div style={{ width: '16rem' }}>
+      <div style={{ width: '20rem' }}>
         <Story />
       </div>
     ),
