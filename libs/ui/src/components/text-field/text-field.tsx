@@ -21,7 +21,7 @@ export interface TextFieldProps {
 
 export const TextField = ({
   name,
-  value,
+  value = '',
   onChange,
   type = 'text',
   label,
@@ -41,6 +41,10 @@ export const TextField = ({
     iconRight,
     error,
   });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e.target.value);
+  };
 
   return (
     <div className={styles.field}>
@@ -65,10 +69,10 @@ export const TextField = ({
           name={name}
           placeholder={placeholder}
           value={value}
-          onChange={(e) => onChange?.(e.target.value)}
+          onChange={handleChange}
           disabled={disabled}
           className={cx(styles.input, ...inputClasses)}
-          aria-describedby={helperId}
+          aria-describedby={helperMessage ? helperId : undefined}
         />
 
         <div className={cx(styles.icons, styles.iconsRight)}>
