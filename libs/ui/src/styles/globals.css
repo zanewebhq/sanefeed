@@ -34,6 +34,12 @@
   --color-primary-400: hsl(180, 100%, 18%);
   --color-primary-500: hsl(180, 100%, 10%);
 
+  --color-danger-100: hsl(0, 79%, 91%);
+  --color-danger-200: hsl(0, 78%, 67%);
+  --color-danger-300: hsl(0, 68%, 42%);
+  --color-danger-400: hsl(0, 54%, 29%);
+  --color-danger-500: hsl(0, 50%, 21%);
+
   /* Fonts */
 
   --font-family: 'Fira Sans', sans-serif;
@@ -61,6 +67,7 @@
   --radius-lg: 0.5rem;
 
   --transition-micro: 150ms ease-out;
+  --transition-field: 100ms ease-in-out;
 }
 
 *,
