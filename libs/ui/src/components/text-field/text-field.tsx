@@ -3,17 +3,17 @@ import Icon, { IconProps } from '../icon/icon';
 import Text from '../text/text';
 import styles from './text-field.module.css';
 
-interface GetInputPaddingClassesParams {
+interface GetInputClassesParams {
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
   error?: string;
 }
 
-const getInputPaddingClasses = ({
+const getInputClasses = ({
   iconLeft,
   iconRight,
   error,
-}: GetInputPaddingClassesParams) => {
+}: GetInputClassesParams) => {
   const classes = [];
 
   if (iconLeft) {
@@ -24,6 +24,10 @@ const getInputPaddingClasses = ({
     classes.push(styles.inputWithDoubleIconRight);
   } else if (iconRight || error) {
     classes.push(styles.inputWithIconRight);
+  }
+
+  if (error) {
+    classes.push(styles.inputError);
   }
 
   return classes;
@@ -52,7 +56,7 @@ export const TextField = ({
 }: TextFieldProps) => {
   const helperId = `${name}-helper`;
 
-  const inputPaddingClasses = getInputPaddingClasses({
+  const inputClasses = getInputClasses({
     iconLeft,
     iconRight,
     error,
@@ -84,7 +88,7 @@ export const TextField = ({
           id={name}
           name={name}
           placeholder={placeholder}
-          className={cx(styles.input, ...inputPaddingClasses)}
+          className={cx(styles.input, ...inputClasses)}
           aria-describedby={helperId}
         />
 
@@ -92,20 +96,20 @@ export const TextField = ({
           {iconRight && <Icon name={iconRight} size="md" />}
 
           {error && (
-            <Icon name="error" size="md" className={styles.errorIcon} />
+            <Icon name="error" size="md" className={styles.iconError} />
           )}
         </div>
       </div>
 
-      {helper && (
+      {(error || helper) && (
         <Text
           id={helperId}
           type="ui"
           as="span"
           size="sm"
-          className={styles.helper}
+          className={cx(styles.helper, error && styles.error)}
         >
-          {helper}
+          {error || helper}
         </Text>
       )}
     </div>

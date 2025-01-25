@@ -53,6 +53,10 @@
   }
 }
 
+.inputError {
+  border-color: var(--color-danger-300);
+}
+
 .inputWithIconLeft {
   padding-left: 3rem;
 }
@@ -81,7 +85,15 @@
   right: 1rem;
 }
 
+.iconError {
+  color: var(--color-danger-300);
+}
+
 .helper {
   padding-top: 0.25rem;
   color: var(--color-neutral-500);
+}
+
+.error {
+  color: var(--color-danger-300);
 }
