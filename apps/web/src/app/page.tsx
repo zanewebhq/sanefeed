@@ -15,6 +15,10 @@ export default function HomePage() {
         SaneFeed
       </Text>
 
+      <Text type="body" as="p" size="md">
+        Welcome to SaneFeed!
+      </Text>
+
       <Button iconLeft="plus">New Feed</Button>
 
       <Link href="#" iconRight="external">
