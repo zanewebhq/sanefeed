@@ -14,14 +14,43 @@ const meta: Meta<typeof TextField> = {
 };
 export default meta;
 
-export const Primary: StoryObj<TextFieldProps> = {
+export const Simple: StoryObj<TextFieldProps> = {
+  args: {
+    type: 'text',
+    name: 'name',
+    label: 'Name',
+  },
+};
+
+export const Email: StoryObj<TextFieldProps> = {
   args: {
     type: 'email',
-    label: 'Email',
     name: 'email',
-    placeholder: 'Placeholder',
-    helper: 'Helper text',
+    label: 'Email',
+    placeholder: 'email@example.com',
     iconLeft: 'mail',
-    iconRight: 'caps-lock',
+  },
+};
+
+export const Error: StoryObj<TextFieldProps> = {
+  args: {
+    type: 'email',
+    name: 'email',
+    label: 'Email',
+    placeholder: 'email@example.com',
+    iconLeft: 'mail',
+    value: 'Invalid input',
+    error: 'Please enter a valid email address.',
+  },
+};
+
+export const Disabled: StoryObj<TextFieldProps> = {
+  args: {
+    type: 'email',
+    name: 'email',
+    label: 'Email',
+    placeholder: 'email@example.com',
+    iconLeft: 'mail',
+    disabled: true,
   },
 };

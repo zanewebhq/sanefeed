@@ -35,22 +35,28 @@ const getInputClasses = ({
 
 export interface TextFieldProps {
   name: string;
+  value?: string;
+  onChange?: (value: string) => void;
   type?: 'text' | 'email';
   label?: string;
   placeholder?: string;
   helper?: string;
   error?: string;
+  disabled?: boolean;
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
 }
 
 export const TextField = ({
   name,
+  value,
+  onChange,
   type = 'text',
   label,
   placeholder,
   helper,
   error,
+  disabled = false,
   iconLeft,
   iconRight,
 }: TextFieldProps) => {
@@ -76,7 +82,13 @@ export const TextField = ({
         </label>
       )}
 
-      <div className={styles.inputWrapper} onClick={focusInput}>
+      <div
+        className={cx(
+          styles.inputWrapper,
+          disabled && styles.inputWrapperDisabled
+        )}
+        onClick={focusInput}
+      >
         {iconLeft && (
           <div className={cx(styles.icons, styles.iconsLeft)}>
             <Icon name={iconLeft} size="md" />
@@ -88,6 +100,9 @@ export const TextField = ({
           id={name}
           name={name}
           placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange?.(e.target.value)}
+          disabled={disabled}
           className={cx(styles.input, ...inputClasses)}
           aria-describedby={helperId}
         />

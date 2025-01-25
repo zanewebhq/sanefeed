@@ -16,6 +16,14 @@
   position: relative;
   color: var(--color-neutral-500);
   cursor: text;
+
+  &:focus-within {
+    color: var(--color-neutral-700);
+  }
+}
+
+.inputWrapperDisabled {
+  color: var(--color-neutral-400);
 }
 
 .input {
@@ -50,6 +58,14 @@
     border-color: var(--color-neutral-700);
     box-shadow: 0 0 0.375rem
       color-mix(in hsl, var(--color-neutral-700) 50%, transparent);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    box-shadow: none;
+    color: var(--color-dark-text-100);
+    border-color: var(--color-neutral-400);
+    background-color: var(--color-neutral-50);
   }
 }
 
