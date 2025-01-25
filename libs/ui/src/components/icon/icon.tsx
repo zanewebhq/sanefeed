@@ -89,12 +89,13 @@ const sizes = {
 export interface IconProps {
   name: keyof typeof icons;
   size?: keyof typeof sizes;
+  className?: string;
 }
 
-export function Icon({ name, size = 'md' }: IconProps) {
+export function Icon({ name, size = 'md', className }: IconProps) {
   const IconComponent = icons[name];
 
-  return <IconComponent size={sizes[size]} />;
+  return <IconComponent size={sizes[size]} className={className} />;
 }
 
 export default Icon;
