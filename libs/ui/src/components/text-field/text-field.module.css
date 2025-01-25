@@ -3,15 +3,6 @@
   flex-direction: column;
 }
 
-.label {
-  padding-bottom: 0.5rem;
-  cursor: pointer;
-}
-
-.labelText {
-  font-weight: var(--font-weight-medium);
-}
-
 .inputWrapper {
   position: relative;
   color: var(--color-neutral-500);
