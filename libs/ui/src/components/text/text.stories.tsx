@@ -46,7 +46,7 @@ export const Heading4: StoryObj<TextProps> = {
 export const Heading5: StoryObj<TextProps> = {
   args: {
     children: 'Hello, world!',
-    type: 'body',
+    type: 'heading',
     as: 'h5',
     size: 'sm',
   },
@@ -102,7 +102,7 @@ export const Ui1: StoryObj<TextProps> = {
     children: 'Hello, world!',
     type: 'ui',
     as: 'span',
-    size: '4xl',  
+    size: '4xl',
   },
 };
 export const Ui2: StoryObj<TextProps> = {

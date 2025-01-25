@@ -1,3 +1,4 @@
+import { cx } from '../../utils';
 import styles from './text.module.css';
 
 export type TextTag = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -17,6 +18,7 @@ export type TextSize =
 
 export interface TextProps {
   children: React.ReactNode;
+  className?: string;
   as?: TextTag;
   type?: TextType;
   size?: TextSize;
@@ -24,15 +26,19 @@ export interface TextProps {
 
 export const Text = ({
   children,
+  className,
   as: Tag = 'p',
   type = 'body',
   size = 'md',
 }: TextProps) => {
-  const className = `${styles.text} ${styles[`type-${type}`]} ${
-    styles[`size-${size}`]
-  }`;
+  const classes = cx(
+    styles.text,
+    styles[`type-${type}`],
+    styles[`size-${size}`],
+    className
+  );
 
-  return <Tag className={className}>{children}</Tag>;
+  return <Tag className={classes}>{children}</Tag>;
 };
 
 export default Text;

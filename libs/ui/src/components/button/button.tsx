@@ -1,3 +1,4 @@
+import { cx } from '../../utils';
 import Icon, { IconProps } from '../icon/icon';
 import styles from './button.module.css';
 
@@ -5,6 +6,7 @@ export type ButtonVariant = 'primary' | 'secondary';
 
 export interface ButtonProps {
   children: string;
+  className?: string;
   type?: 'button' | 'submit';
   variant?: ButtonVariant;
   disabled?: boolean;
@@ -17,6 +19,7 @@ export interface ButtonProps {
 
 export function Button({
   children,
+  className,
   type = 'button',
   variant = 'primary',
   disabled = false,
@@ -26,12 +29,12 @@ export function Button({
   href,
   openNewTab = false,
 }: ButtonProps) {
-  const className = `${styles.button} ${styles[variant]}`;
+  const classes = cx(styles.button, styles[variant], className);
 
   return href ? (
     <a
       href={href}
-      className={className}
+      className={classes}
       target={openNewTab ? '_blank' : '_self'}
       rel={openNewTab ? 'noopener noreferrer' : undefined}
     >
@@ -43,7 +46,7 @@ export function Button({
     <button
       type={type}
       onClick={onClick}
-      className={className}
+      className={classes}
       disabled={disabled}
     >
       {iconLeft && <Icon name={iconLeft} />}
