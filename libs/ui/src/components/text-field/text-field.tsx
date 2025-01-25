@@ -2,38 +2,8 @@ import { cx } from '../../utils';
 import FieldHelper from '../field-helper/field-helper';
 import FieldLabel from '../field-label/field-label';
 import Icon, { IconProps } from '../icon/icon';
-import Text from '../text/text';
 import styles from './text-field.module.css';
-
-interface GetInputClassesParams {
-  iconLeft?: IconProps['name'];
-  iconRight?: IconProps['name'];
-  error?: string;
-}
-
-const getInputClasses = ({
-  iconLeft,
-  iconRight,
-  error,
-}: GetInputClassesParams) => {
-  const classes = [];
-
-  if (iconLeft) {
-    classes.push(styles.inputWithIconLeft);
-  }
-
-  if (iconRight && error) {
-    classes.push(styles.inputWithDoubleIconRight);
-  } else if (iconRight || error) {
-    classes.push(styles.inputWithIconRight);
-  }
-
-  if (error) {
-    classes.push(styles.inputError);
-  }
-
-  return classes;
-};
+import { focusInput, getInputClasses } from './utils';
 
 export interface TextFieldProps {
   name: string;
@@ -72,10 +42,6 @@ export const TextField = ({
     error,
   });
 
-  const focusInput = () => {
-    document.getElementById(name)?.focus();
-  };
-
   return (
     <div className={styles.field}>
       {label && <FieldLabel id={name} label={label} />}
@@ -85,7 +51,7 @@ export const TextField = ({
           styles.inputWrapper,
           disabled && styles.inputWrapperDisabled
         )}
-        onClick={focusInput}
+        onClick={() => focusInput(name)}
       >
         {iconLeft && (
           <div className={cx(styles.icons, styles.iconsLeft)}>
