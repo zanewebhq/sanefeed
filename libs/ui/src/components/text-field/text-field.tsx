@@ -1,4 +1,5 @@
 import { cx } from '../../utils';
+import FieldLabel from '../field-label/field-label';
 import Icon, { IconProps } from '../icon/icon';
 import Text from '../text/text';
 import styles from './text-field.module.css';
@@ -74,13 +75,7 @@ export const TextField = ({
 
   return (
     <div className={styles.field}>
-      {label && (
-        <label className={styles.label} htmlFor={name}>
-          <Text type="ui" as="span" size="md" className={styles.labelText}>
-            {label}
-          </Text>
-        </label>
-      )}
+      {label && <FieldLabel htmlFor={name} label={label} />}
 
       <div
         className={cx(

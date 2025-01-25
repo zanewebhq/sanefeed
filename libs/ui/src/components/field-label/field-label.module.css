@@ -1,0 +1,7 @@
+.label {
+  padding-bottom: 0.5rem;
+}
+
+.labelText {
+  font-weight: var(--font-weight-medium);
+}
