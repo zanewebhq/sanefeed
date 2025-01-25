@@ -1,4 +1,5 @@
 import { cx } from '../../utils';
+import FieldHelper from '../field-helper/field-helper';
 import FieldLabel from '../field-label/field-label';
 import Icon, { IconProps } from '../icon/icon';
 import Text from '../text/text';
@@ -62,6 +63,8 @@ export const TextField = ({
   iconRight,
 }: TextFieldProps) => {
   const helperId = `${name}-helper`;
+  const helperMessage = error || helper;
+  const helperType = error ? 'error' : 'helper';
 
   const inputClasses = getInputClasses({
     iconLeft,
@@ -75,7 +78,7 @@ export const TextField = ({
 
   return (
     <div className={styles.field}>
-      {label && <FieldLabel htmlFor={name} label={label} />}
+      {label && <FieldLabel id={name} label={label} />}
 
       <div
         className={cx(
@@ -111,16 +114,8 @@ export const TextField = ({
         </div>
       </div>
 
-      {(error || helper) && (
-        <Text
-          id={helperId}
-          type="ui"
-          as="span"
-          size="sm"
-          className={cx(styles.helper, error && styles.error)}
-        >
-          {error || helper}
-        </Text>
+      {helperMessage && (
+        <FieldHelper id={helperId} type={helperType} message={helperMessage} />
       )}
     </div>
   );

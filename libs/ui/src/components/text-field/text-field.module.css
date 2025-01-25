@@ -104,12 +104,3 @@
 .iconError {
   color: var(--color-danger-300);
 }
-
-.helper {
-  padding-top: 0.25rem;
-  color: var(--color-neutral-500);
-}
-
-.error {
-  color: var(--color-danger-300);
-}

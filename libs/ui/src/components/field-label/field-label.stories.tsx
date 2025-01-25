@@ -9,7 +9,7 @@ export default meta;
 
 export const Primary: StoryObj<FieldLabelProps> = {
   args: {
-    htmlFor: 'label',
+    id: 'label',
     label: 'Label',
   },
 };
