@@ -1,10 +1,9 @@
 import { cx } from '../../utils';
-import FieldHelper from '../field-helper/field-helper';
-import FieldLabel from '../field-label/field-label';
+import FieldIcons from '../field-icons/field-icons';
 import FieldWrapper from '../field-wrapper/field-wrapper';
 import Icon, { IconProps } from '../icon/icon';
 import styles from './password-field.module.css';
-import { focusInput, getInputClasses } from './utils';
+import { getInputClasses } from './utils';
 
 export interface PasswordFieldProps {
   name: string;
@@ -48,9 +47,7 @@ export const PasswordField = ({
       error={error}
       disabled={disabled}
     >
-      <div className={cx(styles.icons, styles.iconsLeft)}>
-        <Icon name="padlock" size="md" />
-      </div>
+      <FieldIcons iconLeft="padlock" iconRight="show" error={!!error} />
 
       <input
         type="password"

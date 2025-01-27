@@ -1,0 +1,19 @@
+.icons {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.iconsLeft {
+  left: 1rem;
+}
+
+.iconsRight {
+  right: 1rem;
+}
+
+.iconError {
+  color: var(--color-danger-300);
+}
