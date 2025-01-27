@@ -1,9 +1,9 @@
 import { cx } from '../../utils';
 import FieldIcons from '../field-icons/field-icons';
 import FieldWrapper from '../field-wrapper/field-wrapper';
-import Icon, { IconProps } from '../icon/icon';
+import { IconProps } from '../icon/icon';
 import styles from './text-field.module.css';
-import { getInputClasses } from './utils';
+import { getInputClasses } from '../../utils';
 
 export interface TextFieldProps {
   name: string;
@@ -36,9 +36,15 @@ export const TextField = ({
   const helperMessage = error || helper;
 
   const inputClasses = getInputClasses({
-    iconLeft,
-    iconRight,
-    error,
+    iconLeft: !!iconLeft,
+    iconRight: !!iconRight,
+    error: !!error,
+    styles: {
+      leftIconPadding: styles.leftIconPadding,
+      doubleIconPadding: styles.doubleIconPadding,
+      rightIconPadding: styles.rightIconPadding,
+      inputError: styles.inputError,
+    },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

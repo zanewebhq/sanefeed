@@ -3,7 +3,7 @@ import FieldIcons from '../field-icons/field-icons';
 import FieldWrapper from '../field-wrapper/field-wrapper';
 import Icon, { IconProps } from '../icon/icon';
 import styles from './password-field.module.css';
-import { getInputClasses } from './utils';
+import { getInputClasses } from '../../utils';
 
 export interface PasswordFieldProps {
   name: string;
@@ -31,8 +31,15 @@ export const PasswordField = ({
   const helperMessage = error || helper;
 
   const inputClasses = getInputClasses({
-    iconLeft: 'padlock',
-    iconRight: 'show',
+    iconLeft: true,
+    iconRight: true,
+    error: !!error,
+    styles: {
+      leftIconPadding: styles.leftIconPadding,
+      doubleIconPadding: styles.doubleIconPadding,
+      rightIconPadding: styles.rightIconPadding,
+      inputError: styles.inputError,
+    },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,12 +66,6 @@ export const PasswordField = ({
         className={cx(styles.input, ...inputClasses)}
         aria-describedby={helperMessage ? helperId : undefined}
       />
-
-      <div className={cx(styles.icons, styles.iconsRight)}>
-        <Icon name="show" size="md" />
-
-        {error && <Icon name="error" size="md" className={styles.iconError} />}
-      </div>
     </FieldWrapper>
   );
 };
