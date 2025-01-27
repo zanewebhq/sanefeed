@@ -1,9 +1,8 @@
 import { cx } from '../../utils';
 import FieldIcons from '../field-icons/field-icons';
 import FieldWrapper from '../field-wrapper/field-wrapper';
-import Icon, { IconProps } from '../icon/icon';
+import { IconProps } from '../icon/icon';
 import styles from './password-field.module.css';
-import { getInputClasses } from '../../utils';
 
 export interface PasswordFieldProps {
   name: string;
@@ -30,18 +29,6 @@ export const PasswordField = ({
   const helperId = `${name}-helper`;
   const helperMessage = error || helper;
 
-  const inputClasses = getInputClasses({
-    iconLeft: true,
-    iconRight: true,
-    error: !!error,
-    styles: {
-      leftIconPadding: styles.leftIconPadding,
-      doubleIconPadding: styles.doubleIconPadding,
-      rightIconPadding: styles.rightIconPadding,
-      inputError: styles.inputError,
-    },
-  });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
   };
@@ -63,7 +50,7 @@ export const PasswordField = ({
         value={value}
         onChange={handleChange}
         disabled={disabled}
-        className={cx(styles.input, ...inputClasses)}
+        className={cx(styles.input, error && styles.error)}
         aria-describedby={helperMessage ? helperId : undefined}
       />
     </FieldWrapper>

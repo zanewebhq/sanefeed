@@ -1,32 +1,33 @@
-import { IconProps } from '../icon/icon';
-import styles from './text-field.module.css';
-
-export interface GetInputClassesParams {
-  iconLeft?: IconProps['name'];
-  iconRight?: IconProps['name'];
-  error?: string;
+export interface GetIconClassesProps {
+  iconLeft: boolean;
+  iconRight: boolean;
+  error: boolean;
+  styles: {
+    singleIconLeft: string;
+    singleIconRight: string;
+    doubleIconRight: string;
+  };
 }
 
-export const getInputClasses = ({
+export const getIconClasses = ({
   iconLeft,
   iconRight,
   error,
-}: GetInputClassesParams) => {
-  const classes = [];
+  styles,
+}: GetIconClassesProps) => {
+  const classes: string[] = [];
 
-  if (iconLeft) {
-    classes.push(styles.inputWithIconLeft);
-  }
+  const conditions = [
+    { condition: iconLeft, className: styles.singleIconLeft },
+    { condition: iconRight && error, className: styles.doubleIconRight },
+    { condition: iconRight || error, className: styles.singleIconRight },
+  ];
 
-  if (iconRight && error) {
-    classes.push(styles.inputWithDoubleIconRight);
-  } else if (iconRight || error) {
-    classes.push(styles.inputWithIconRight);
-  }
-
-  if (error) {
-    classes.push(styles.inputError);
-  }
+  conditions.forEach(({ condition, className }) => {
+    if (condition) {
+      classes.push(className);
+    }
+  });
 
   return classes;
 };

@@ -3,7 +3,6 @@ import FieldIcons from '../field-icons/field-icons';
 import FieldWrapper from '../field-wrapper/field-wrapper';
 import { IconProps } from '../icon/icon';
 import styles from './text-field.module.css';
-import { getInputClasses } from '../../utils';
 
 export interface TextFieldProps {
   name: string;
@@ -35,18 +34,6 @@ export const TextField = ({
   const helperId = `${name}-helper`;
   const helperMessage = error || helper;
 
-  const inputClasses = getInputClasses({
-    iconLeft: !!iconLeft,
-    iconRight: !!iconRight,
-    error: !!error,
-    styles: {
-      leftIconPadding: styles.leftIconPadding,
-      doubleIconPadding: styles.doubleIconPadding,
-      rightIconPadding: styles.rightIconPadding,
-      inputError: styles.inputError,
-    },
-  });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
   };
@@ -69,7 +56,7 @@ export const TextField = ({
         value={value}
         onChange={handleChange}
         disabled={disabled}
-        className={cx(styles.input, ...inputClasses)}
+        className={cx(styles.input, error && styles.error)}
         aria-describedby={helperMessage ? helperId : undefined}
       />
     </FieldWrapper>

@@ -1,6 +1,7 @@
 import { cx } from '../../utils';
 import Icon, { IconProps } from '../icon/icon';
 import styles from './field-icons.module.css';
+import { getIconClasses } from './utils';
 
 export interface FieldIconsProps {
   error: boolean;
@@ -9,16 +10,27 @@ export interface FieldIconsProps {
 }
 
 export const FieldIcons = ({ iconLeft, iconRight, error }: FieldIconsProps) => {
+  const iconClasses = getIconClasses({
+    iconLeft: !!iconLeft,
+    iconRight: !!iconRight,
+    error,
+    styles: {
+      singleIconLeft: styles.singleIconLeft,
+      singleIconRight: styles.singleIconRight,
+      doubleIconRight: styles.doubleIconRight,
+    },
+  });
+
   return (
-    <>
+    <div className={cx(styles.icons, ...iconClasses)}>
       {iconLeft && (
-        <div className={cx(styles.icons, styles.iconsLeft)}>
+        <div className={styles.group}>
           <Icon name={iconLeft} size="md" />
         </div>
       )}
 
       {(iconRight || error) && (
-        <div className={cx(styles.icons, styles.iconsRight)}>
+        <div className={styles.group}>
           {iconRight && <Icon name={iconRight} size="md" />}
 
           {error && (
@@ -26,7 +38,7 @@ export const FieldIcons = ({ iconLeft, iconRight, error }: FieldIconsProps) => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
