@@ -30,7 +30,3 @@ export const getInputClasses = ({
 
   return classes;
 };
-
-export const focusInput = (name: string) => {
-  document.getElementById(name)?.focus();
-};
