@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { cx } from '../../utils';
 import FieldIcons from '../field-icons/field-icons';
 import FieldWrapper from '../field-wrapper/field-wrapper';
@@ -29,8 +30,14 @@ export const PasswordField = ({
   const helperId = `${name}-helper`;
   const helperMessage = error || helper;
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -41,10 +48,15 @@ export const PasswordField = ({
       error={error}
       disabled={disabled}
     >
-      <FieldIcons iconLeft="padlock" iconRight="show" error={!!error} />
+      <FieldIcons
+        iconLeft="padlock"
+        iconRight={showPassword ? 'hide' : 'show'}
+        error={!!error}
+        onRightIconClick={togglePasswordVisibility}
+      />
 
       <input
-        type="password"
+        type={showPassword ? 'text' : 'password'}
         id={name}
         name={name}
         value={value}

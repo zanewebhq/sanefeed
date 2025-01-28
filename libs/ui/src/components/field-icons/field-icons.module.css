@@ -33,3 +33,7 @@
 .doubleIconRight + input {
   padding-right: 5rem;
 }
+
+.clickable {
+  cursor: pointer;
+}

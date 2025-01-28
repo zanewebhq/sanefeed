@@ -7,9 +7,15 @@ export interface FieldIconsProps {
   error: boolean;
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
+  onRightIconClick?: () => void;
 }
 
-export const FieldIcons = ({ iconLeft, iconRight, error }: FieldIconsProps) => {
+export const FieldIcons = ({
+  iconLeft,
+  iconRight,
+  error,
+  onRightIconClick,
+}: FieldIconsProps) => {
   const iconClasses = getIconClasses({
     iconLeft: !!iconLeft,
     iconRight: !!iconRight,
@@ -31,7 +37,14 @@ export const FieldIcons = ({ iconLeft, iconRight, error }: FieldIconsProps) => {
 
       {(iconRight || error) && (
         <div className={styles.group}>
-          {iconRight && <Icon name={iconRight} size="md" />}
+          {iconRight && (
+            <Icon
+              name={iconRight}
+              size="md"
+              className={onRightIconClick ? styles.clickable : undefined}
+              onClick={onRightIconClick}
+            />
+          )}
 
           {error && (
             <Icon name="error" size="md" className={styles.iconError} />

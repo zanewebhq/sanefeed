@@ -18,5 +18,6 @@ export const Primary: StoryObj<PasswordFieldProps> = {
   args: {
     name: 'password',
     label: 'Password',
+    value: 'password',
   },
 };
