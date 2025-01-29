@@ -40,6 +40,12 @@
   --color-danger-400: hsl(0, 54%, 29%);
   --color-danger-500: hsl(0, 50%, 21%);
 
+  --color-password-weak: hsl(0, 68%, 42%);
+  --color-password-moderate: hsl(33, 100%, 50%);
+  --color-password-good: hsl(43, 74%, 49%);
+  --color-password-strong: hsl(80, 61%, 50%);
+  --color-password-excellent: hsl(120, 61%, 34%);
+
   /* Fonts */
 
   --font-family: 'Fira Sans', sans-serif;

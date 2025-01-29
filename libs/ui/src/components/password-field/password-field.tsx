@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { cx } from '../../utils';
 import FieldIcons from '../field-icons/field-icons';
 import FieldWrapper from '../field-wrapper/field-wrapper';
 import { IconProps } from '../icon/icon';
 import styles from './password-field.module.css';
+import PasswordStrengthMeter from '../password-strength-meter/password-strength-meter';
 
 export interface PasswordFieldProps {
   name: string;
@@ -16,6 +17,7 @@ export interface PasswordFieldProps {
   disabled?: boolean;
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
+  withStrengthMeter?: boolean;
 }
 
 export const PasswordField = ({
@@ -26,6 +28,7 @@ export const PasswordField = ({
   helper,
   error,
   disabled = false,
+  withStrengthMeter = false,
 }: PasswordFieldProps) => {
   const helperId = `${name}-helper`;
   const helperMessage = error || helper;
@@ -65,6 +68,8 @@ export const PasswordField = ({
         className={cx(styles.input, error && styles.error)}
         aria-describedby={helperMessage ? helperId : undefined}
       />
+
+      {withStrengthMeter && <PasswordStrengthMeter value={value} />}
     </FieldWrapper>
   );
 };

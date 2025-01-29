@@ -21,3 +21,14 @@ export const Primary: StoryObj<PasswordFieldProps> = {
     value: 'password',
   },
 };
+
+export const StrengthMeter: StoryObj<PasswordFieldProps> = {
+  args: {
+    name: 'password',
+    label: 'Password',
+    value: 'password',
+    withStrengthMeter: true,
+    helper: 'Min. 8 characters, 1 uppercase, 1 lowercase, 1 digit',
+    // error: 'Password is required.',
+  },
+};
