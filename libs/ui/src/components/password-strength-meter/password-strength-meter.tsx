@@ -1,26 +1,23 @@
 import { cx } from '../../utils';
 import styles from './password-strength-meter.module.css';
+import Field from '../field/field';
 
 const conditions = [
   {
-    id: 'length',
     pattern: /.{8,}/,
-    message: 'Add a minimum of 8 characters.',
+    hint: 'Add a minimum of 8 characters.',
   },
   {
-    id: 'upperAndLowerCase',
     pattern: /(?=.*[a-z])(?=.*[A-Z])/,
-    message: 'Use upper and lower case.',
+    hint: 'Use upper and lower case.',
   },
   {
-    id: 'digit',
     pattern: /\d/,
-    message: 'Add at least 1 digit.',
+    hint: 'Add at least 1 digit.',
   },
   {
-    id: 'special',
     pattern: /[^A-Za-z0-9]/,
-    message: 'Add at least 1 special character.',
+    hint: 'Add at least 1 special character.',
   },
 ];
 
@@ -29,51 +26,67 @@ const strengthLevels = [
   { className: 'moderate', label: 'Moderate.' },
   { className: 'good', label: 'Good.' },
   { className: 'strong', label: 'Strong.' },
-  { className: 'excellent', label: 'Excellent.' },
+  { className: 'excellent', label: 'Excellent! Your password is secure.' },
 ];
 
 const checkPasswordStrength = (password: string) => {
   let conditionsMet = 0;
-  let firstUnmetCondition = null;
+  let unmetConditionHint = '';
 
   for (const condition of conditions) {
     if (condition.pattern.test(password)) {
       conditionsMet++;
-    } else if (!firstUnmetCondition) {
-      firstUnmetCondition = condition.message;
+    } else if (!unmetConditionHint) {
+      unmetConditionHint = condition.hint;
     }
   }
 
   return {
     score: conditionsMet,
-    message: firstUnmetCondition,
+    hint: unmetConditionHint,
     ...strengthLevels[conditionsMet],
   };
 };
 
+export interface PasswordStrength {
+  className: string;
+  label: string;
+  score: number;
+  hint: string;
+}
+
 export interface PasswordStrengthMeterProps {
+  name: string;
   value: string;
+  showHint?: boolean;
 }
 
 export const PasswordStrengthMeter = ({
+  name,
   value,
+  showHint = false,
 }: PasswordStrengthMeterProps) => {
-  const isEmpty = !value.length;
   const strength = checkPasswordStrength(value);
+  const message = `${strength.label} ${strength.hint}`;
 
   return (
-    <div
-      className={cx(
-        styles.strengthMeter,
-        !isEmpty && styles[strength.className]
+    <>
+      <div className={cx(styles.strengthMeter, styles[strength.className])}>
+        <div className={styles.segment} />
+        <div className={styles.segment} />
+        <div className={styles.segment} />
+        <div className={styles.segment} />
+        <div className={styles.segment} />
+      </div>
+
+      {showHint && (
+        <Field.Helper
+          id={`${name}-hint`}
+          className={styles[strength.className]}
+          message={message}
+        />
       )}
-    >
-      <div className={styles.segment} />
-      <div className={styles.segment} />
-      <div className={styles.segment} />
-      <div className={styles.segment} />
-      <div className={styles.segment} />
-    </div>
+    </>
   );
 };
 

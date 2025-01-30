@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { cx } from '../../utils';
-import FieldIcons from '../field-icons/field-icons';
-import FieldWrapper from '../field-wrapper/field-wrapper';
 import { IconProps } from '../icon/icon';
 import styles from './password-field.module.css';
 import PasswordStrengthMeter from '../password-strength-meter/password-strength-meter';
+import Field from '../field/field';
 
 export interface PasswordFieldProps {
   name: string;
@@ -30,10 +29,11 @@ export const PasswordField = ({
   disabled = false,
   withStrengthMeter = false,
 }: PasswordFieldProps) => {
-  const helperId = `${name}-helper`;
-  const helperMessage = error || helper;
-
   const [showPassword, setShowPassword] = useState(false);
+
+  const helperId = `${name}-helper`;
+  const helperType = error ? 'error' : 'helper';
+  const helperMessage = error ? error : !value && helper ? helper : undefined;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
@@ -44,33 +44,44 @@ export const PasswordField = ({
   };
 
   return (
-    <FieldWrapper
-      name={name}
-      label={label}
-      helper={helper}
-      error={error}
-      disabled={disabled}
-    >
-      <FieldIcons
-        iconLeft="padlock"
-        iconRight={showPassword ? 'hide' : 'show'}
-        error={!!error}
-        onRightIconClick={togglePasswordVisibility}
-      />
+    <Field>
+      {label && <Field.Label id={name} label={label} />}
 
-      <input
-        type={showPassword ? 'text' : 'password'}
-        id={name}
-        name={name}
-        value={value}
-        onChange={handleChange}
-        disabled={disabled}
-        className={cx(styles.input, error && styles.error)}
-        aria-describedby={helperMessage ? helperId : undefined}
-      />
+      <Field.Wrapper name={name} disabled={disabled}>
+        <Field.Icons
+          iconLeft="padlock"
+          iconRight={showPassword ? 'hide' : 'show'}
+          error={!!error}
+          onRightIconClick={togglePasswordVisibility}
+        />
 
-      {withStrengthMeter && <PasswordStrengthMeter value={value} />}
-    </FieldWrapper>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          id={name}
+          name={name}
+          value={value}
+          onChange={handleChange}
+          disabled={disabled}
+          className={cx(styles.input, error && styles.error)}
+        />
+      </Field.Wrapper>
+
+      {withStrengthMeter && (
+        <PasswordStrengthMeter
+          name={name}
+          value={value}
+          showHint={!helperMessage}
+        />
+      )}
+
+      {helperMessage && (
+        <Field.Helper
+          id={helperId}
+          message={helperMessage}
+          type={!withStrengthMeter ? helperType : undefined}
+        />
+      )}
+    </Field>
   );
 };
 

@@ -1,6 +1,5 @@
 import { cx } from '../../utils';
-import FieldIcons from '../field-icons/field-icons';
-import FieldWrapper from '../field-wrapper/field-wrapper';
+import Field from '../field/field';
 import { IconProps } from '../icon/icon';
 import styles from './text-field.module.css';
 
@@ -32,6 +31,7 @@ export const TextField = ({
   iconRight,
 }: TextFieldProps) => {
   const helperId = `${name}-helper`;
+  const helperType = error ? 'error' : 'helper';
   const helperMessage = error || helper;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,27 +39,32 @@ export const TextField = ({
   };
 
   return (
-    <FieldWrapper
-      name={name}
-      label={label}
-      helper={helper}
-      error={error}
-      disabled={disabled}
-    >
-      <FieldIcons iconLeft={iconLeft} iconRight={iconRight} error={!!error} />
+    <Field>
+      {label && <Field.Label id={name} label={label} />}
 
-      <input
-        type={type}
-        id={name}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={handleChange}
-        disabled={disabled}
-        className={cx(styles.input, error && styles.error)}
-        aria-describedby={helperMessage ? helperId : undefined}
-      />
-    </FieldWrapper>
+      <Field.Wrapper name={name} disabled={disabled}>
+        <Field.Icons
+          iconLeft={iconLeft}
+          iconRight={iconRight}
+          error={!!error}
+        />
+
+        <input
+          type={type}
+          id={name}
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
+          disabled={disabled}
+          className={cx(styles.input, error && styles.error)}
+        />
+      </Field.Wrapper>
+
+      {helperMessage && (
+        <Field.Helper id={helperId} type={helperType} message={helperMessage} />
+      )}
+    </Field>
   );
 };
 
