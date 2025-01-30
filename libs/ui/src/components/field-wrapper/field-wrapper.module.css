@@ -1,0 +1,18 @@
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputWrapper {
+  position: relative;
+  color: var(--color-neutral-500);
+  cursor: text;
+
+  &:focus-within {
+    color: var(--color-neutral-700);
+  }
+}
+
+.inputWrapperDisabled {
+  color: var(--color-neutral-400);
+}
