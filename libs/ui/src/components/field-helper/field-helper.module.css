@@ -1,9 +1,7 @@
 .helper {
-  padding-top: 0.25rem;
   color: var(--color-neutral-500) !important;
 }
 
 .error {
-  padding-top: 0.25rem;
   color: var(--color-danger-300) !important;
 }

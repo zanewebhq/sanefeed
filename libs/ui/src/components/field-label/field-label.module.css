@@ -1,7 +1,7 @@
 .label {
-  padding-bottom: 0.5rem;
+  cursor: pointer;
 }
 
-.labelText {
+.bold {
   font-weight: var(--font-weight-medium);
 }

@@ -42,7 +42,7 @@ const icons = {
   backspace: MdOutlineBackspace,
   'caps-lock': BsCapslock,
   categories: BiCategory,
-  'check-mark': MdCheck,
+  'checkmark': MdCheck,
   'chevron-down': IoChevronDownSharp,
   'chevron-left': MdChevronLeft,
   'chevron-left-light': BsChevronLeft,
