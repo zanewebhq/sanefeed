@@ -45,7 +45,7 @@ export const PasswordField = ({
 
   return (
     <Field>
-      {label && <Field.Label id={name} label={label} />}
+      {label && <Field.Label id={name} label={label} bold />}
 
       <Field.Wrapper name={name} disabled={disabled}>
         <Field.Icons
