@@ -4,6 +4,7 @@
   align-items: center;
   gap: 0.25rem;
   width: fit-content;
+  height: 1.5rem;
   border: none;
   border-bottom: 2px solid;
   font-family: var(--font-family);
@@ -19,8 +20,7 @@
   box-shadow: 0 0 0 2px transparent;
   background-color: transparent;
   transition: background-color var(--transition-micro),
-    color var(--transition-micro), border-color var(--transition-micro),
-    box-shadow var(--transition-micro);
+    color var(--transition-micro), box-shadow var(--transition-micro);
 
   &:hover,
   &:focus-visible {
@@ -37,7 +37,6 @@
   &:focus-visible {
     outline: 2px dashed var(--color-primary-300);
     outline-offset: 2px;
-    border: none;
     color: var(--color-primary-300);
     box-shadow: 0 0 0 3px transparent;
     background-color: transparent;
