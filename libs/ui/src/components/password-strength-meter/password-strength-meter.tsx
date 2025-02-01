@@ -1,6 +1,9 @@
+'use client';
+
 import { cx } from '../../utils';
 import styles from './password-strength-meter.module.css';
 import Field from '../field/field';
+import { useEffect, useState } from 'react';
 
 const conditions = [
   {
@@ -57,17 +60,32 @@ export interface PasswordStrength {
 
 export interface PasswordStrengthMeterProps {
   name: string;
-  value: string;
+  value?: string;
   showHint?: boolean;
 }
+
+const initialStrength: PasswordStrength = {
+  className: 'weak',
+  label: 'Weak.',
+  score: 0,
+  hint: '',
+};
 
 export const PasswordStrengthMeter = ({
   name,
   value,
   showHint = false,
 }: PasswordStrengthMeterProps) => {
-  const strength = checkPasswordStrength(value);
+  const [strength, setStrength] = useState<PasswordStrength>(initialStrength);
   const message = `${strength.label} ${strength.hint}`;
+
+  useEffect(() => {
+    if (value) {
+      setStrength(checkPasswordStrength(value));
+    } else {
+      setStrength(initialStrength);
+    }
+  }, [value]);
 
   return (
     <>

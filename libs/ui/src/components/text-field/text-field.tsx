@@ -1,3 +1,5 @@
+'use client';
+
 import { cx } from '../../utils';
 import Field from '../field/field';
 import { IconProps } from '../icon/icon';
@@ -6,7 +8,7 @@ import styles from './text-field.module.css';
 export interface TextFieldProps {
   name: string;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type?: 'text' | 'email';
   label?: string;
   placeholder?: string;
@@ -19,7 +21,7 @@ export interface TextFieldProps {
 
 export const TextField = ({
   name,
-  value = '',
+  value,
   onChange,
   type = 'text',
   label,
@@ -33,10 +35,6 @@ export const TextField = ({
   const helperId = `${name}-helper`;
   const helperType = error ? 'error' : 'helper';
   const helperMessage = error || helper;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
-  };
 
   return (
     <Field>
@@ -55,7 +53,7 @@ export const TextField = ({
           name={name}
           placeholder={placeholder}
           value={value}
-          onChange={handleChange}
+          onChange={onChange}
           disabled={disabled}
           className={cx(styles.input, error && styles.error)}
         />

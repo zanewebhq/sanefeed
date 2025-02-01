@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { cx } from '../../utils';
 import { IconProps } from '../icon/icon';
@@ -8,7 +10,7 @@ import Field from '../field/field';
 export interface PasswordFieldProps {
   name: string;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   placeholder?: string;
   helper?: string;
@@ -21,7 +23,7 @@ export interface PasswordFieldProps {
 
 export const PasswordField = ({
   name,
-  value = '',
+  value,
   onChange,
   label,
   helper,
@@ -34,10 +36,6 @@ export const PasswordField = ({
   const helperId = `${name}-helper`;
   const helperType = error ? 'error' : 'helper';
   const helperMessage = error ? error : !value && helper ? helper : undefined;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
-  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -60,7 +58,7 @@ export const PasswordField = ({
           id={name}
           name={name}
           value={value}
-          onChange={handleChange}
+          onChange={onChange}
           disabled={disabled}
           className={cx(styles.input, error && styles.error)}
         />
