@@ -1,3 +1,5 @@
+'use client';
+
 import Field from '../field/field';
 import Icon from '../icon/icon';
 import styles from './checkbox-field.module.css';
@@ -5,22 +7,18 @@ import styles from './checkbox-field.module.css';
 export interface CheckboxFieldProps {
   name: string;
   checked?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   disabled?: boolean;
 }
 
 export const CheckboxField = ({
   name,
-  checked = false,
+  checked,
   onChange,
   label,
   disabled = false,
 }: CheckboxFieldProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
-  };
-  
   return (
     <div className={styles.field}>
       {checked && <Icon name="checkmark" className={styles.checkmark} />}
@@ -30,7 +28,7 @@ export const CheckboxField = ({
         id={name}
         name={name}
         checked={checked}
-        onChange={handleChange}
+        onChange={onChange}
         disabled={disabled}
         className={styles.checkbox}
       />
