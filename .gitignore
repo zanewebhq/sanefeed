@@ -47,3 +47,6 @@ out
 
 
 storybook-static
+
+# Enviorment Variables
+.env
