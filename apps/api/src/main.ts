@@ -13,7 +13,7 @@ const pool = new Pool({
 const { Strategy: JwtStrategy, ExtractJwt } = passportJWT;
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 'your_jwt_secret',
+  secretOrKey: process.env.JWT_SECRET,
 };
 
 passport.use(
