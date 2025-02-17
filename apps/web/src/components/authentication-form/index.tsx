@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import {
   Button,
+  FormError,
   Icon,
   Link,
   PasswordField,
@@ -73,27 +74,37 @@ export default function AuthenticationForm() {
         className={styles.form}
         noValidate
       >
-        <TextField
-          {...register('email')}
-          type="email"
-          label="Email"
-          placeholder="email@example.com"
-          iconLeft="mail"
-          error={errors.email?.message}
-        />
+        <div className={styles.group}>
+          <TextField
+            {...register('email')}
+            type="email"
+            label="Email"
+            placeholder="email@example.com"
+            iconLeft="mail"
+            error={errors.email?.message}
+          />
 
-        <PasswordField
-          {...register('password')}
-          watchedPassword={watchedPassword}
-          label="Password"
-          helper="Min. 8 characters, 1 uppercase, 1 lowercase, 1 digit"
-          error={errors.password?.message}
-          withStrengthMeter
-        />
+          <PasswordField
+            {...register('password')}
+            label="Password"
+            helper="Min. 8 characters, 1 uppercase, 1 lowercase, 1 digit"
+            error={errors.password?.message}
+            watchedPassword={watchedPassword}
+            withStrengthMeter
+          />
+        </div>
 
-        <Button type="submit" className={styles.button}>
-          Sign up
-        </Button>
+        <div className={styles.group}>
+          {false && (
+            <FormError>
+              An error occurred on the server. Please try again later.
+            </FormError>
+          )}
+
+          <Button type="submit" className={styles.button}>
+            Sign up
+          </Button>
+        </div>
       </form>
     </div>
   );
