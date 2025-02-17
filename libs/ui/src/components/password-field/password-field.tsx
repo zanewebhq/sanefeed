@@ -19,6 +19,8 @@ export interface PasswordFieldProps {
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
   withStrengthMeter?: boolean;
+  watchedPassword?: string;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export const PasswordField = ({
@@ -30,12 +32,18 @@ export const PasswordField = ({
   error,
   disabled = false,
   withStrengthMeter = false,
+  watchedPassword,
+  ref,
 }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const helperId = `${name}-helper`;
   const helperType = error ? 'error' : 'helper';
-  const helperMessage = error ? error : !value && helper ? helper : undefined;
+  const helperMessage = error
+    ? error
+    : !watchedPassword && helper
+    ? helper
+    : undefined;
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -61,23 +69,20 @@ export const PasswordField = ({
           onChange={onChange}
           disabled={disabled}
           className={cx(styles.input, error && styles.error)}
+          ref={ref}
         />
       </Field.Wrapper>
 
       {withStrengthMeter && (
         <PasswordStrengthMeter
           name={name}
-          value={value}
+          value={watchedPassword}
           showHint={!helperMessage}
         />
       )}
 
       {helperMessage && (
-        <Field.Helper
-          id={helperId}
-          message={helperMessage}
-          type={!withStrengthMeter ? helperType : undefined}
-        />
+        <Field.Helper id={helperId} message={helperMessage} type={helperType} />
       )}
     </Field>
   );

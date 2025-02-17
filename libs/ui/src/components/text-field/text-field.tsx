@@ -8,6 +8,7 @@ import styles from './text-field.module.css';
 export interface TextFieldProps {
   name: string;
   value?: string;
+  defaultValue?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   type?: 'text' | 'email';
   label?: string;
@@ -17,11 +18,13 @@ export interface TextFieldProps {
   disabled?: boolean;
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export const TextField = ({
   name,
   value,
+  defaultValue,
   onChange,
   type = 'text',
   label,
@@ -31,6 +34,7 @@ export const TextField = ({
   disabled = false,
   iconLeft,
   iconRight,
+  ref,
 }: TextFieldProps) => {
   const helperId = `${name}-helper`;
   const helperType = error ? 'error' : 'helper';
@@ -53,9 +57,11 @@ export const TextField = ({
           name={name}
           placeholder={placeholder}
           value={value}
+          defaultValue={defaultValue}
           onChange={onChange}
           disabled={disabled}
           className={cx(styles.input, error && styles.error)}
+          ref={ref}
         />
       </Field.Wrapper>
 

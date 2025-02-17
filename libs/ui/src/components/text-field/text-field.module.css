@@ -41,6 +41,7 @@
   }
 }
 
-.error {
+.error,
+.error:focus {
   border-color: var(--color-danger-300);
 }
