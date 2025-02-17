@@ -4,6 +4,7 @@ import passportJWT from 'passport-jwt';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Pool } from 'pg';
+import cors from 'cors';
 
 const app = express();
 const pool = new Pool({
@@ -35,6 +36,7 @@ passport.use(
 
 app.use(express.json());
 app.use(passport.initialize());
+app.use(cors());
 
 app.post('/api/signup', async (req, res) => {
   const { email, password } = req.body;

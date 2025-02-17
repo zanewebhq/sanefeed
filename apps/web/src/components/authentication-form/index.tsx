@@ -49,7 +49,26 @@ export default function AuthenticationForm() {
 
   const watchedPassword = watch('password');
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const response = await fetch('http://localhost:3333/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error('Error signing up:', error);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
