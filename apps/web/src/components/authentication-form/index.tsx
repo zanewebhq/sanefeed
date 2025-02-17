@@ -15,6 +15,7 @@ import {
 } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
+import { useState } from 'react';
 
 interface Inputs {
   email: string;
@@ -35,6 +36,7 @@ const schema = z.object({
 });
 
 export default function AuthenticationForm() {
+  const [formError, setFormError] = useState<string | null>(null);
   const methods = useForm<Inputs>({
     defaultValues,
     resolver: zodResolver(schema),
@@ -60,13 +62,16 @@ export default function AuthenticationForm() {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        setFormError(
+          'An error occurred on the server. Please try again later.'
+        );
       }
 
       const result = await response.json();
       console.log(result);
     } catch (error) {
       console.error('Error signing up:', error);
+      setFormError('An error occurred on the server. Please try again later.');
     }
   };
 
@@ -114,11 +119,7 @@ export default function AuthenticationForm() {
         </div>
 
         <div className={styles.group}>
-          {false && (
-            <FormError>
-              An error occurred on the server. Please try again later.
-            </FormError>
-          )}
+          {formError && <FormError>{formError}</FormError>}
 
           <Button type="submit" className={styles.button}>
             Sign up
