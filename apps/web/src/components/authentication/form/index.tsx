@@ -67,13 +67,16 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const response = await fetch(`http://localhost:3333/api/${endpoint}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (!response.ok) {
         setFormError(
