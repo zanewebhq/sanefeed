@@ -22,13 +22,15 @@ export const signup = async (req: Request, res: Response) => {
 
     res.status(201).json({
       status: 'success',
-      data: {
-        token,
-      },
+      data: { token },
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'User registration failed' });
+    res.status(500).json({
+      status: 'error',
+      data: null,
+      message: 'An error occurred while signing up',
+    });
   }
 };
 
@@ -40,20 +42,35 @@ export const login = async (req: Request, res: Response) => {
       email,
     ]);
     if (result.rows.length === 0) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({
+        status: 'error',
+        data: null,
+        message: 'Invalid email or password',
+      });
     }
 
     const user = result.rows[0];
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+      return res.status(401).json({
+        status: 'error',
+        data: null,
+        message: 'Invalid email or password',
+      });
     }
 
     const payload = { id: user.id };
     const token = jwt.sign(payload, jwtOptions.secretOrKey);
-    res.json({ message: 'Login successful', token });
+    res.json({
+      status: 'success',
+      data: { token },
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Login failed' });
+    res.status(500).json({
+      status: 'error',
+      data: null,
+      message: 'An error occurred while logging in',
+    });
   }
 };
