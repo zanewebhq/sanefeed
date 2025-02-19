@@ -1,13 +1,9 @@
 import { Router } from 'express';
-import passport from 'passport';
 import controllers from '../controllers';
+import middleware from '../middleware';
 
 const router = Router();
 
-router.get(
-  '/protected',
-  passport.authenticate('jwt', { session: false }),
-  controllers.user.protectedRoute
-);
+router.get('/protected', middleware.protect, controllers.user.protectedRoute);
 
 export default router;
