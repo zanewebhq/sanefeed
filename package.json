@@ -23,7 +23,7 @@
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
     "db:reset": "pnpm db:down -v && pnpm db:up",
-    "migrate": "ts-node node_modules/node-pg-migrate/bin/node-pg-migrate.js -j ts -m 'apps/api/db/migrations'",
+    "migrate": "ts-node node_modules/node-pg-migrate/bin/node-pg-migrate.js -j ts -m 'apps/api/src/database/migrations'",
     "migrate:up": "pnpm migrate up",
     "migrate:down": "pnpm migrate down",
     "migrate:redo": "pnpm migrate redo",
