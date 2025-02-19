@@ -16,7 +16,16 @@ export const signup = async (req: Request, res: Response) => {
       'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
       [email, hashedPassword]
     );
-    res.status(201).json(result.rows[0]);
+
+    const payload = { id: result.rows[0].id };
+    const token = jwt.sign(payload, jwtOptions.secretOrKey);
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        token,
+      },
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'User registration failed' });
