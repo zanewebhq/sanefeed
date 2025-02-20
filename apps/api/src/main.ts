@@ -6,6 +6,12 @@ import './config/passport';
 import AppError from './utils/app-error';
 import errorHandler from './middleware/error';
 
+process.on('uncaughtException', (err: Error) => {
+  console.error(err.name, err.message);
+
+  process.exit(1);
+});
+
 const app = express();
 
 app.use(express.json());
@@ -26,3 +32,11 @@ const server = app.listen(3333, () => {
 });
 
 server.on('error', console.error);
+
+process.on('unhandledRejection', (err: Error) => {
+  console.error(err.name, err.message);
+
+  server.close(() => {
+    process.exit(1);
+  });
+});
