@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import AppError from '../utils/app-error';
 
+interface AppDatabaseError extends AppError {
+  code: string;
+}
+
 const sendErrorDev = (err: AppError, res: Response) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -26,19 +30,35 @@ const sendErrorProd = (err: AppError, res: Response) => {
   }
 };
 
+const handleDatabaseError = (err: AppDatabaseError) => {
+  switch (err.code) {
+    case '23505':
+      return new AppError('Duplicate field value entered', 400);
+    case '23503':
+      return new AppError('Foreign key violation', 400);
+    case '23502':
+      return new AppError('Not null violation', 400);
+    default:
+      return err;
+  }
+};
+
 const errorHandler = (
   err: AppError,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
+  const statusCode = err.statusCode || 500;
+  const status = err.status || 'error';
+  let error = { ...err, statusCode, status, message: err.message };
 
   if (process.env.NODE_ENV === 'development') {
-    sendErrorDev(err, res);
+    sendErrorDev(error, res);
   } else {
-    sendErrorProd(err, res);
+    error = handleDatabaseError(error as AppDatabaseError);
+
+    sendErrorProd(error, res);
   }
 };
 

@@ -78,13 +78,12 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
         }
       );
 
+      const result = await response.json();
+
       if (!response.ok) {
-        setFormError(
-          'An error occurred on the server. Please try again later.'
-        );
+        setFormError(result.message);
       }
 
-      const result = await response.json();
       console.log(result);
     } catch (error) {
       console.error('Error:', error);

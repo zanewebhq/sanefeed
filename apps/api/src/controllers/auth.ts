@@ -35,7 +35,6 @@ export const login = catchAsync(async (req: Request, res: Response) => {
   if (result.rows.length === 0) {
     return res.status(401).json({
       status: 'error',
-      data: null,
       message: 'Invalid email or password',
     });
   }
@@ -45,7 +44,6 @@ export const login = catchAsync(async (req: Request, res: Response) => {
   if (!isMatch) {
     return res.status(401).json({
       status: 'error',
-      data: null,
       message: 'Invalid email or password',
     });
   }
