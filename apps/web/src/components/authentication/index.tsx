@@ -1,6 +1,7 @@
-import styles from './styles.module.css';
 import AuthenticationHeader from '../authentication/header';
 import AuthenticationForm from './form';
+
+import styles from './styles.module.css';
 
 interface AuthenticationProps {
   children: React.ReactNode;
