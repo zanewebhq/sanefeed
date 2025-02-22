@@ -1,6 +1,6 @@
 'use client';
 
-import { Text } from '@sanefeed/ui';
+import { Button, Text } from '@sanefeed/ui';
 import { useEffect, useState } from 'react';
 
 const getUser = async () => {
@@ -13,6 +13,18 @@ const getUser = async () => {
   });
 
   return response.json();
+};
+
+const logout = async () => {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+
+  window.location.href = '/';
 };
 
 export default function MePage() {
@@ -31,8 +43,11 @@ export default function MePage() {
   }
 
   return (
-    <Text type="heading" as="h1" size="5xl">
-      Hello, {user.email}!
-    </Text>
+    <div style={{ width: '48rem' }}>
+      <Text type="heading" as="h1" size="5xl">
+        Hello, {user.email}!
+      </Text>
+      <Button onClick={logout}>Log out</Button>
+    </div>
   );
 }

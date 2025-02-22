@@ -67,3 +67,16 @@ export const login = catchAsync(async (req: Request, res: Response) => {
       status: 'success',
     });
 });
+
+export const logout = catchAsync(async (req: Request, res: Response) => {
+  res
+    .status(200)
+    .clearCookie('token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    })
+    .json({
+      status: 'success',
+    });
+});
