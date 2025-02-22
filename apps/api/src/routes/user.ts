@@ -4,6 +4,6 @@ import middleware from '../middleware';
 
 const router = Router();
 
-router.get('/protected', middleware.protect, controllers.user.protectedRoute);
+router.get('/me', middleware.protect, controllers.user.me);
 
 export default router;

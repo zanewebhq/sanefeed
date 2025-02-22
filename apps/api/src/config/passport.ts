@@ -1,10 +1,11 @@
 import passport from 'passport';
 import passportJWT from 'passport-jwt';
 import { pool } from '../database';
+import cookieExtractor from '../utils/cookie-extractor';
 
-const { Strategy: JwtStrategy, ExtractJwt } = passportJWT;
+const { Strategy: JwtStrategy } = passportJWT;
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: cookieExtractor,
   secretOrKey: process.env.JWT_SECRET,
 };
 

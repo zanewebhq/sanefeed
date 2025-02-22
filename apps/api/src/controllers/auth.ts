@@ -20,10 +20,16 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
   const payload = { id: result.rows[0].id };
   const token = jwt.sign(payload, jwtOptions.secretOrKey);
 
-  res.status(201).json({
-    status: 'success',
-    data: { token },
-  });
+  res
+    .status(201)
+    .cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    })
+    .json({
+      status: 'success',
+    });
 });
 
 export const login = catchAsync(async (req: Request, res: Response) => {
@@ -50,8 +56,14 @@ export const login = catchAsync(async (req: Request, res: Response) => {
 
   const payload = { id: user.id };
   const token = jwt.sign(payload, jwtOptions.secretOrKey);
-  res.json({
-    status: 'success',
-    data: { token },
-  });
+  res
+    .status(200)
+    .cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    })
+    .json({
+      status: 'success',
+    });
 });

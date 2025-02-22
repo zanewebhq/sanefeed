@@ -8,6 +8,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button, FormError, PasswordField, TextField } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
+import { useRouter } from 'next/navigation';
 
 const CONFIG = {
   login: {
@@ -47,6 +48,7 @@ interface AuthenticationFormProps {
 }
 
 export default function AuthenticationForm({ type }: AuthenticationFormProps) {
+  const router = useRouter();
   const { endpoint, submitText, withStrengthMeter, passwordHelper } =
     CONFIG[type];
 
@@ -75,6 +77,7 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
+          credentials: 'include',
         }
       );
 
@@ -82,9 +85,9 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
 
       if (!response.ok) {
         setFormError(result.message);
+      } else {
+        router.push('/me');
       }
-
-      console.log(result);
     } catch (error) {
       console.error('Error:', error);
       setFormError('An error occurred on the server. Please try again later.');

@@ -5,6 +5,7 @@ import routes from './routes';
 import './config/passport';
 import AppError from './utils/app-error';
 import errorHandler from './middleware/error';
+import cookieParser from 'cookie-parser';
 
 process.on('uncaughtException', (err: Error) => {
   console.error(err.name, err.message);
@@ -16,7 +17,13 @@ const app = express();
 
 app.use(express.json());
 app.use(passport.initialize());
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 
 app.use('/api', routes.auth);
 app.use('/api', routes.user);
