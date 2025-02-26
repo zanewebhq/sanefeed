@@ -1,4 +1,4 @@
-import AuthenticationHeader from '../authentication/header';
+import AuthenticationHeader from './header';
 import AuthenticationForm from './form';
 
 import styles from './styles.module.css';

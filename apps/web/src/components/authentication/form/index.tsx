@@ -12,13 +12,13 @@ import { useRouter } from 'next/navigation';
 
 const CONFIG = {
   login: {
-    endpoint: '/login',
+    endpoint: '/auth/login',
     submitText: 'Log in',
     withStrengthMeter: false,
     passwordHelper: undefined,
   },
   signup: {
-    endpoint: '/signup',
+    endpoint: '/auth/signup',
     submitText: 'Sign Up',
     withStrengthMeter: true,
     passwordHelper: 'Min. 8 characters, 1 uppercase, 1 lowercase, 1 digit',
@@ -86,7 +86,7 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
       if (!response.ok) {
         setFormError(result.message);
       } else {
-        router.push('/me');
+        router.push('/verify');
       }
     } catch (error) {
       console.error('Error:', error);

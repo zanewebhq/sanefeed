@@ -8,7 +8,7 @@ const CONFIG = {
     description: 'Log in to continue enjoying your content, your way!',
     preLinkText: "Don't have an account?",
     linkText: 'Sign up',
-    link: '/signup',
+    link: '/auth/signup',
   },
   signup: {
     title: 'Get started with SaneFeed',
@@ -16,7 +16,7 @@ const CONFIG = {
       'Join us to take control of your content. Your Content, Your Way!',
     preLinkText: 'Already have an account?',
     linkText: 'Log in',
-    link: '/login',
+    link: '/auth/login',
   },
 };
 

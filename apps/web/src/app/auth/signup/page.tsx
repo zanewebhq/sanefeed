@@ -1,4 +1,4 @@
-import Authentication from '../../components/authentication';
+import Authentication from '../../../components/authentication';
 
 import styles from './page.module.css';
 
