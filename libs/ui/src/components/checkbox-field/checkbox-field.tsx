@@ -10,6 +10,7 @@ export interface CheckboxFieldProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   disabled?: boolean;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export const CheckboxField = ({
@@ -18,6 +19,7 @@ export const CheckboxField = ({
   onChange,
   label,
   disabled = false,
+  ref,
 }: CheckboxFieldProps) => {
   return (
     <div className={styles.field}>
@@ -31,6 +33,7 @@ export const CheckboxField = ({
         onChange={onChange}
         disabled={disabled}
         className={styles.checkbox}
+        ref={ref}
       />
 
       {label && <Field.Label id={name} label={label} />}
