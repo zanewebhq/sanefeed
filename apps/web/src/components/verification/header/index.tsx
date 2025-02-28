@@ -12,8 +12,8 @@ export default function VerificationHeader() {
       </Text>
 
       <Text>
-        To complete your registration, please verify your address by entering
-        the verification code we just sent to your email.
+        To complete your signup, please verify your email address by entering
+        the verification code we just sent to email@example.com.
       </Text>
     </div>
   );

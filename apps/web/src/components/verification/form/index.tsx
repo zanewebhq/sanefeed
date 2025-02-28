@@ -5,13 +5,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import {
-  Button,
-  FormError,
-  Link,
-  Text,
-  TextField,
-} from '@sanefeed/ui';
+import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
 
@@ -61,14 +55,14 @@ export default function VerificationForm() {
         error={errors.code?.message}
       />
 
-      <Text>The code will expire in 09:59</Text>
+      <Text>The code will expire in 24 hours.</Text>
 
       <div className={styles.group}>
         <div>
           <Text>Didn't receive the code?</Text>
           <Text>
             Check your spam folder or{' '}
-            <Link onClick={handleResend}>resend verification email</Link>
+            <Link onClick={handleResend}>resend the verification email</Link>.
           </Text>
         </div>
 

@@ -13,10 +13,19 @@
   pointer-events: none;
 }
 
-.group {
+.left,
+.right {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.left {
+  margin-right: auto;
+}
+
+.right {
+  margin-left: auto;
 }
 
 .iconError {

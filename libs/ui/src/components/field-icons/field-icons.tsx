@@ -30,13 +30,13 @@ export const FieldIcons = ({
   return (
     <div className={cx(styles.icons, ...iconClasses)}>
       {iconLeft && (
-        <div className={styles.group}>
+        <div className={styles.left}>
           <Icon name={iconLeft} size="md" />
         </div>
       )}
 
       {(iconRight || error) && (
-        <div className={styles.group}>
+        <div className={styles.right}>
           {iconRight && (
             <Icon
               name={iconRight}

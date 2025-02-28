@@ -1,7 +1,9 @@
 .helper {
+  text-align: left;
   color: var(--color-neutral-500) !important;
 }
 
 .error {
+  text-align: left;
   color: var(--color-danger-300) !important;
 }
