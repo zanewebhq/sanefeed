@@ -61,8 +61,6 @@ export default function VerificationForm() {
 
       const result = await response.json();
 
-      console.log(response.ok, result);
-
       if (!response.ok) {
         setLoading(false);
         setFormError(result.message);
@@ -77,8 +75,33 @@ export default function VerificationForm() {
     }
   };
 
-  const handleResend = () => {
-    console.log('Resending verification code...');
+  const handleResend = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/resend-verification`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        setLoading(false);
+        setFormError(result.message);
+      } else {
+        // router.push('/me');
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('Error:', error);
+      setFormError('An error occurred on the server. Please try again later.');
+    }
   };
 
   return (

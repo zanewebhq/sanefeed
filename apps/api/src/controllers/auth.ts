@@ -14,6 +14,7 @@ interface User {
   id: number;
   email: string;
   password: string;
+  verified: boolean;
   verification_code: string;
   verification_code_expires_at: string;
 }
@@ -52,6 +53,39 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
       status: 'success',
     });
 });
+
+export const resendVerification = catchAsync(
+  async (req: RequestWithUser, res: Response) => {
+    if (req.user.verified) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'User is already verified.',
+      });
+    }
+
+    const verificationCode = crypto
+      .randomBytes(3)
+      .toString('hex')
+      .toUpperCase();
+    const verificationCodeExpiresAt = dayjs().add(1, 'hour').toISOString();
+
+    const result = await pool.query(
+      'UPDATE users SET verification_code = $1, verification_code_expires_at = $2 WHERE id = $3 RETURNING *',
+      [verificationCode, verificationCodeExpiresAt, req.user.id]
+    );
+
+    // TODO: Send verification code via email
+
+    const user = result.rows[0];
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user,
+      },
+    });
+  }
+);
 
 export const verify = catchAsync(
   async (req: RequestWithUser, res: Response) => {
