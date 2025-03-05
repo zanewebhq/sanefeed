@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
+import { StatusCodes } from 'http-status-codes';
 
 interface User {
   id: number;
@@ -26,7 +27,7 @@ export const verify = catchAsync(
     const isMatching = req.body.code === req.user.verification_code;
 
     if (hasExpired || !isMatching) {
-      return res.status(401).json({
+      return res.status(StatusCodes.UNAUTHORIZED).json({
         status: 'error',
         message: 'Invalid verification code.',
       });
@@ -39,7 +40,7 @@ export const verify = catchAsync(
 
     const user = result.rows[0];
 
-    res.status(200).json({
+    res.status(StatusCodes.OK).json({
       status: 'success',
       data: {
         user,

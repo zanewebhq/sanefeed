@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
+import { StatusCodes } from 'http-status-codes';
 
 interface User {
   id: number;
@@ -20,7 +21,7 @@ interface RequestWithUser extends Request {
 const resendVerification = catchAsync(
   async (req: RequestWithUser, res: Response) => {
     if (req.user.verified) {
-      return res.status(400).json({
+      return res.status(StatusCodes.BAD_REQUEST).json({
         status: 'error',
         message: 'User is already verified.',
       });
@@ -41,7 +42,7 @@ const resendVerification = catchAsync(
 
     const user = result.rows[0];
 
-    res.status(200).json({
+    res.status(StatusCodes.OK).json({
       status: 'success',
       data: {
         user,

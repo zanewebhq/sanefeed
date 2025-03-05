@@ -5,6 +5,7 @@ import crypto from 'crypto';
 import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
+import { StatusCodes } from 'http-status-codes';
 
 const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
@@ -30,7 +31,7 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
   // TODO: Send verification code via email
 
   res
-    .status(201)
+    .status(StatusCodes.CREATED)
     .cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
