@@ -13,12 +13,14 @@ import { useRouter } from 'next/navigation';
 const CONFIG = {
   login: {
     endpoint: '/auth/login',
+    redirect: '/me',
     submitText: 'Log in',
     withStrengthMeter: false,
     passwordHelper: undefined,
   },
   signup: {
     endpoint: '/auth/signup',
+    redirect: '/auth/verify',
     submitText: 'Sign Up',
     withStrengthMeter: true,
     passwordHelper: 'Min. 8 characters, 1 uppercase, 1 lowercase, 1 digit',
@@ -52,6 +54,7 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
   const { endpoint, submitText, withStrengthMeter, passwordHelper } =
     CONFIG[type];
 
+  const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const methods = useForm<Inputs>({
     defaultValues,
@@ -69,6 +72,8 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
+      setLoading(true);
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
         {
@@ -84,11 +89,13 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
       const result = await response.json();
 
       if (!response.ok) {
+        setLoading(false);
         setFormError(result.message);
       } else {
-        router.push('/verify');
+        router.push(CONFIG[type].redirect);
       }
     } catch (error) {
+      setLoading(false);
       console.error('Error:', error);
       setFormError('An error occurred on the server. Please try again later.');
     }
@@ -119,7 +126,7 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
       <div className={styles.group}>
         {formError && <FormError>{formError}</FormError>}
 
-        <Button type="submit" className={styles.button}>
+        <Button type="submit" className={styles.button} loading={loading}>
           {submitText}
         </Button>
       </div>
