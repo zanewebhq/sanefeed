@@ -10,8 +10,23 @@ const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
 };
 
+interface User {
+  id: number;
+  email: string;
+  password: string;
+  verification_code: string;
+  verification_code_expires_at: string;
+}
+
+interface RequestWithUser extends Request {
+  user: User;
+}
+
 export const signup = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
+
+  // TODO: Validate email and password
+
   const hashedPassword = await bcrypt.hash(password, 10);
   const verificationCode = crypto.randomBytes(3).toString('hex').toUpperCase();
   const verificationCodeExpiresAt = dayjs().add(1, 'hour').toISOString();
@@ -23,6 +38,8 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
 
   const payload = { id: result.rows[0].id };
   const token = jwt.sign(payload, jwtOptions.secretOrKey);
+
+  // TODO: Send verification code via email
 
   res
     .status(201)
@@ -36,6 +53,38 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+export const verify = catchAsync(
+  async (req: RequestWithUser, res: Response) => {
+    const currentTime = dayjs();
+    const verificationCodeExpiresAt = dayjs(
+      req.user.verification_code_expires_at
+    );
+    const hasExpired = currentTime.isAfter(verificationCodeExpiresAt);
+    const isMatching = req.body.code === req.user.verification_code;
+
+    if (hasExpired || !isMatching) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'Invalid verification code.',
+      });
+    }
+
+    const result = await pool.query(
+      'UPDATE users SET verified = true, verification_code = NULL, verification_code_expires_at = NULL WHERE id = $1 RETURNING *',
+      [req.user.id]
+    );
+
+    const user = result.rows[0];
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user,
+      },
+    });
+  }
+);
+
 export const login = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
@@ -45,7 +94,7 @@ export const login = catchAsync(async (req: Request, res: Response) => {
   if (result.rows.length === 0) {
     return res.status(401).json({
       status: 'error',
-      message: 'Invalid email or password',
+      message: 'Invalid email or password.',
     });
   }
 
@@ -54,7 +103,7 @@ export const login = catchAsync(async (req: Request, res: Response) => {
   if (!isMatch) {
     return res.status(401).json({
       status: 'error',
-      message: 'Invalid email or password',
+      message: 'Invalid email or password.',
     });
   }
 

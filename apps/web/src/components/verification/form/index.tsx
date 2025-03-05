@@ -8,6 +8,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
+import { useRouter } from 'next/navigation';
 
 interface Inputs {
   code: string;
@@ -26,7 +27,11 @@ const schema = z.object({
 });
 
 export default function VerificationForm() {
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+
   const methods = useForm<Inputs>({
     defaultValues,
     resolver: zodResolver(schema),
@@ -39,7 +44,37 @@ export default function VerificationForm() {
   } = methods;
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
+    try {
+      setLoading(true);
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/verify`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+          credentials: 'include',
+        }
+      );
+
+      const result = await response.json();
+
+      console.log(response.ok, result);
+
+      if (!response.ok) {
+        setLoading(false);
+        setFormError(result.message);
+      } else {
+        // router.push('/me');
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('Error:', error);
+      setFormError('An error occurred on the server. Please try again later.');
+    }
   };
 
   const handleResend = () => {
@@ -68,7 +103,7 @@ export default function VerificationForm() {
 
         {formError && <FormError>{formError}</FormError>}
 
-        <Button type="submit" className={styles.button}>
+        <Button type="submit" className={styles.button} loading={loading}>
           Verify Email
         </Button>
 
