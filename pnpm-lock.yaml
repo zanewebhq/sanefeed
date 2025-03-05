@@ -78,6 +78,9 @@ importers:
       '@eslint/js':
         specifier: ^9.8.0
         version: 9.18.0
+      '@faker-js/faker':
+        specifier: ^9.5.1
+        version: 9.5.1
       '@nx/devkit':
         specifier: 20.4.0
         version: 20.4.0(nx@20.4.0(@swc-node/register@1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.3))(@swc/core@1.5.29(@swc/helpers@0.5.15)))
@@ -186,6 +189,9 @@ importers:
       '@types/node':
         specifier: 18.16.9
         version: 18.16.9
+      '@types/nodemailer':
+        specifier: ^6.4.17
+        version: 6.4.17
       '@types/passport':
         specifier: ^1.0.17
         version: 1.0.17
@@ -1137,6 +1143,10 @@ packages:
   '@eslint/plugin-kit@0.2.5':
     resolution: {integrity: sha512-lB05FkqEdUg2AA0xEbUz0SnkXT1LcCTa438W4IWTUh4hdOnVbQyOJ81OrDXsJk/LSiJHubgGEFoR5EHq1NsH1A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@faker-js/faker@9.5.1':
+    resolution: {integrity: sha512-0fzMEDxkExR2cn731kpDaCCnBGBUOIXEi2S1N5l8Hltp6aPf4soTMJ+g4k8r2sI5oB+rpwIW8Uy/6jkwGpnWPg==}
+    engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -2625,6 +2635,9 @@ packages:
 
   '@types/node@18.16.9':
     resolution: {integrity: sha512-IeB32oIV4oGArLrd7znD2rkHQ6EDCM+2Sr76dJnrHwv9OHBTTM6nuDLK9bmikXzPa0ZlWMWtRGo/Uw4mrzQedA==}
+
+  '@types/nodemailer@6.4.17':
+    resolution: {integrity: sha512-I9CCaIp6DTldEg7vyUTZi8+9Vo0hi1/T8gv3C89yk1rSAAzoKQ8H8ki/jBYJSFoH/BisgLP8tkZMlQ91CIquww==}
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
@@ -8745,6 +8758,8 @@ snapshots:
       '@eslint/core': 0.10.0
       levn: 0.4.1
 
+  '@faker-js/faker@9.5.1': {}
+
   '@hapi/hoek@9.3.0': {}
 
   '@hapi/topo@5.1.0':
@@ -10808,6 +10823,10 @@ snapshots:
       '@types/node': 18.16.9
 
   '@types/node@18.16.9': {}
+
+  '@types/nodemailer@6.4.17':
+    dependencies:
+      '@types/node': 18.16.9
 
   '@types/parse-json@4.0.2': {}
 

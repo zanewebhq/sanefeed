@@ -93,7 +93,6 @@ export default function VerificationForm() {
         setLoading(false);
         setFormError(result.message);
       } else {
-        // router.push('/me');
         setLoading(false);
       }
     } catch (error) {

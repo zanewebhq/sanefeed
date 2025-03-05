@@ -4,6 +4,7 @@ import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
+import sendEmail from '../../utils/send-email';
 
 interface User {
   id: number;
@@ -38,7 +39,11 @@ const resendVerification = catchAsync(
       [verificationCode, verificationCodeExpiresAt, req.user.id]
     );
 
-    // TODO: Send verification code via email
+    await sendEmail({
+      email: req.user.email,
+      subject: 'Verification code',
+      text: `Your verification code is: ${verificationCode}.`,
+    });
 
     const user = result.rows[0];
 

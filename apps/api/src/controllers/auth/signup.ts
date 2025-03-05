@@ -6,6 +6,7 @@ import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
+import sendEmail from '../../utils/send-email';
 
 const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
@@ -28,7 +29,11 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
   const payload = { id: result.rows[0].id };
   const token = jwt.sign(payload, jwtOptions.secretOrKey);
 
-  // TODO: Send verification code via email
+  await sendEmail({
+    email,
+    subject: 'Verification code',
+    text: `Your verification code is: ${verificationCode}.`,
+  });
 
   res
     .status(StatusCodes.CREATED)
