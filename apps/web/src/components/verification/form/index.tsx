@@ -65,8 +65,7 @@ export default function VerificationForm() {
         setLoading(false);
         setFormError(result.message);
       } else {
-        // router.push('/me');
-        setLoading(false);
+        router.push('/me');
       }
     } catch (error) {
       setLoading(false);

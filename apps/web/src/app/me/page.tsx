@@ -16,8 +16,8 @@ const getUser = async () => {
 };
 
 const logout = async () => {
-  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/logout`, {
-    method: 'POST',
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
