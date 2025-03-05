@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import catchAsync from '../utils/catch-async';
+import catchAsync from '../../utils/catch-async';
 
-export const me = catchAsync(async (req: Request, res: Response) => {
+const me = catchAsync(async (req: Request, res: Response) => {
   res.json({
     status: 'success',
     data: {
@@ -9,3 +9,5 @@ export const me = catchAsync(async (req: Request, res: Response) => {
     },
   });
 });
+
+export default me;
