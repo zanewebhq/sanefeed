@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 
 import { Button, FormError, PasswordField, TextField } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
+import useAuthenticationForm, { Inputs } from './use-form';
 
 const CONFIG = {
   login: {
@@ -27,27 +26,6 @@ const CONFIG = {
   },
 };
 
-interface Inputs {
-  email: string;
-  password: string;
-}
-
-const defaultValues: Inputs = {
-  email: '',
-  password: '',
-};
-
-const schema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Email is required.' })
-    .email({ message: 'Please enter a valid email address.' }),
-  password: z
-    .string()
-    .min(1, { message: 'Password is required.' })
-    .min(8, { message: 'Weak. Add a minimum of 8 characters.' }),
-});
-
 interface AuthenticationFormProps {
   type: 'login' | 'signup';
 }
@@ -59,10 +37,7 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
 
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const methods = useForm<Inputs>({
-    defaultValues,
-    resolver: zodResolver(schema),
-  });
+  const methods = useAuthenticationForm(type);
 
   const {
     register,
