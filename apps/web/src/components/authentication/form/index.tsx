@@ -12,7 +12,7 @@ import useAuthenticationForm, { Inputs } from './use-form';
 const CONFIG = {
   login: {
     endpoint: '/auth/login',
-    redirect: '/me',
+    redirect: '/',
     submitText: 'Log in',
     withStrengthMeter: false,
     passwordHelper: undefined,
