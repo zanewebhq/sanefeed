@@ -6,3 +6,4 @@ export * from './components/text-field/text-field';
 export * from './components/password-field/password-field';
 export * from './components/checkbox-field/checkbox-field';
 export * from './components/form-error/form-error';
+export * from './components/spinner/spinner';

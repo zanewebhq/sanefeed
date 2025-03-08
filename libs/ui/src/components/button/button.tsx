@@ -1,5 +1,6 @@
 import { cx } from '../../utils';
 import Icon, { IconProps } from '../icon/icon';
+import Spinner from '../spinner/spinner';
 import styles from './button.module.css';
 
 export type ButtonVariant = 'primary' | 'secondary';
@@ -15,6 +16,7 @@ export interface ButtonProps {
   onClick?: () => void;
   href?: string;
   openNewTab?: boolean;
+  loading?: boolean;
 }
 
 export function Button({
@@ -28,6 +30,7 @@ export function Button({
   onClick,
   href,
   openNewTab = false,
+  loading = false,
 }: ButtonProps) {
   const classes = cx(styles.button, styles[variant], className);
 
@@ -47,9 +50,10 @@ export function Button({
       type={type}
       onClick={onClick}
       className={classes}
-      disabled={disabled}
+      disabled={disabled || loading}
     >
-      {iconLeft && <Icon name={iconLeft} />}
+      {loading && <Spinner />}
+      {iconLeft && !loading && <Icon name={iconLeft} />}
       <span>{children}</span>
       {iconRight && <Icon name={iconRight} />}
     </button>

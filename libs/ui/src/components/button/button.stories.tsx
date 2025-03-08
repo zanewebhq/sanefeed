@@ -42,6 +42,16 @@ export const WithIcon: StoryObj<ButtonProps> = {
   },
 };
 
+export const Loading: StoryObj<ButtonProps> = {
+  args: {
+    onClick: () => alert('Button clicked'),
+    children: 'New Feed',
+    variant: 'primary',
+    loading: true,
+    disabled: false,
+  },
+};
+
 export const AsLink: StoryObj<ButtonProps> = {
   args: {
     href: '#',

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import AppError from '../utils/app-error';
+import { StatusCodes } from 'http-status-codes';
 
 interface AppDatabaseError extends AppError {
   code: string;
@@ -23,7 +24,7 @@ const sendErrorProd = (err: AppError, res: Response) => {
   } else {
     console.error('ERROR: ', err);
 
-    res.status(500).json({
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       status: 'error',
       message: 'Something went wrong',
     });
