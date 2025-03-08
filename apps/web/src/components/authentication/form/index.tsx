@@ -42,7 +42,10 @@ const schema = z.object({
     .string()
     .min(1, { message: 'Email is required.' })
     .email({ message: 'Please enter a valid email address.' }),
-  password: z.string().min(1, { message: 'Password is required.' }),
+  password: z
+    .string()
+    .min(1, { message: 'Password is required.' })
+    .min(8, { message: 'Weak. Add a minimum of 8 characters.' }),
 });
 
 interface AuthenticationFormProps {
