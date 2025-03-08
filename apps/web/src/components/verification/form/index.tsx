@@ -1,30 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 
 import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
-
-interface Inputs {
-  code: string;
-}
-
-const defaultValues: Inputs = {
-  code: '',
-};
-
-const schema = z.object({
-  code: z
-    .string()
-    .min(1, 'Verification code is required.')
-    .min(6, 'Verification code must be 6 characters.')
-    .max(6, 'Verification code must be 6 characters.'),
-});
+import useVerificationForm, { Inputs } from './use-form';
 
 export default function VerificationForm() {
   const router = useRouter();
@@ -32,10 +15,7 @@ export default function VerificationForm() {
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
-  const methods = useForm<Inputs>({
-    defaultValues,
-    resolver: zodResolver(schema),
-  });
+  const methods = useVerificationForm();
 
   const {
     register,
