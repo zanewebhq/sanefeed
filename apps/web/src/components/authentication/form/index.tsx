@@ -98,6 +98,7 @@ export default function AuthenticationForm({ type }: AuthenticationFormProps) {
           error={errors.password?.message}
           watchedPassword={watchedPassword}
           withStrengthMeter={withStrengthMeter}
+          forgotPasswordLink={type === 'login' ? '/auth/password' : undefined}
         />
       </div>
 

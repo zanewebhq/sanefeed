@@ -20,6 +20,7 @@ export interface PasswordFieldProps {
   iconRight?: IconProps['name'];
   withStrengthMeter?: boolean;
   watchedPassword?: string;
+  forgotPasswordLink?: string;
   ref?: React.Ref<HTMLInputElement>;
 }
 
@@ -33,6 +34,7 @@ export const PasswordField = ({
   disabled = false,
   withStrengthMeter = false,
   watchedPassword,
+  forgotPasswordLink,
   ref,
 }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,7 +53,15 @@ export const PasswordField = ({
 
   return (
     <Field>
-      {label && <Field.Label id={name} label={label} bold />}
+      <div className={styles.top}>
+        {label && <Field.Label id={name} label={label} bold />}
+
+        {forgotPasswordLink && (
+          <a href={forgotPasswordLink} className={styles.link}>
+            Forgot password?
+          </a>
+        )}
+      </div>
 
       <Field.Wrapper name={name} disabled={disabled}>
         <Field.Icons
