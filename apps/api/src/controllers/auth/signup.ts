@@ -22,11 +22,12 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
   const verificationCodeExpiresAt = dayjs().add(1, 'hour').toISOString();
 
   const result = await pool.query(
-    'INSERT INTO users (email, password, verification_code, verification_code_expires_at) VALUES ($1, $2, $3, $4) RETURNING *',
+    'INSERT INTO users (email, password, verification_code, verification_code_expires_at) VALUES ($1, $2, $3, $4) RETURNING id, email',
     [email, hashedPassword, verificationCode, verificationCodeExpiresAt]
   );
 
-  const payload = { id: result.rows[0].id };
+  const user = result.rows[0];
+  const payload = { id: user.id };
   const token = jwt.sign(payload, jwtOptions.secretOrKey);
 
   await sendEmail({
@@ -44,6 +45,9 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
     })
     .json({
       status: 'success',
+      data: {
+        user,
+      },
     });
 });
 

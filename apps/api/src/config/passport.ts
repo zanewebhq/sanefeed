@@ -12,9 +12,10 @@ const jwtOptions = {
 passport.use(
   new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
     try {
-      const res = await pool.query('SELECT * FROM users WHERE id = $1', [
-        jwtPayload.id,
-      ]);
+      const res = await pool.query(
+        'SELECT id, email, verified, verification_code, verification_code_expires_at FROM users WHERE id = $1',
+        [jwtPayload.id]
+      );
       if (res.rows.length > 0) {
         return done(null, res.rows[0]);
       } else {

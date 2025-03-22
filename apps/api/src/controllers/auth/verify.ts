@@ -34,7 +34,7 @@ export const verify = catchAsync(
     }
 
     const result = await pool.query(
-      'UPDATE users SET verified = true, verification_code = NULL, verification_code_expires_at = NULL WHERE id = $1 RETURNING *',
+      'UPDATE users SET verified = true, verification_code = NULL, verification_code_expires_at = NULL WHERE id = $1 RETURNING id, email',
       [req.user.id]
     );
 

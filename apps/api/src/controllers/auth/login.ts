@@ -12,9 +12,10 @@ const jwtOptions = {
 const login = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const result = await pool.query('SELECT * FROM users WHERE email = $1', [
-    email,
-  ]);
+  const result = await pool.query(
+    'SELECT id, email, password FROM users WHERE email = $1',
+    [email]
+  );
   if (result.rows.length === 0) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       status: 'error',
@@ -22,8 +23,8 @@ const login = catchAsync(async (req: Request, res: Response) => {
     });
   }
 
-  const user = result.rows[0];
-  const isMatch = await bcrypt.compare(password, user.password);
+  const { password: userPassword, ...sanitizedUser } = result.rows[0];
+  const isMatch = await bcrypt.compare(password, userPassword);
   if (!isMatch) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       status: 'error',
@@ -31,7 +32,7 @@ const login = catchAsync(async (req: Request, res: Response) => {
     });
   }
 
-  const payload = { id: user.id };
+  const payload = { id: sanitizedUser.id };
   const token = jwt.sign(payload, jwtOptions.secretOrKey);
   res
     .status(StatusCodes.OK)
@@ -42,6 +43,9 @@ const login = catchAsync(async (req: Request, res: Response) => {
     })
     .json({
       status: 'success',
+      data: {
+        user: sanitizedUser,
+      },
     });
 });
 
