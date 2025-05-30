@@ -3,7 +3,7 @@ import Icon, { IconProps } from '.';
 
 const meta: Meta<typeof Icon> = {
   component: Icon,
-  title: 'Icon',
+  title: 'UI/Icon',
 };
 export default meta;
 

@@ -1,5 +1,5 @@
-import { cx } from '../../../utils';
-import Icon, { IconProps } from '../../icon';
+import { cx } from '../../../../utils';
+import Icon, { IconProps } from '../../../icon';
 import styles from './icons.module.css';
 import { getIconClasses } from './utils';
 

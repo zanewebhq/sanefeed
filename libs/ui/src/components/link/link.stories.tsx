@@ -3,7 +3,7 @@ import Link, { LinkProps } from '.';
 
 const meta: Meta<typeof Link> = {
   component: Link,
-  title: 'Link',
+  title: 'UI/Link',
 };
 export default meta;
 

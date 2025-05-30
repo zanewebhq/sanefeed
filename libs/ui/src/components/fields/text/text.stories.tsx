@@ -3,7 +3,7 @@ import TextField, { TextFieldProps } from '.';
 
 const meta: Meta<typeof TextField> = {
   component: TextField,
-  title: 'TextField',
+  title: 'Fields/Text',
   decorators: [
     (Story) => (
       <div style={{ width: '20rem' }}>

@@ -1,5 +1,5 @@
-import { cx } from '../../../utils';
-import Text from '../../text';
+import { cx } from '../../../../utils';
+import Text from '../../../text';
 import styles from './label.module.css';
 
 export interface FieldLabelProps {

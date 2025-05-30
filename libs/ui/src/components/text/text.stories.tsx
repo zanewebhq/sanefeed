@@ -3,7 +3,7 @@ import Text, { TextProps } from '.';
 
 const meta: Meta<typeof Text> = {
   component: Text,
-  title: 'Text',
+  title: 'UI/Text',
 };
 export default meta;
 

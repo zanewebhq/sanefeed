@@ -3,7 +3,7 @@ import Button, { ButtonProps } from '.';
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: 'Button',
+  title: 'UI/Button',
   decorators: [
     (Story) => (
       <div style={{ width: '20rem' }}>

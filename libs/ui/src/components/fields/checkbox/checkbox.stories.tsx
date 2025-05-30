@@ -3,7 +3,7 @@ import CheckboxField, { CheckboxFieldProps } from '.';
 
 const meta: Meta<typeof CheckboxField> = {
   component: CheckboxField,
-  title: 'CheckboxField',
+  title: 'Fields/Checkbox',
   decorators: [
     (Story) => (
       <div style={{ width: '20rem' }}>

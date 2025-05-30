@@ -3,7 +3,7 @@ import FormError, { FormErrorProps } from '.';
 
 const meta: Meta<typeof FormError> = {
   component: FormError,
-  title: 'FormError',
+  title: 'UI/FormError',
 };
 export default meta;
 

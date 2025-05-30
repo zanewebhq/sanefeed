@@ -1,6 +1,6 @@
 'use client';
 
-import { cx } from '../../../utils';
+import { cx } from '../../../../utils';
 import styles from './wrapper.module.css';
 
 export interface FieldWrapperProps {

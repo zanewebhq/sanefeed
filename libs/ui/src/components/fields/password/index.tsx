@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { cx } from '../../utils';
-import { IconProps } from '../icon';
-import styles from './password-field.module.css';
-import PasswordStrengthMeter from '../password-strength-meter';
-import Field from '../field';
+import { cx } from '../../../utils';
+import { IconProps } from '../../icon';
+import styles from './password.module.css';
+import PasswordStrengthMeter from './strength-meter';
+import Field from '../../fields/field';
 
 export interface PasswordFieldProps {
   name: string;

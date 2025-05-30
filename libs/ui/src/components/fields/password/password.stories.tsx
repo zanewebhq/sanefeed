@@ -3,7 +3,7 @@ import PasswordField, { PasswordFieldProps } from '.';
 
 const meta: Meta<typeof PasswordField> = {
   component: PasswordField,
-  title: 'PasswordField',
+  title: 'Fields/Password',
   decorators: [
     (Story) => (
       <div style={{ width: '20rem' }}>
