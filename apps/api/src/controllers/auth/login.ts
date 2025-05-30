@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import { StatusCodes } from 'http-status-codes';
+import sanitizeUser from '../../utils/sanitize-user';
 
 const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
@@ -15,15 +16,19 @@ const login = catchAsync(async (req: Request, res: Response) => {
   const result = await pool.query('SELECT * FROM users WHERE email = $1', [
     email,
   ]);
-  if (result.rows.length === 0) {
+
+  const user = result.rows.at(0);
+  const sanitizedUser = sanitizeUser(user);
+
+  if (!user) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       status: 'error',
       message: 'Invalid email or password.',
     });
   }
 
-  const user = result.rows[0];
   const isMatch = await bcrypt.compare(password, user.password);
+
   if (!isMatch) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
       status: 'error',
@@ -33,6 +38,7 @@ const login = catchAsync(async (req: Request, res: Response) => {
 
   const payload = { id: user.id };
   const token = jwt.sign(payload, jwtOptions.secretOrKey);
+
   res
     .status(StatusCodes.OK)
     .cookie('token', token, {
@@ -42,6 +48,9 @@ const login = catchAsync(async (req: Request, res: Response) => {
     })
     .json({
       status: 'success',
+      data: {
+        user: sanitizedUser,
+      },
     });
 });
 

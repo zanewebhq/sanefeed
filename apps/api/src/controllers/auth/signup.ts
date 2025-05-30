@@ -7,6 +7,7 @@ import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
 import sendEmail from '../../utils/send-email';
+import sanitizeUser from '../../utils/sanitize-user';
 
 const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
@@ -26,7 +27,10 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
     [email, hashedPassword, verificationCode, verificationCodeExpiresAt]
   );
 
-  const payload = { id: result.rows[0].id };
+  const user = result.rows.at(0);
+  const sanitizedUser = sanitizeUser(user);
+
+  const payload = { id: user.id };
   const token = jwt.sign(payload, jwtOptions.secretOrKey);
 
   await sendEmail({
@@ -44,6 +48,9 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
     })
     .json({
       status: 'success',
+      data: {
+        user: sanitizedUser,
+      },
     });
 });
 
