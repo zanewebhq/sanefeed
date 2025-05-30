@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import FormError from './form-error';
+import FormError from '.';
 
 describe('Text', () => {
   it('should render successfully', () => {

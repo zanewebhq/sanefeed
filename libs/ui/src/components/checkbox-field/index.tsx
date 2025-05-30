@@ -1,7 +1,7 @@
 'use client';
 
-import Field from '../field/field';
-import Icon from '../icon/icon';
+import Field from '../field';
+import Icon from '../icon';
 import styles from './checkbox-field.module.css';
 
 export interface CheckboxFieldProps {

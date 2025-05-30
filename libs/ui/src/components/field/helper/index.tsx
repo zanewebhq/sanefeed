@@ -1,6 +1,6 @@
-import styles from './field-helper.module.css';
-import Text from '../text/text';
-import { cx } from '../../utils';
+import styles from './helper.module.css';
+import Text from '../../text';
+import { cx } from '../../../utils';
 
 export type FieldHelperType = 'helper' | 'error';
 

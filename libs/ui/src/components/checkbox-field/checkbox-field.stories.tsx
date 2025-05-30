@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CheckboxField, { CheckboxFieldProps } from './checkbox-field';
+import CheckboxField, { CheckboxFieldProps } from '.';
 
 const meta: Meta<typeof CheckboxField> = {
   component: CheckboxField,

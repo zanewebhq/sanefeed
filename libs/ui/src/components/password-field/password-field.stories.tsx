@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PasswordField, { PasswordFieldProps } from './password-field';
+import PasswordField, { PasswordFieldProps } from '.';
 
 const meta: Meta<typeof PasswordField> = {
   component: PasswordField,

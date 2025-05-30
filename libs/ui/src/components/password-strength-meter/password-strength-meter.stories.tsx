@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PasswordStrengthMeter, {
-  PasswordStrengthMeterProps,
-} from './password-strength-meter';
+import PasswordStrengthMeter, { PasswordStrengthMeterProps } from '.';
 
 const meta: Meta<typeof PasswordStrengthMeter> = {
   component: PasswordStrengthMeter,

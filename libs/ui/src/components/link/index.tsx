@@ -1,5 +1,5 @@
 import { cx } from '../../utils';
-import Icon, { IconProps } from '../icon/icon';
+import Icon, { IconProps } from '../icon';
 import styles from './link.module.css';
 
 export interface LinkProps {

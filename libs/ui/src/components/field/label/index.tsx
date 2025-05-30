@@ -1,6 +1,6 @@
-import { cx } from '../../utils';
-import Text from '../text/text';
-import styles from './field-label.module.css';
+import { cx } from '../../../utils';
+import Text from '../../text';
+import styles from './label.module.css';
 
 export interface FieldLabelProps {
   id: string;

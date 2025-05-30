@@ -1,7 +1,7 @@
-import FieldHelper from '../field-helper/field-helper';
-import FieldIcons from '../field-icons/field-icons';
-import FieldLabel from '../field-label/field-label';
-import FieldWrapper from '../field-wrapper/field-wrapper';
+import FieldHelper from './helper';
+import FieldIcons from './icons';
+import FieldLabel from './label';
+import FieldWrapper from './wrapper';
 import styles from './field.module.css';
 
 export interface FieldProps {

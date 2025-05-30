@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import PasswordField from './password-strength-meter';
+import PasswordField from '.';
 
 describe('Text', () => {
   it('should render successfully', () => {

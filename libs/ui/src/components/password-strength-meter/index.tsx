@@ -2,7 +2,7 @@
 
 import { cx } from '../../utils';
 import styles from './password-strength-meter.module.css';
-import Field from '../field/field';
+import Field from '../field';
 import { useEffect, useState } from 'react';
 
 const conditions = [

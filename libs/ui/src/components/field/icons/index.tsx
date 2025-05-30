@@ -1,6 +1,6 @@
-import { cx } from '../../utils';
-import Icon, { IconProps } from '../icon/icon';
-import styles from './field-icons.module.css';
+import { cx } from '../../../utils';
+import Icon, { IconProps } from '../../icon';
+import styles from './icons.module.css';
 import { getIconClasses } from './utils';
 
 export interface FieldIconsProps {

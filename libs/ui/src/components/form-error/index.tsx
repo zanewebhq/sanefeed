@@ -1,4 +1,4 @@
-import Text from '../text/text';
+import Text from '../text';
 import styles from './form-error.module.css';
 
 export interface FormErrorProps {

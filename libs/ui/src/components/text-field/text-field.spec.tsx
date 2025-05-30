@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import TextField from './text-field';
+import TextField from '.';
 
 describe('Text', () => {
   it('should render successfully', () => {

@@ -1,6 +1,6 @@
 import { cx } from '../../utils';
-import Icon, { IconProps } from '../icon/icon';
-import Spinner from '../spinner/spinner';
+import Icon, { IconProps } from '../icon';
+import Spinner from '../spinner';
 import styles from './button.module.css';
 
 export type ButtonVariant = 'primary' | 'secondary';

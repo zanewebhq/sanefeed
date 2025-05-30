@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { cx } from '../../utils';
-import { IconProps } from '../icon/icon';
+import { IconProps } from '../icon';
 import styles from './password-field.module.css';
-import PasswordStrengthMeter from '../password-strength-meter/password-strength-meter';
-import Field from '../field/field';
+import PasswordStrengthMeter from '../password-strength-meter';
+import Field from '../field';
 
 export interface PasswordFieldProps {
   name: string;

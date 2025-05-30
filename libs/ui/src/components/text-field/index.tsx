@@ -1,8 +1,8 @@
 'use client';
 
 import { cx } from '../../utils';
-import Field from '../field/field';
-import { IconProps } from '../icon/icon';
+import Field from '../field';
+import { IconProps } from '../icon';
 import styles from './text-field.module.css';
 
 export interface TextFieldProps {
