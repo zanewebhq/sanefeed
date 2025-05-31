@@ -1,6 +1,7 @@
 import { cx } from '../../utils';
 import Icon, { IconProps } from '../icon';
 import Spinner from '../spinner';
+import Text from '../text';
 import styles from './button.module.css';
 
 export type ButtonVariant = 'primary' | 'secondary';
@@ -42,7 +43,9 @@ export function Button({
       rel={openNewTab ? 'noopener noreferrer' : undefined}
     >
       {iconLeft && <Icon name={iconLeft} />}
-      <span>{children}</span>
+      <Text size="lg" className={styles.buttonText}>
+        {children}
+      </Text>
       {iconRight && <Icon name={iconRight} />}
     </a>
   ) : (
@@ -54,7 +57,9 @@ export function Button({
     >
       {loading && <Spinner />}
       {iconLeft && !loading && <Icon name={iconLeft} />}
-      <span>{children}</span>
+      <Text size="lg" className={styles.buttonText}>
+        {children}
+      </Text>
       {iconRight && <Icon name={iconRight} />}
     </button>
   );

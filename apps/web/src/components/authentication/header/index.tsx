@@ -33,13 +33,13 @@ export default function AuthenticationHeader({
     <div className={styles.header}>
       <Icon name="logo" size="lg" className={styles.logo} />
 
-      <Text type="heading" as="h1" size="4xl">
+      <Text as="h1" size="4xl">
         {title}
       </Text>
 
-      <Text>{description}</Text>
+      <Text as="p">{description}</Text>
 
-      <Text>
+      <Text as="p">
         {preLinkText} <Link href={link}>{linkText}</Link>
       </Text>
     </div>

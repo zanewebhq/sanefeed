@@ -1,6 +1,5 @@
 .text {
   font-family: var(--font-family);
-  color: var(--color-text-dark-200);
 }
 
 .size-xs {

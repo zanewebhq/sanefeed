@@ -8,13 +8,13 @@
   padding: 0 2rem;
   border: none;
   border-radius: var(--radius-md);
-  font-family: var(--font-family);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-normal);
   text-decoration: none;
   cursor: pointer;
   user-select: none;
+}
+
+.buttonText {
+  font-weight: var(--font-weight-medium);
 }
 
 .primary {

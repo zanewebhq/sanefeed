@@ -20,7 +20,7 @@ export const FieldHelper = ({
   const classes = cx(type && styles[type], className);
 
   return (
-    <Text id={id} type="label" as="span" size="sm" className={classes}>
+    <Text id={id} size="sm" className={classes}>
       {message}
     </Text>
   );

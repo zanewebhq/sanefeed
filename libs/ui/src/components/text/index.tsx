@@ -30,13 +30,13 @@ export const Text = ({
   id,
   className,
   as: Tag = 'span',
-  type = 'label',
-  size = 'md',
+  type,
+  size,
 }: TextProps) => {
   const classes = cx(
     styles.text,
-    styles[`type-${type}`],
-    styles[`size-${size}`],
+    type ? styles[`type-${type}`] : '',
+    size ? styles[`size-${size}`] : '',
     className
   );
 

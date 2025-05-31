@@ -10,7 +10,7 @@ export interface FieldLabelProps {
 
 export const FieldLabel = ({ id, label, bold = false }: FieldLabelProps) => (
   <label htmlFor={id} className={styles.label}>
-    <Text type="label" as="span" size="md" className={cx(bold && styles.bold)}>
+    <Text className={cx(bold && styles.bold)}>
       {label}
     </Text>
   </label>

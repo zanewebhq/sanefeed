@@ -7,7 +7,7 @@ export interface FormErrorProps {
 
 export const FormError = ({ children }: FormErrorProps) => (
   <div className={styles.formError}>
-    <Text type="body" as="span" size="sm" className={styles.text}>
+    <Text type="body" size="sm" className={styles.text}>
       {children}
     </Text>
   </div>

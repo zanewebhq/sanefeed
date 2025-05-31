@@ -7,11 +7,11 @@ export default function VerificationHeader() {
     <div className={styles.header}>
       <Icon name="logo" size="lg" className={styles.logo} />
 
-      <Text type="heading" as="h1" size="4xl">
+      <Text as="h1" size="4xl">
         Verify your email address
       </Text>
 
-      <Text>
+      <Text as="p">
         To complete your signup, please verify your email address by entering
         the verification code we just sent to email@example.com.
       </Text>
