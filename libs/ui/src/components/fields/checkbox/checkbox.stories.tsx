@@ -18,6 +18,7 @@ export const Unchecked: StoryObj<CheckboxFieldProps> = {
   args: {
     name: 'remember-me',
     label: 'Remember me',
+    checked: false,
   },
 };
 
@@ -25,5 +26,6 @@ export const Checked: StoryObj<CheckboxFieldProps> = {
   args: {
     name: 'remember-me',
     label: 'Remember me',
+    checked: true,
   },
 };
