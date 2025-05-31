@@ -1,9 +1,9 @@
 import { cx } from '../../utils';
 import styles from './text.module.css';
 
-export type TextTag = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export type TextTag = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
 
-export type TextType = 'body' | 'heading' | 'ui';
+export type TextType = 'body' | 'heading' | 'label';
 
 export type TextSize =
   | 'xs'
@@ -29,8 +29,8 @@ export const Text = ({
   children,
   id,
   className,
-  as: Tag = 'p',
-  type = 'body',
+  as: Tag = 'span',
+  type = 'label',
   size = 'md',
 }: TextProps) => {
   const classes = cx(
