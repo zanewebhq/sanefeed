@@ -8,6 +8,15 @@ const meta: Meta<typeof Text> = {
 };
 export default meta;
 
+export const Playground: StoryObj<TextProps> = {
+  args: {
+    children: 'Hello, world!',
+    type: 'label',
+    as: 'span',
+    size: 'md',
+  },
+};
+
 const HeadingRenderer = (props: TextProps) => (
   <div className={styles.storyWrapper}>
     <Text {...props} as="h1" size="5xl" />

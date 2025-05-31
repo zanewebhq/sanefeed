@@ -9,6 +9,13 @@ const meta: Meta<typeof Icon> = {
 };
 export default meta;
 
+export const Playground: StoryObj<IconProps> = {
+  args: {
+    name: 'arrow-back',
+    size: 'md',
+  },
+};
+
 const IconRenderer = (props: IconProps) => (
   <div className={styles.storyWrapper}>
     {Object.keys(icons).map((icon) => (
