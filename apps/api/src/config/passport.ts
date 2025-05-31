@@ -15,8 +15,11 @@ passport.use(
       const res = await pool.query('SELECT * FROM users WHERE id = $1', [
         jwtPayload.id,
       ]);
-      if (res.rows.length > 0) {
-        return done(null, res.rows[0]);
+
+      const user = res.rows.at(0);
+
+      if (user) {
+        return done(null, user);
       } else {
         return done(null, false);
       }

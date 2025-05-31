@@ -1,6 +1,5 @@
 .text {
   font-family: var(--font-family);
-  color: var(--color-text-dark-200);
 }
 
 .size-xs {
@@ -52,4 +51,10 @@
 .type-ui {
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
+}
+
+.storyWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

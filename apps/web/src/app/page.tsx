@@ -38,13 +38,11 @@ export default function HomePage() {
 
   return (
     <div className={styles.wrapper}>
-      <Text type="heading" as="h1" size="5xl">
-        Welcome to SaneFeed!
-      </Text>
+      <Text as="h1">Welcome to SaneFeed!</Text>
 
       {user ? (
         <>
-          <Text>
+          <Text as="p">
             You are logged in as: <b>{user.email}</b>!
           </Text>
 

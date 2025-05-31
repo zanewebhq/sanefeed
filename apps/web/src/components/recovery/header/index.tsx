@@ -7,11 +7,11 @@ export default function VerificationHeader() {
     <div className={styles.header}>
       <Icon name="logo" size="lg" className={styles.logo} />
 
-      <Text type="heading" as="h1" size="4xl">
+      <Text as="h1" size="4xl">
         Forgot password?
       </Text>
 
-      <Text>
+      <Text as="p">
         Enter your email address below, and we'll send you a recovery code to
         reset your password.
       </Text>

@@ -3,6 +3,7 @@ import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
+import sanitizeUser from '../../utils/sanitize-user';
 
 interface User {
   id: number;
@@ -38,12 +39,13 @@ export const verify = catchAsync(
       [req.user.id]
     );
 
-    const user = result.rows[0];
+    const user = result.rows.at(0);
+    const sanitizedUser = sanitizeUser(user);
 
     res.status(StatusCodes.OK).json({
       status: 'success',
       data: {
-        user,
+        user: sanitizedUser,
       },
     });
   }

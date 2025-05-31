@@ -91,12 +91,12 @@ export default function VerificationForm() {
         error={errors.code?.message}
       />
 
-      <Text>The code will expire in 24 hours.</Text>
+      <Text as="p">The code will expire in 24 hours.</Text>
 
       <div className={styles.group}>
         <div>
-          <Text>Didn't receive the code?</Text>
-          <Text>
+          <Text as="p">Didn't receive the code?</Text>
+          <Text as="p">
             Check your spam folder or{' '}
             <Link onClick={handleResend}>resend the verification email</Link>.
           </Text>

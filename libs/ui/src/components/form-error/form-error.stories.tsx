@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import FormError, { FormErrorProps } from './form-error';
+import FormError, { FormErrorProps } from '.';
 
 const meta: Meta<typeof FormError> = {
   component: FormError,
-  title: 'FormError',
+  title: 'UI/FormError',
 };
 export default meta;
 
