@@ -2,7 +2,7 @@ import { Icon, Text } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
 
-export default function VerificationHeader() {
+export default function RecoveryHeader() {
   return (
     <div className={styles.header}>
       <Icon name="logo" size="lg" className={styles.logo} />

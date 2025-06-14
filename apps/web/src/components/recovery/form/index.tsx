@@ -6,13 +6,13 @@ import { SubmitHandler } from 'react-hook-form';
 import { Button, FormError, Link, TextField } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
-import useVerificationForm, { Inputs } from './use-form';
+import useRecoveryForm, { Inputs } from './use-form';
 
-export default function VerificationForm() {
+export default function RecoveryForm() {
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
-  const methods = useVerificationForm();
+  const methods = useRecoveryForm();
 
   const {
     register,
