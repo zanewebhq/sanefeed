@@ -3,16 +3,18 @@
 import { Button, FormError, Icon, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import useSendRecoveryCodeForm, { Inputs } from './use-form';
 import { SubmitHandler } from 'react-hook-form';
 import request from 'apps/web/src/utils/request';
 
 interface SendRecoveryCodeStepProps {
+  setEmail: Dispatch<SetStateAction<string | undefined>>;
   next: () => void;
 }
 
 export default function SendRecoveryCodeStep({
+  setEmail,
   next,
 }: SendRecoveryCodeStepProps) {
   const [loading, setLoading] = useState(false);
@@ -43,6 +45,7 @@ export default function SendRecoveryCodeStep({
     if (!response.ok) {
       setFormError(result.message);
     } else {
+      setEmail(data.email);
       next();
     }
   };

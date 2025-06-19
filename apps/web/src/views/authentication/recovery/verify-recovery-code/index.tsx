@@ -6,10 +6,17 @@ import styles from '../styles.module.css';
 import { SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import useVerifyRecoveryCodeForm, { Inputs } from './use-form';
+import request from 'apps/web/src/utils/request';
 
-interface VerifyRecoveryCodeStepProps {}
+interface VerifyRecoveryCodeStepProps {
+  next: () => void;
+  email: string | undefined;
+}
 
-export default function VerifyRecoveryCodeStep({}: VerifyRecoveryCodeStepProps) {
+export default function VerifyRecoveryCodeStep({
+  next,
+  email,
+}: VerifyRecoveryCodeStepProps) {
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string>();
 
@@ -21,8 +28,26 @@ export default function VerifyRecoveryCodeStep({}: VerifyRecoveryCodeStepProps) 
     formState: { errors },
   } = methods;
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
+
+    const response = await request({
+      endpoint: '/auth/recover/verify',
+      method: 'POST',
+      body: {
+        email: email || '',
+        code: data.code,
+      },
+    });
+
+    const result = await response.json();
+    setLoading(false);
+
+    if (!response.ok) {
+      setFormError(result.message);
+    } else {
+      next();
+    }
   };
 
   return (
