@@ -1,7 +1,9 @@
+'use client';
+
 import { Button, FormError, Icon, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
-import { FieldErrors, SubmitHandler, UseFormRegister } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import useVerifyRecoveryCodeForm, { Inputs } from './use-form';
 
@@ -20,7 +22,6 @@ export default function VerifyRecoveryCodeStep({}: VerifyRecoveryCodeStepProps) 
   } = methods;
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log('data');
     setLoading(true);
   };
 
@@ -57,8 +58,7 @@ export default function VerifyRecoveryCodeStep({}: VerifyRecoveryCodeStepProps) 
           <div>
             <Text as="p">Didn't receive the code?</Text>
             <Text as="p">
-              Check your spam folder or{' '}
-              <Link>resend the verification email</Link>.
+              Check your spam folder or <Link>resend the recovery code</Link>.
             </Text>
           </div>
 

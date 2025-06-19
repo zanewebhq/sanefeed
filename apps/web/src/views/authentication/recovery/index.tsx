@@ -11,7 +11,7 @@ export default function PasswordRecoveryView() {
 
   return (
     <div className={styles.wrapper}>
-      {step === 1 && <SendRecoveryCodeStep />}
+      {step === 1 && <SendRecoveryCodeStep next={() => setStep(2)} />}
 
       {step === 2 && <VerifyRecoveryCodeStep />}
 

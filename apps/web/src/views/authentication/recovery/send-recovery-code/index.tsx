@@ -1,13 +1,20 @@
+'use client';
+
 import { Button, FormError, Icon, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
 import { useState } from 'react';
 import useSendRecoveryCodeForm, { Inputs } from './use-form';
 import { SubmitHandler } from 'react-hook-form';
+import request from 'apps/web/src/utils/request';
 
-interface SendRecoveryCodeStepProps {}
+interface SendRecoveryCodeStepProps {
+  next: () => void;
+}
 
-export default function SendRecoveryCodeStep({}: SendRecoveryCodeStepProps) {
+export default function SendRecoveryCodeStep({
+  next,
+}: SendRecoveryCodeStepProps) {
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string>();
 
@@ -19,9 +26,25 @@ export default function SendRecoveryCodeStep({}: SendRecoveryCodeStepProps) {
     formState: { errors },
   } = methods;
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log('data');
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
+
+    const response = await request({
+      endpoint: '/auth/recover/send',
+      method: 'POST',
+      body: {
+        email: data.email,
+      },
+    });
+
+    const result = await response.json();
+    setLoading(false);
+
+    if (!response.ok) {
+      setFormError(result.message);
+    } else {
+      next();
+    }
   };
 
   return (

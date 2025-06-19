@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Button,
   FormError,
@@ -28,7 +30,6 @@ export default function UpdatePasswordStep({}: UpdatePasswordStepProps) {
   } = methods;
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log('data');
     setLoading(true);
   };
 
