@@ -5,11 +5,13 @@ import { useForm } from 'react-hook-form';
 export interface Inputs {
   email: string;
   code: string;
+  password: string;
 }
 
 const defaultValues: Inputs = {
   email: '',
   code: '',
+  password: '',
 };
 
 const schema = z.object({
@@ -22,6 +24,11 @@ const schema = z.object({
     .min(1, 'Verification code is required.')
     .min(6, 'Verification code must be 6 characters.')
     .max(6, 'Verification code must be 6 characters.'),
+  password: z
+    .string()
+    .min(1, { message: 'Password is required.' })
+    .min(8, { message: 'Weak. Add a minimum of 8 characters.' })
+    .max(128, { message: 'Password should not exceed 128 characters.' }),
 });
 
 const usePasswordRecoveryForm = () => {
