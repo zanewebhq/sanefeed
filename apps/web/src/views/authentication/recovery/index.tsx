@@ -6,6 +6,7 @@ import usePasswordRecoveryForm, { Inputs } from './use-form';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import SendRecoveryCodeStep from './send-recovery-code';
+import VerifyRecoveryCodeStep from './verify-recovery-code';
 
 export default function PasswordRecoveryView() {
   const [loading, setLoading] = useState(false);
@@ -53,7 +54,7 @@ export default function PasswordRecoveryView() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
-      <SendRecoveryCodeStep
+      <VerifyRecoveryCodeStep
         register={register}
         errors={errors}
         formError={formError}
