@@ -13,10 +13,20 @@ import styles from '../styles.module.css';
 import { SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import useUpdatePasswordForm, { Inputs } from './use-form';
+import request from 'apps/web/src/utils/request';
+import { useRouter } from 'next/navigation';
 
-interface UpdatePasswordStepProps {}
+interface UpdatePasswordStepProps {
+  email: string | undefined;
+  code: string | undefined;
+}
 
-export default function UpdatePasswordStep({}: UpdatePasswordStepProps) {
+export default function UpdatePasswordStep({
+  email,
+  code,
+}: UpdatePasswordStepProps) {
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string>();
 
@@ -29,8 +39,27 @@ export default function UpdatePasswordStep({}: UpdatePasswordStepProps) {
     watch,
   } = methods;
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
+
+    const response = await request({
+      endpoint: '/auth/recover',
+      method: 'POST',
+      body: {
+        email: email || '',
+        code: code || '',
+        password: data.password,
+      },
+    });
+
+    const result = await response.json();
+    setLoading(false);
+
+    if (!response.ok) {
+      setFormError(result.message);
+    } else {
+      router.push('/auth/login');
+    }
   };
 
   const password = watch('password');

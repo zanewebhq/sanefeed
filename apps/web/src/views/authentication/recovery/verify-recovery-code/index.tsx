@@ -4,18 +4,20 @@ import { Button, FormError, Icon, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
 import { SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import useVerifyRecoveryCodeForm, { Inputs } from './use-form';
 import request from 'apps/web/src/utils/request';
 
 interface VerifyRecoveryCodeStepProps {
   next: () => void;
   email: string | undefined;
+  setCode: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export default function VerifyRecoveryCodeStep({
   next,
   email,
+  setCode,
 }: VerifyRecoveryCodeStepProps) {
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string>();
@@ -46,6 +48,7 @@ export default function VerifyRecoveryCodeStep({
     if (!response.ok) {
       setFormError(result.message);
     } else {
+      setCode(data.code);
       next();
     }
   };

@@ -8,6 +8,7 @@ import UpdatePasswordStep from './update-password';
 
 export default function PasswordRecoveryView() {
   const [email, setEmail] = useState<string>();
+  const [code, setCode] = useState<string>();
   const [step, setStep] = useState(1);
 
   return (
@@ -17,10 +18,14 @@ export default function PasswordRecoveryView() {
       )}
 
       {step === 2 && (
-        <VerifyRecoveryCodeStep next={() => setStep(3)} email={email} />
+        <VerifyRecoveryCodeStep
+          next={() => setStep(3)}
+          email={email}
+          setCode={setCode}
+        />
       )}
 
-      {step === 3 && <UpdatePasswordStep />}
+      {step === 3 && <UpdatePasswordStep email={email} code={code} />}
     </div>
   );
 }
