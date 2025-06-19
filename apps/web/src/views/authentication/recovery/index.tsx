@@ -5,10 +5,11 @@ import styles from './styles.module.css';
 import usePasswordRecoveryForm, { Inputs } from './use-form';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import SendRecoveryCodeStep from './send-recovery-code';
 
 export default function PasswordRecoveryView() {
   const [loading, setLoading] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string>();
 
   const methods = usePasswordRecoveryForm();
 
@@ -51,42 +52,13 @@ export default function PasswordRecoveryView() {
   };
 
   return (
-    <form className={styles.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.header}>
-        <Icon name="logo" size="lg" className={styles.logo} />
-
-        <Text as="h1" size="4xl">
-          Forgot password?
-        </Text>
-
-        <Text as="p">
-          Enter your email address below, and we'll send you a recovery code to
-          reset your password.
-        </Text>
-      </div>
-
-      <div className={styles.fields}>
-        <TextField
-          {...register('email')}
-          type="email"
-          label="Email"
-          placeholder="email@example.com"
-          iconLeft="mail"
-          error={errors.email?.message}
-        />
-
-        {formError && <FormError>{formError}</FormError>}
-
-        <div className={styles.group}>
-          <Button type="submit" className={styles.button} loading={loading}>
-            Send recovery code
-          </Button>
-
-          <Link href="/auth/signup" iconLeft="arrow-back">
-            Go back
-          </Link>
-        </div>
-      </div>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      <SendRecoveryCodeStep
+        register={register}
+        errors={errors}
+        formError={formError}
+        loading={loading}
+      />
     </form>
   );
 }
