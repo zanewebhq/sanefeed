@@ -1,13 +1,10 @@
-import Recovery from 'apps/web/src/components/recovery';
 import styles from '../page.module.css';
+import PasswordRecoveryView from 'apps/web/src/views/authentication/recovery';
 
 export default function PasswordRecoveryPage() {
   return (
     <div className={styles.wrapper}>
-      <Recovery>
-        <Recovery.Header />
-        <Recovery.Form />
-      </Recovery>
+      <PasswordRecoveryView />
     </div>
   );
 }

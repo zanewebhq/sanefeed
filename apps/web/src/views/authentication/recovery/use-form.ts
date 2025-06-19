@@ -17,11 +17,11 @@ const schema = z.object({
     .email({ message: 'Please enter a valid email address.' }),
 });
 
-const useRecoveryForm = () => {
+const usePasswordRecoveryForm = () => {
   return useForm<Inputs>({
     defaultValues,
     resolver: zodResolver(schema),
   });
 };
 
-export default useRecoveryForm;
+export default usePasswordRecoveryForm;
