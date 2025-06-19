@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catch-async';
+import catchAsync from '../../../utils/catch-async';
 import { StatusCodes } from 'http-status-codes';
-import { pool } from '../../database';
-import sendEmail from '../../utils/send-email';
+import { pool } from '../../../database';
+import sendEmail from '../../../utils/send-email';
 import crypto from 'crypto';
 import dayjs from 'dayjs';
 

@@ -4,7 +4,8 @@ import signup from './signup';
 import verify from './verify';
 import resendVerification from './resend-verification';
 import recover from './recover';
-import sendRecovery from './send-recovery';
+import sendRecovery from './recover/send';
+import verifyRecovery from './recover/verify';
 
 const auth = {
   login,
@@ -14,6 +15,7 @@ const auth = {
   resendVerification,
   recover,
   sendRecovery,
+  verifyRecovery,
 };
 
 export default auth;

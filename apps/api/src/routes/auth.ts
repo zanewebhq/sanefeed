@@ -15,7 +15,8 @@ router.get(
   controllers.auth.resendVerification
 );
 
-router.post('/auth/recover', controllers.auth.recover);
 router.post('/auth/recover/send', controllers.auth.sendRecovery);
+router.post('/auth/recover/verify', controllers.auth.verifyRecovery);
+router.post('/auth/recover', controllers.auth.recover);
 
 export default router;
