@@ -1,22 +1,29 @@
 import { Button, FormError, Icon, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
-import { Inputs } from '../use-form';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { useState } from 'react';
+import useSendRecoveryCodeForm, { Inputs } from './use-form';
+import { SubmitHandler } from 'react-hook-form';
 
-interface SendRecoveryCodeStepProps {
-  register: UseFormRegister<Inputs>;
-  errors: FieldErrors<Inputs>;
-  formError: string | undefined;
-  loading: boolean;
-}
+interface SendRecoveryCodeStepProps {}
 
-export default function SendRecoveryCodeStep({
-  register,
-  errors,
-  formError,
-  loading,
-}: SendRecoveryCodeStepProps) {
+export default function SendRecoveryCodeStep({}: SendRecoveryCodeStepProps) {
+  const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState<string>();
+
+  const methods = useSendRecoveryCodeForm();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log('data');
+    setLoading(true);
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -32,7 +39,11 @@ export default function SendRecoveryCodeStep({
         </Text>
       </div>
 
-      <div className={styles.fields}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <TextField
           {...register('email')}
           type="email"
@@ -53,7 +64,7 @@ export default function SendRecoveryCodeStep({
             Go back
           </Link>
         </div>
-      </div>
+      </form>
     </>
   );
 }

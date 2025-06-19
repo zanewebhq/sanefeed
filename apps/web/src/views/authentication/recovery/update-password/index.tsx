@@ -5,28 +5,35 @@ import {
   Link,
   PasswordField,
   Text,
-  TextField,
 } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
-import { Inputs } from '../use-form';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
+import { useState } from 'react';
+import useUpdatePasswordForm, { Inputs } from './use-form';
 
-interface UpdatePasswordStepProps {
-  register: UseFormRegister<Inputs>;
-  errors: FieldErrors<Inputs>;
-  formError: string | undefined;
-  loading: boolean;
-  watchedPassword: string;
-}
+interface UpdatePasswordStepProps {}
 
-export default function UpdatePasswordStep({
-  register,
-  errors,
-  formError,
-  loading,
-  watchedPassword,
-}: UpdatePasswordStepProps) {
+export default function UpdatePasswordStep({}: UpdatePasswordStepProps) {
+  const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState<string>();
+
+  const methods = useUpdatePasswordForm();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = methods;
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log('data');
+    setLoading(true);
+  };
+
+  const password = watch('password');
+
   return (
     <>
       <div className={styles.header}>
@@ -43,13 +50,17 @@ export default function UpdatePasswordStep({
         </Text>
       </div>
 
-      <div className={styles.fields}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <PasswordField
           {...register('password')}
           label="Password"
           helper="Min. 8 characters, 1 uppercase, 1 lowercase, 1 digit"
           error={errors.password?.message}
-          watchedPassword={watchedPassword}
+          watchedPassword={password}
           withStrengthMeter
         />
 
@@ -64,7 +75,7 @@ export default function UpdatePasswordStep({
             Go back
           </Link>
         </div>
-      </div>
+      </form>
     </>
   );
 }

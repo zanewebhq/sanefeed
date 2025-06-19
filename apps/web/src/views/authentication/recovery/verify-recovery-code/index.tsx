@@ -1,22 +1,29 @@
 import { Button, FormError, Icon, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
-import { Inputs } from '../use-form';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, SubmitHandler, UseFormRegister } from 'react-hook-form';
+import { useState } from 'react';
+import useVerifyRecoveryCodeForm, { Inputs } from './use-form';
 
-interface VerifyRecoveryCodeStepProps {
-  register: UseFormRegister<Inputs>;
-  errors: FieldErrors<Inputs>;
-  formError: string | undefined;
-  loading: boolean;
-}
+interface VerifyRecoveryCodeStepProps {}
 
-export default function VerifyRecoveryCodeStep({
-  register,
-  errors,
-  formError,
-  loading,
-}: VerifyRecoveryCodeStepProps) {
+export default function VerifyRecoveryCodeStep({}: VerifyRecoveryCodeStepProps) {
+  const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState<string>();
+
+  const methods = useVerifyRecoveryCodeForm();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log('data');
+    setLoading(true);
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -32,7 +39,11 @@ export default function VerifyRecoveryCodeStep({
         </Text>
       </div>
 
-      <div className={styles.fields}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <TextField
           {...register('code')}
           type="text"
@@ -61,7 +72,7 @@ export default function VerifyRecoveryCodeStep({
             Go back
           </Link>
         </div>
-      </div>
+      </form>
     </>
   );
 }
