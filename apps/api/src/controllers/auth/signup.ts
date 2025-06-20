@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import catchAsync from '../../utils/catch-async';
@@ -8,6 +7,7 @@ import { StatusCodes } from 'http-status-codes';
 import sendEmail from '../../utils/send-email';
 import sanitizeUser from '../../utils/sanitize-user';
 import { createUser } from '../../models/user';
+import hashPassword from '../../utils/hash-password';
 
 const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
@@ -18,7 +18,7 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
 
   // TODO: Validate request body
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await hashPassword(password);
   const verificationCode = crypto.randomBytes(3).toString('hex').toUpperCase();
   const verificationCodeExpiresAt = dayjs().add(1, 'hour').toDate();
 

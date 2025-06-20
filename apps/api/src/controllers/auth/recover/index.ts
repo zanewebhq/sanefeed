@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
 import catchAsync from '../../../utils/catch-async';
 
 import { StatusCodes } from 'http-status-codes';
 import dayjs from 'dayjs';
 import { getUserByEmail, updateUser } from '../../../models/user';
+import hashPassword from '../../../utils/hash-password';
 
 export const recover = catchAsync(async (req: Request, res: Response) => {
   const { email, code, password } = req.body;
@@ -30,7 +30,7 @@ export const recover = catchAsync(async (req: Request, res: Response) => {
     });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await hashPassword(password);
 
   await updateUser(user.id, {
     password: hashedPassword,
