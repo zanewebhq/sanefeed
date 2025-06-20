@@ -18,11 +18,11 @@ const schema = z.object({
     .max(6, 'Verification code must be 6 characters.'),
 });
 
-const useVerificationForm = () => {
+const useEmailVerificationForm = () => {
   return useForm<Inputs>({
     defaultValues,
     resolver: zodResolver(schema),
   });
 };
 
-export default useVerificationForm
+export default useEmailVerificationForm;

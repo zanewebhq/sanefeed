@@ -1,19 +1,15 @@
 import { Request, Response } from 'express';
 import catchAsync from '../../../utils/catch-async';
 import { StatusCodes } from 'http-status-codes';
-import { pool } from '../../../database';
 import sendEmail from '../../../utils/send-email';
 import crypto from 'crypto';
 import dayjs from 'dayjs';
+import { getUserByEmail, updateUser } from '../../../models/user';
 
 export const sendRecovery = catchAsync(async (req: Request, res: Response) => {
   const { email } = req.body;
 
-  const findResult = await pool.query('SELECT * FROM users WHERE email = $1', [
-    email,
-  ]);
-
-  const user = findResult.rows.at(0);
+  const user = await getUserByEmail(email);
 
   if (!user) {
     res.status(StatusCodes.OK).json({
@@ -22,14 +18,12 @@ export const sendRecovery = catchAsync(async (req: Request, res: Response) => {
   }
 
   const recoveryCode = crypto.randomBytes(3).toString('hex').toUpperCase();
-  const recoveryCodeExpiresAt = dayjs().add(1, 'hour').toISOString();
+  const recoveryCodeExpiresAt = dayjs().add(1, 'hour').toDate();
 
-  const updateResult = await pool.query(
-    'UPDATE users SET recovery_code = $1, recovery_code_expires_at = $2 WHERE id = $3 RETURNING *',
-    [recoveryCode, recoveryCodeExpiresAt, user.id]
-  );
-
-  const updatedUser = updateResult.rows.at(0);
+  const updatedUser = await updateUser(user.id, {
+    recovery_code: recoveryCode,
+    recovery_code_expires_at: recoveryCodeExpiresAt,
+  });
 
   await sendEmail({
     email,

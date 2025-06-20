@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import { StatusCodes } from 'http-status-codes';
 import sanitizeUser from '../../utils/sanitize-user';
+import { getUserByEmail } from '../../models/user';
 
 const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
@@ -13,12 +13,7 @@ const jwtOptions = {
 const login = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const result = await pool.query('SELECT * FROM users WHERE email = $1', [
-    email,
-  ]);
-
-  const user = result.rows.at(0);
-  const sanitizedUser = sanitizeUser(user);
+  const user = await getUserByEmail(email);
 
   if (!user) {
     return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -26,6 +21,8 @@ const login = catchAsync(async (req: Request, res: Response) => {
       message: 'Invalid email or password.',
     });
   }
+
+  const sanitizedUser = sanitizeUser(user);
 
   const isMatch = await bcrypt.compare(password, user.password);
 
