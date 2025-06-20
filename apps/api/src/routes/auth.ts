@@ -10,7 +10,7 @@ router.get('/auth/logout', controllers.auth.logout);
 
 router.post('/auth/verify', middleware.protect, controllers.auth.verify);
 router.get(
-  '/auth/resend-verification',
+  '/auth/verify/resend',
   middleware.protect,
   controllers.auth.resendVerification
 );

@@ -8,6 +8,7 @@ import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
 import useEmailVerificationForm, { Inputs } from './use-form';
+import request from 'apps/web/src/utils/request';
 
 export default function EmailVerificationForm() {
   const router = useRouter();
@@ -24,61 +25,35 @@ export default function EmailVerificationForm() {
   } = methods;
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    try {
-      setLoading(true);
+    setLoading(true);
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/verify`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-          credentials: 'include',
-        }
-      );
+    const response = await request({
+      endpoint: '/auth/verify',
+      method: 'POST',
+      body: {
+        code: data.code,
+      },
+    });
 
-      const result = await response.json();
+    const result = await response.json();
 
-      if (!response.ok) {
-        setLoading(false);
-        setFormError(result.message);
-      } else {
-        router.push('/');
-      }
-    } catch (error) {
-      setLoading(false);
-      console.error('Error:', error);
-      setFormError('An error occurred on the server. Please try again later.');
+    if (!response.ok) {
+      setFormError(result.message);
+    } else {
+      router.push('/');
     }
   };
 
   const handleResend = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/resend-verification`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-        }
-      );
+    const response = await request({
+      endpoint: '/auth/verify/resend',
+      method: 'GET',
+    });
 
-      const result = await response.json();
+    const result = await response.json();
 
-      if (!response.ok) {
-        setLoading(false);
-        setFormError(result.message);
-      } else {
-        setLoading(false);
-      }
-    } catch (error) {
-      setLoading(false);
-      console.error('Error:', error);
-      setFormError('An error occurred on the server. Please try again later.');
+    if (!response.ok) {
+      setFormError(result.message);
     }
   };
 

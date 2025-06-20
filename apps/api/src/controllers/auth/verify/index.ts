@@ -1,10 +1,10 @@
 import { Response } from 'express';
-import catchAsync from '../../utils/catch-async';
+import catchAsync from '../../../utils/catch-async';
 import { StatusCodes } from 'http-status-codes';
-import sanitizeUser from '../../utils/sanitize-user';
-import { RequestWithUser } from '../../types';
-import { updateUser } from '../../models/user';
-import validateCode from '../../utils/validate-code';
+import sanitizeUser from '../.././../utils/sanitize-user';
+import { RequestWithUser } from '../../../types';
+import { updateUser } from '../../../models/user';
+import validateCode from '../../../utils/validate-code';
 
 export const verify = catchAsync(
   async (req: RequestWithUser, res: Response) => {

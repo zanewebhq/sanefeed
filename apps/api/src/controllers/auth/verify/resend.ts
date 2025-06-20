@@ -1,11 +1,11 @@
 import { Response } from 'express';
 import crypto from 'crypto';
-import catchAsync from '../../utils/catch-async';
+import catchAsync from '../../../utils/catch-async';
 import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
-import sendEmail from '../../utils/send-email';
-import { RequestWithUser } from '../../types';
-import { updateUser } from '../../models/user';
+import sendEmail from '../../../utils/send-email';
+import { RequestWithUser } from '../../../types';
+import { updateUser } from '../../../models/user';
 
 const resendVerification = catchAsync(
   async (req: RequestWithUser, res: Response) => {
