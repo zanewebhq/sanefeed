@@ -1,13 +1,11 @@
-import Verification from '../../../components/verification';
+import EmailVerificationView from 'apps/web/src/views/authentication/verification';
+
 import styles from '../page.module.css';
 
 export default function VerifyPage() {
   return (
     <div className={styles.wrapper}>
-      <Verification>
-        <Verification.Header />
-        <Verification.Form />
-      </Verification>
+      <EmailVerificationView />
     </div>
   );
 }

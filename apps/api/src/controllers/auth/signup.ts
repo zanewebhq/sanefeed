@@ -16,8 +16,6 @@ const jwtOptions = {
 export const signup = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  // TODO: Validate request body
-
   const hashedPassword = await hashPassword(password);
   const verificationCode = crypto.randomBytes(3).toString('hex').toUpperCase();
   const verificationCodeExpiresAt = dayjs().add(1, 'hour').toDate();
