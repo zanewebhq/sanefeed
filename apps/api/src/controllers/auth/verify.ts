@@ -1,21 +1,20 @@
 import { Response } from 'express';
 import catchAsync from '../../utils/catch-async';
-import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
 import sanitizeUser from '../../utils/sanitize-user';
 import { RequestWithUser } from '../../types';
 import { updateUser } from '../../models/user';
+import validateCode from '../../utils/validate-code';
 
 export const verify = catchAsync(
   async (req: RequestWithUser, res: Response) => {
-    const currentTime = dayjs();
-    const verificationCodeExpiresAt = dayjs(
+    const validCode = validateCode(
+      req.body.code,
+      req.user.verification_code,
       req.user.verification_code_expires_at
     );
-    const hasExpired = currentTime.isAfter(verificationCodeExpiresAt);
-    const isMatching = req.body.code === req.user.verification_code;
 
-    if (hasExpired || !isMatching) {
+    if (!validCode) {
       return res.status(StatusCodes.UNAUTHORIZED).json({
         status: 'error',
         message: 'Invalid verification code.',
