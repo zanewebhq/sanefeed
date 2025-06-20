@@ -5,15 +5,12 @@ import { pool } from '../../../database';
 import sendEmail from '../../../utils/send-email';
 import crypto from 'crypto';
 import dayjs from 'dayjs';
+import { getUserByEmail } from '../../../models/user';
 
 export const sendRecovery = catchAsync(async (req: Request, res: Response) => {
   const { email } = req.body;
 
-  const findResult = await pool.query('SELECT * FROM users WHERE email = $1', [
-    email,
-  ]);
-
-  const user = findResult.rows.at(0);
+  const user = await getUserByEmail(email);
 
   if (!user) {
     res.status(StatusCodes.OK).json({

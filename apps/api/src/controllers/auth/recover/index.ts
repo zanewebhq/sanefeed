@@ -4,17 +4,13 @@ import catchAsync from '../../../utils/catch-async';
 import { pool } from '../../../database';
 
 import { StatusCodes } from 'http-status-codes';
-import { User } from '../../../types';
 import dayjs from 'dayjs';
+import { getUserByEmail } from '../../../models/user';
 
 export const recover = catchAsync(async (req: Request, res: Response) => {
   const { email, code, password } = req.body;
 
-  const users = await pool.query('SELECT * FROM users WHERE email = $1', [
-    email,
-  ]);
-
-  const user = users.rows.at(0) as User;
+  const user = await getUserByEmail(email);
 
   if (!user) {
     return res.status(StatusCodes.BAD_REQUEST).json({

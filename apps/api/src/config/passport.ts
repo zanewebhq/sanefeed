@@ -1,7 +1,7 @@
 import passport from 'passport';
 import passportJWT from 'passport-jwt';
-import { pool } from '../database';
 import cookieExtractor from '../utils/cookie-extractor';
+import { getUserById } from '../models/user';
 
 const { Strategy: JwtStrategy } = passportJWT;
 const jwtOptions = {
@@ -12,11 +12,7 @@ const jwtOptions = {
 passport.use(
   new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
     try {
-      const res = await pool.query('SELECT * FROM users WHERE id = $1', [
-        jwtPayload.id,
-      ]);
-
-      const user = res.rows.at(0);
+      const user = await getUserById(jwtPayload.id);
 
       if (user) {
         return done(null, user);
