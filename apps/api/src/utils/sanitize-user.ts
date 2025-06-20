@@ -1,11 +1,4 @@
-interface User {
-  id: number;
-  email: string;
-  password: string;
-  verified: boolean;
-  verification_code: string;
-  verification_code_expires_at: string;
-}
+import { User } from '../types';
 
 const sanitizeUser = (user: User) => ({ id: user.id, email: user.email });
 
