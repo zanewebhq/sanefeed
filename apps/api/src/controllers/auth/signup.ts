@@ -2,12 +2,12 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
-import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
 import sendEmail from '../../utils/send-email';
 import sanitizeUser from '../../utils/sanitize-user';
+import { createUser } from '../../models/user';
 
 const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
@@ -16,18 +16,19 @@ const jwtOptions = {
 export const signup = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  // TODO: Validate email and password
+  // TODO: Validate request body
 
   const hashedPassword = await bcrypt.hash(password, 10);
   const verificationCode = crypto.randomBytes(3).toString('hex').toUpperCase();
-  const verificationCodeExpiresAt = dayjs().add(1, 'hour').toISOString();
+  const verificationCodeExpiresAt = dayjs().add(1, 'hour').toDate();
 
-  const result = await pool.query(
-    'INSERT INTO users (email, password, verification_code, verification_code_expires_at) VALUES ($1, $2, $3, $4) RETURNING *',
-    [email, hashedPassword, verificationCode, verificationCodeExpiresAt]
-  );
+  const user = await createUser({
+    email,
+    password: hashedPassword,
+    verification_code: verificationCode,
+    verification_code_expires_at: verificationCodeExpiresAt,
+  });
 
-  const user = result.rows.at(0);
   const sanitizedUser = sanitizeUser(user);
 
   const payload = { id: user.id };
