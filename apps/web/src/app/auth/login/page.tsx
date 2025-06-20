@@ -1,14 +1,11 @@
-import Authentication from '../../../components/authentication';
+import LoginView from 'apps/web/src/views/authentication/login';
 
 import styles from '../page.module.css';
 
 export default function LoginPage() {
   return (
     <div className={styles.wrapper}>
-      <Authentication>
-        <Authentication.Header type="login" />
-        <Authentication.Form type="login" />
-      </Authentication>
+      <LoginView />
     </div>
   );
 }
