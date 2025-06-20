@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import catchAsync from '../../../utils/catch-async';
-import { pool } from '../../../database';
 
 import { StatusCodes } from 'http-status-codes';
 import dayjs from 'dayjs';
-import { getUserByEmail } from '../../../models/user';
+import { getUserByEmail, updateUser } from '../../../models/user';
 
 export const recover = catchAsync(async (req: Request, res: Response) => {
   const { email, code, password } = req.body;
@@ -33,10 +32,11 @@ export const recover = catchAsync(async (req: Request, res: Response) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  await pool.query(
-    'UPDATE users SET password = $1, recovery_code = NULL, recovery_code_expires_at = NULL WHERE email = $2 RETURNING *',
-    [hashedPassword, user.email]
-  );
+  await updateUser(user.id, {
+    password: hashedPassword,
+    recovery_code: null,
+    recovery_code_expires_at: null,
+  });
 
   res.status(StatusCodes.OK).json({
     status: 'success',

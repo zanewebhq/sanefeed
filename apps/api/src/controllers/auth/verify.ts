@@ -1,10 +1,10 @@
 import { Response } from 'express';
-import { pool } from '../../database';
 import catchAsync from '../../utils/catch-async';
 import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
 import sanitizeUser from '../../utils/sanitize-user';
 import { RequestWithUser } from '../../types';
+import { updateUser } from '../../models/user';
 
 export const verify = catchAsync(
   async (req: RequestWithUser, res: Response) => {
@@ -22,12 +22,12 @@ export const verify = catchAsync(
       });
     }
 
-    const result = await pool.query(
-      'UPDATE users SET verified = true, verification_code = NULL, verification_code_expires_at = NULL WHERE id = $1 RETURNING *',
-      [req.user.id]
-    );
+    const user = await updateUser(req.user.id, {
+      verified: true,
+      verification_code: null,
+      verification_code_expires_at: null,
+    });
 
-    const user = result.rows.at(0);
     const sanitizedUser = sanitizeUser(user);
 
     res.status(StatusCodes.OK).json({
