@@ -1,12 +1,13 @@
 'use client';
 
-import { Button, FormError, Icon, Link, Text, TextField } from '@sanefeed/ui';
+import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
 import { SubmitHandler } from 'react-hook-form';
 import { Dispatch, SetStateAction, useState } from 'react';
 import useVerifyRecoveryCodeForm, { Inputs } from './use-form';
 import request from 'apps/web/src/utils/request';
+import AuthenticationHeader from '../../components/header';
 
 interface VerifyRecoveryCodeStepProps {
   next: () => void;
@@ -55,18 +56,11 @@ export default function VerifyRecoveryCodeStep({
 
   return (
     <>
-      <div className={styles.header}>
-        <Icon name="logo" size="lg" className={styles.logo} />
-
-        <Text as="h1" size="4xl">
-          Check your email
-        </Text>
-
-        <Text as="p">
-          We've sent a password recovery code to email@example.com. Please enter
-          it below to verify your identity.
-        </Text>
-      </div>
+      <AuthenticationHeader
+        heading="Check your email"
+        description="We've sent a password recovery code to email@example.com. Please enter
+          it below to verify your identity."
+      />
 
       <form
         className={styles.form}

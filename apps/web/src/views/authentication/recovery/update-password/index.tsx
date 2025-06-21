@@ -3,10 +3,8 @@
 import {
   Button,
   FormError,
-  Icon,
   Link,
   PasswordField,
-  Text,
 } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
@@ -15,6 +13,7 @@ import { useState } from 'react';
 import useUpdatePasswordForm, { Inputs } from './use-form';
 import request from 'apps/web/src/utils/request';
 import { useRouter } from 'next/navigation';
+import AuthenticationHeader from '../../components/header';
 
 interface UpdatePasswordStepProps {
   email: string | undefined;
@@ -66,19 +65,12 @@ export default function UpdatePasswordStep({
 
   return (
     <>
-      <div className={styles.header}>
-        <Icon name="logo" size="lg" className={styles.logo} />
-
-        <Text as="h1" size="4xl">
-          Enter new password
-        </Text>
-
-        <Text as="p">
-          Enter your new password. Make sure it is at least 8 characters long
+      <AuthenticationHeader
+        heading="Enter new password"
+        description="Enter your new password. Make sure it is at least 8 characters long
           and includes at least one uppercase letter, a lowercase letter, and a
-          digit.
-        </Text>
-      </div>
+          digit."
+      />
 
       <form
         className={styles.form}
