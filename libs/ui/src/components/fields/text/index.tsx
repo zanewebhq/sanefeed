@@ -19,6 +19,7 @@ export interface TextFieldProps {
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
   ref?: React.Ref<HTMLInputElement>;
+  className?: string;
 }
 
 export const TextField = ({
@@ -35,13 +36,14 @@ export const TextField = ({
   iconLeft,
   iconRight,
   ref,
+  className,
 }: TextFieldProps) => {
   const helperId = `${name}-helper`;
   const helperType = error ? 'error' : 'helper';
   const helperMessage = error || helper;
 
   return (
-    <Field>
+    <Field className={className}>
       {label && <Field.Label id={name} label={label} bold />}
 
       <Field.Wrapper name={name} disabled={disabled}>
