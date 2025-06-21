@@ -11,8 +11,12 @@ const conditions = [
     hint: 'Add a minimum of 8 characters.',
   },
   {
-    pattern: /(?=.*[a-z])(?=.*[A-Z])/,
-    hint: 'Use upper and lower case.',
+    pattern: /(?=.*[a-z])/,
+    hint: 'Add at least one lowercase letter.',
+  },
+  {
+    pattern: /(?=.*[A-Z])/,
+    hint: 'Add at least one uppercase letter.',
   },
   {
     pattern: /\d/,
@@ -25,6 +29,7 @@ const conditions = [
 ];
 
 const strengthLevels = [
+  { className: '', label: '' },
   { className: 'weak', label: 'Weak.' },
   { className: 'moderate', label: 'Moderate.' },
   { className: 'good', label: 'Good.' },
@@ -65,8 +70,8 @@ export interface PasswordStrengthMeterProps {
 }
 
 const initialStrength: PasswordStrength = {
-  className: 'weak',
-  label: 'Weak.',
+  className: '',
+  label: '',
   score: 0,
   hint: '',
 };
