@@ -94,30 +94,41 @@ body {
 h1,
 h2,
 h3,
-h4,
-h5 {
+h4 {
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-heading);
 }
 
 h1 {
-  font-size: var(--font-size-5xl);
+  font-size: var(--font-size-4xl);
+
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-5xl);
+  }
 }
 
 h2 {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-2xl);
+
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-4xl);
+  }
 }
 
 h3 {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
+
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-2xl);
+  }
 }
 
 h4 {
   font-size: var(--font-size-lg);
-}
 
-h5 {
-  font-size: var(--font-size-sm);
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-xl);
+  }
 }
 
 p,

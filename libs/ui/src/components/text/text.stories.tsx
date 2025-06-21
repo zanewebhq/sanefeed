@@ -23,7 +23,6 @@ const HeadingRenderer = (props: TextProps) => (
     <Text {...props} as="h2" size="4xl" />
     <Text {...props} as="h3" size="2xl" />
     <Text {...props} as="h4" size="lg" />
-    <Text {...props} as="h5" size="sm" />
   </div>
 );
 
