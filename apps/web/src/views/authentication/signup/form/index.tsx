@@ -64,7 +64,6 @@ export default function SignupForm() {
           {...register('password')}
           label="Password"
           error={errors.password?.message}
-          forgotPasswordLink="/auth/recover"
           helper="Min. 8 characters, 1 uppercase, 1 lowercase, 1 digit"
           watchedPassword={password}
           withStrengthMeter
