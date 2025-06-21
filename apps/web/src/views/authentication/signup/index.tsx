@@ -1,11 +1,11 @@
 import AuthenticationHeader from '../components/header';
+import AuthenticationWrapper from '../components/wrapper';
 import SignupForm from './form';
-import styles from './styles.module.css';
 import { Link, Text } from '@sanefeed/ui';
 
 export default function SignupView() {
   return (
-    <div className={styles.wrapper}>
+    <AuthenticationWrapper>
       <AuthenticationHeader
         heading="Get started with SaneFeed"
         description="Join us to take control of your content. Your Content, Your Way!"
@@ -16,6 +16,6 @@ export default function SignupView() {
       </AuthenticationHeader>
 
       <SignupForm />
-    </div>
+    </AuthenticationWrapper>
   );
 }

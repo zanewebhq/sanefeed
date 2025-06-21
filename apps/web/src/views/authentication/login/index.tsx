@@ -1,11 +1,11 @@
 import AuthenticationHeader from '../components/header';
+import AuthenticationWrapper from '../components/wrapper';
 import LoginForm from './form';
-import styles from './styles.module.css';
 import { Link, Text } from '@sanefeed/ui';
 
 export default function LoginView() {
   return (
-    <div className={styles.wrapper}>
+    <AuthenticationWrapper>
       <AuthenticationHeader
         heading="Welcome back to SaneFeed"
         description="Log in to continue enjoying your content, your way!"
@@ -16,6 +16,6 @@ export default function LoginView() {
       </AuthenticationHeader>
 
       <LoginForm />
-    </div>
+    </AuthenticationWrapper>
   );
 }
