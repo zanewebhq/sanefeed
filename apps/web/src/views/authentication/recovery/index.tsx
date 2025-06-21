@@ -1,10 +1,10 @@
 'use client';
 
-import styles from './styles.module.css';
 import { useState } from 'react';
 import SendRecoveryCodeStep from './send-recovery-code';
 import VerifyRecoveryCodeStep from './verify-recovery-code';
 import UpdatePasswordStep from './update-password';
+import AuthenticationWrapper from '../components/wrapper';
 
 export default function PasswordRecoveryView() {
   const [email, setEmail] = useState<string>();
@@ -12,7 +12,7 @@ export default function PasswordRecoveryView() {
   const [step, setStep] = useState(1);
 
   return (
-    <div className={styles.wrapper}>
+    <AuthenticationWrapper>
       {step === 1 && (
         <SendRecoveryCodeStep next={() => setStep(2)} setEmail={setEmail} />
       )}
@@ -26,6 +26,6 @@ export default function PasswordRecoveryView() {
       )}
 
       {step === 3 && <UpdatePasswordStep email={email} code={code} />}
-    </div>
+    </AuthenticationWrapper>
   );
 }

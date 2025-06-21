@@ -1,12 +1,13 @@
 'use client';
 
-import { Button, FormError, Icon, Link, Text, TextField } from '@sanefeed/ui';
+import { Button, FormError, Link, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
 import { Dispatch, SetStateAction, useState } from 'react';
 import useSendRecoveryCodeForm, { Inputs } from './use-form';
 import { SubmitHandler } from 'react-hook-form';
 import request from 'apps/web/src/utils/request';
+import AuthenticationHeader from '../../components/header';
 
 interface SendRecoveryCodeStepProps {
   setEmail: Dispatch<SetStateAction<string | undefined>>;
@@ -52,18 +53,11 @@ export default function SendRecoveryCodeStep({
 
   return (
     <>
-      <div className={styles.header}>
-        <Icon name="logo" size="lg" className={styles.logo} />
-
-        <Text as="h1" size="4xl">
-          Forgot password?
-        </Text>
-
-        <Text as="p">
-          Enter your email address below, and we'll send you a recovery code to
-          reset your password.
-        </Text>
-      </div>
+      <AuthenticationHeader
+        heading="Forgot password?"
+        description="Enter your email address below, and we'll send you a recovery code to
+          reset your password."
+      />
 
       <form
         className={styles.form}

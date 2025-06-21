@@ -19,23 +19,43 @@
 }
 
 .size-xl {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
+
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-xl);
+  }
 }
 
 .size-2xl {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
+
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-2xl);
+  }
 }
 
 .size-3xl {
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-2xl);
+
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-3xl);
+  }
 }
 
 .size-4xl {
-  font-size: var(--font-size-4xl);
+  font-size: var(--font-size-2xl);
+
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-4xl);
+  }
 }
 
 .size-5xl {
-  font-size: var(--font-size-5xl);
+  font-size: var(--font-size-4xl);
+
+  @media (min-width: 64rem) {
+    font-size: var(--font-size-5xl);
+  }
 }
 
 .type-heading {

@@ -1,7 +1,7 @@
 import { cx } from '../../utils';
 import styles from './text.module.css';
 
-export type TextTag = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+export type TextTag = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4';
 
 export type TextType = 'body' | 'heading' | 'label';
 
