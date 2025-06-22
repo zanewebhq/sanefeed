@@ -5,12 +5,14 @@ import Text from '../text';
 import styles from './button.module.css';
 
 export type ButtonVariant = 'primary' | 'secondary';
+export type ButtonTheme = 'blue' | 'red';
 
 export interface ButtonProps {
   children: string;
   className?: string;
   type?: 'button' | 'submit';
   variant?: ButtonVariant;
+  theme?: ButtonTheme;
   disabled?: boolean;
   iconLeft?: IconProps['name'];
   iconRight?: IconProps['name'];
@@ -25,6 +27,7 @@ export function Button({
   className,
   type = 'button',
   variant = 'primary',
+  theme = 'blue',
   disabled = false,
   iconLeft,
   iconRight,
@@ -33,7 +36,7 @@ export function Button({
   openNewTab = false,
   loading = false,
 }: ButtonProps) {
-  const classes = cx(styles.button, styles[variant], className);
+  const classes = cx(styles.button, styles[variant], styles[theme], className);
 
   return href ? (
     <a

@@ -22,6 +22,7 @@ export interface PasswordFieldProps {
   watchedPassword?: string;
   forgotPasswordLink?: string;
   ref?: React.Ref<HTMLInputElement>;
+  className?: string;
 }
 
 export const PasswordField = ({
@@ -36,6 +37,7 @@ export const PasswordField = ({
   watchedPassword,
   forgotPasswordLink,
   ref,
+  className,
 }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -52,7 +54,7 @@ export const PasswordField = ({
   };
 
   return (
-    <Field>
+    <Field className={className}>
       <div className={styles.top}>
         {label && <Field.Label id={name} label={label} bold />}
 
