@@ -30,6 +30,7 @@ export default function DeleteAccount({ user }: DeleteAccountProps) {
 
       <Button
         type="button"
+        theme="red"
         iconLeft="trash"
         onClick={deleteAccount}
         className={styles.button}

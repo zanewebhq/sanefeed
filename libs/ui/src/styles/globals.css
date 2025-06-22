@@ -40,6 +40,10 @@
   --color-danger-400: hsl(0, 54%, 29%);
   --color-danger-500: hsl(0, 50%, 21%);
 
+  --color-button: var(--color-primary-300);
+  --color-button-hover: var(--color-primary-400);
+  --color-button-active: var(--color-primary-500);
+
   --color-password-weak: hsl(0, 68%, 42%);
   --color-password-moderate: hsl(33, 100%, 50%);
   --color-password-good: hsl(43, 74%, 49%);
