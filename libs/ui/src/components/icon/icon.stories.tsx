@@ -19,7 +19,7 @@ export const Playground: StoryObj<IconProps> = {
 const IconRenderer = (props: IconProps) => (
   <div className={styles.storyWrapper}>
     {Object.keys(icons).map((icon) => (
-      <Icon {...props} name={icon as IconName} />
+      <Icon key={icon} {...props} name={icon as IconName} />
     ))}
   </div>
 );
@@ -55,6 +55,14 @@ export const Small: StoryObj<IconProps> = {
 export const ExtraSmall: StoryObj<IconProps> = {
   args: {
     size: 'xs',
+  },
+  render: IconRenderer,
+};
+
+export const Clickable: StoryObj<IconProps> = {
+  args: {
+    size: 'md',
+    onClick: () => console.log('Click!'),
   },
   render: IconRenderer,
 };
