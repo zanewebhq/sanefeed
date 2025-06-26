@@ -7,3 +7,5 @@ export * from './components/fields/password';
 export * from './components/fields/checkbox';
 export * from './components/form-error';
 export * from './components/spinner';
+export * from './components/dialog';
+export * from './components/icon-button';
