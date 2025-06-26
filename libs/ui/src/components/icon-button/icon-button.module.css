@@ -1,0 +1,85 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.buttonText {
+  font-weight: var(--font-weight-medium);
+}
+
+.blue {
+  --color-button: var(--color-primary-300);
+  --color-button-hover: var(--color-primary-400);
+  --color-button-active: var(--color-primary-500);
+}
+
+.red {
+  --color-button: var(--color-danger-300);
+  --color-button-hover: var(--color-danger-400);
+  --color-button-active: var(--color-danger-500);
+}
+
+.primary {
+  background-color: var(--color-button);
+  color: var(--color-text-light-100);
+  transition: background-color var(--transition-micro),
+    outline-color var(--transition-micro);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-button-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--color-button-hover);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    background-color: var(--color-button-active);
+  }
+
+  &:disabled {
+    background-color: var(--color-neutral-100);
+    color: var(--color-text-dark-100);
+    cursor: not-allowed;
+  }
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--color-button);
+  border: 2px solid var(--color-button);
+  transition: background-color var(--transition-micro),
+    border-color var(--transition-micro), outline-color var(--transition-micro);
+
+  &:hover,
+  &:focus-visible {
+    background-color: color-mix(in hsl, var(--color-button) 10%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--color-button);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    color: var(--color-text-light-100);
+    background-color: var(--color-button);
+  }
+
+  &:disabled {
+    background-color: transparent;
+    border-color: var(--color-neutral-500);
+    color: var(--color-neutral-500);
+    cursor: not-allowed;
+  }
+}
