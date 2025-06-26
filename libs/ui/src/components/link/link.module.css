@@ -25,27 +25,18 @@
   &:hover,
   &:focus-visible {
     border-radius: 1px;
-  }
-
-  &:hover {
-    color: var(--color-text-light-100);
-    border-color: var(--color-primary-200);
-    box-shadow: 0 0 0 3px var(--color-primary-200);
-    background-color: var(--color-primary-200);
+    background-color: color-mix(in hsl, var(--color-button) 8%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in hsl, var(--color-button) 8%, transparent);
   }
 
   &:focus-visible {
-    outline: 2px dashed var(--color-primary-300);
+    outline: 2px dashed var(--color-button);
     outline-offset: 2px;
-    color: var(--color-primary-300);
-    box-shadow: 0 0 0 3px transparent;
-    background-color: transparent;
   }
 
   &:active {
-    color: var(--color-text-light-100);
-    border-color: var(--color-primary-400);
-    box-shadow: 0 0 0 3px var(--color-primary-400);
-    background-color: var(--color-primary-400);
+    box-shadow: 0 0 0 3px
+      color-mix(in hsl, var(--color-button) 20%, transparent);
+    background-color: color-mix(in hsl, var(--color-button) 20%, transparent);
   }
 }

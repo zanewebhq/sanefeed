@@ -44,9 +44,6 @@
   --color-button-hover: var(--color-primary-400);
   --color-button-active: var(--color-primary-500);
 
-  --color-icon-hover: hsla(180, 100%, 40%, 0.1);
-  --color-icon-active: hsla(180, 100%, 40%, 0.3);
-
   --color-password-weak: hsl(0, 68%, 42%);
   --color-password-moderate: hsl(33, 100%, 50%);
   --color-password-good: hsl(43, 74%, 49%);

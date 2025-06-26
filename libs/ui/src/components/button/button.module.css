@@ -65,7 +65,7 @@
 
   &:hover,
   &:focus-visible {
-    background-color: color-mix(in hsl, var(--color-button) 10%, transparent);
+    background-color: color-mix(in hsl, var(--color-button) 8%, transparent);
   }
 
   &:focus-visible {
@@ -74,8 +74,7 @@
   }
 
   &:active {
-    color: var(--color-text-light-100);
-    background-color: var(--color-button);
+    background-color: color-mix(in hsl, var(--color-button) 20%, transparent);
   }
 
   &:disabled {

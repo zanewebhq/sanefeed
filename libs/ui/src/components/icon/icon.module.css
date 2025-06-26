@@ -19,16 +19,16 @@
 
   &:hover,
   &:focus-visible {
-    background-color: var(--color-icon-hover);
+    background-color: color-mix(in hsl, var(--color-button) 8%, transparent);
   }
 
   &:focus-visible {
-    outline: 2px dashed var(--color-primary-200);
+    outline: 2px dashed var(--color-button);
     outline-offset: 2px;
   }
 
   &:active {
-    background-color: var(--color-icon-active);
+    background-color: color-mix(in hsl, var(--color-button) 20%, transparent);
   }
 }
 
