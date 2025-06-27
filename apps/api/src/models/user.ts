@@ -4,13 +4,16 @@ export interface User {
   id: number;
   email: string;
   password: string;
-  verified: boolean;
-  verification_code: string;
-  verification_code_expires_at: Date;
-  recovery_code: string;
-  recovery_code_expires_at: Date;
   created_at: Date;
   updated_at: Date;
+  verified: boolean;
+  verification_code: string | null;
+  verification_code_expires_at: Date | null;
+  recovery_code: string | null;
+  recovery_code_expires_at: Date | null;
+  email_change_code: string | null;
+  email_change_code_expires_at: Date | null;
+  email_change_new: string | null;
 }
 
 type GetUserById = (id: number) => Promise<User | null>;
@@ -55,64 +58,29 @@ export const createUser: CreateUser = async (data) => {
 type UpdateUser = (id: number, data: Partial<User>) => Promise<User | null>;
 
 export const updateUser: UpdateUser = async (id, data) => {
-  const {
-    email,
-    password,
-    verified,
-    verification_code,
-    verification_code_expires_at,
-    recovery_code,
-    recovery_code_expires_at,
-    updated_at,
-  } = data;
+  const allowedFields = new Set([
+    'email',
+    'password',
+    'verified',
+    'verification_code',
+    'verification_code_expires_at',
+    'recovery_code',
+    'recovery_code_expires_at',
+    'email_change_code',
+    'email_change_code_expires_at',
+    'email_change_new',
+    'updated_at',
+  ]);
+
   const setClauses: string[] = [];
   const params: unknown[] = [id];
 
-  if (email !== undefined) {
-    setClauses.push('email = $' + (params.length + 1));
-    params.push(email === null ? null : email);
-  }
-
-  if (password !== undefined) {
-    setClauses.push('password = $' + (params.length + 1));
-    params.push(password === null ? null : password);
-  }
-
-  if (verified !== undefined) {
-    setClauses.push('verified = $' + (params.length + 1));
-    params.push(verified === null ? null : verified);
-  }
-
-  if (verification_code !== undefined) {
-    setClauses.push('verification_code = $' + (params.length + 1));
-    params.push(verification_code === null ? null : verification_code);
-  }
-
-  if (verification_code_expires_at !== undefined) {
-    setClauses.push('verification_code_expires_at = $' + (params.length + 1));
-    params.push(
-      verification_code_expires_at === null
-        ? null
-        : verification_code_expires_at
-    );
-  }
-
-  if (recovery_code !== undefined) {
-    setClauses.push('recovery_code = $' + (params.length + 1));
-    params.push(recovery_code === null ? null : recovery_code);
-  }
-
-  if (recovery_code_expires_at !== undefined) {
-    setClauses.push('recovery_code_expires_at = $' + (params.length + 1));
-    params.push(
-      recovery_code_expires_at === null ? null : recovery_code_expires_at
-    );
-  }
-
-  if (updated_at !== undefined) {
-    setClauses.push('updated_at = $' + (params.length + 1));
-    params.push(updated_at === null ? null : updated_at);
-  }
+  Object.entries(data).forEach(([field, value]) => {
+    if (allowedFields.has(field) && value !== undefined) {
+      setClauses.push(`${field} = $${params.length + 1}`);
+      params.push(value === null ? null : value);
+    }
+  });
 
   if (setClauses.length === 0) {
     return null;

@@ -1,5 +1,6 @@
 import '@sanefeed/ui/styles/globals.css';
 import { Fira_Sans } from 'next/font/google';
+import { Toaster } from 'sonner';
 
 const firaSans = Fira_Sans({
   subsets: ['latin'],
@@ -21,7 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={firaSans.className}>
-      <body>{children}</body>
+      <body>
+        <Toaster position="top-center" />
+
+        {children}
+      </body>
     </html>
   );
 }

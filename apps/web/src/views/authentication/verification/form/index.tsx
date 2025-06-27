@@ -77,7 +77,7 @@ export default function EmailVerificationForm() {
           </Text>
         </div>
 
-        {formError && <FormError>{formError}</FormError>}
+        <FormError error={formError} />
 
         <Button type="submit" className={styles.button} loading={loading}>
           Verify Email

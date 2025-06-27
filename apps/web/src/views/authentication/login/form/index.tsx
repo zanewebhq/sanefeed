@@ -66,7 +66,7 @@ export default function LoginForm() {
       </div>
 
       <div className={styles.group}>
-        {formError && <FormError>{formError}</FormError>}
+        <FormError error={formError} />
 
         <Button type="submit" className={styles.button} loading={loading}>
           Log in

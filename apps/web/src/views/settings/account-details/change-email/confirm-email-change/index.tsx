@@ -1,29 +1,24 @@
-'use client';
-
-import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
-
-import styles from '../styles.module.css';
+import { Dialog, FormError, Link, Text, TextField } from '@sanefeed/ui';
+import styles from './styles.module.css';
+import { useState } from 'react';
+import useConfirmEmailChangeForm, { Inputs } from './use-form';
 import { SubmitHandler } from 'react-hook-form';
-import { Dispatch, SetStateAction, useState } from 'react';
-import useVerifyRecoveryCodeForm, { Inputs } from './use-form';
 import request from 'apps/web/src/utils/request';
-import AuthenticationHeader from '../../components/header';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
-interface VerifyRecoveryCodeStepProps {
-  next: () => void;
-  email: string | undefined;
-  setCode: Dispatch<SetStateAction<string | undefined>>;
+interface ConfirmEmailChangeProps {
+  onClose: () => void;
 }
 
-export default function VerifyRecoveryCodeStep({
-  next,
-  email,
-  setCode,
-}: VerifyRecoveryCodeStepProps) {
+export default function ConfirmEmailChange({
+  onClose,
+}: ConfirmEmailChangeProps) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string>();
 
-  const methods = useVerifyRecoveryCodeForm();
+  const methods = useConfirmEmailChangeForm();
 
   const {
     register,
@@ -35,10 +30,9 @@ export default function VerifyRecoveryCodeStep({
     setLoading(true);
 
     const response = await request({
-      endpoint: '/auth/recover/verify',
+      endpoint: '/user/change-email/confirm',
       method: 'POST',
       body: {
-        email: email || '',
         code: data.code,
       },
     });
@@ -49,22 +43,22 @@ export default function VerifyRecoveryCodeStep({
     if (!response.ok) {
       setFormError(result.message);
     } else {
-      setCode(data.code);
-      next();
+      onClose();
+      toast.success('Your email has been updated!');
+      router.refresh();
     }
   };
 
   return (
     <>
-      <AuthenticationHeader
-        heading="Check your email"
-        description="We've sent a password recovery code to email@example.com. Please enter
-          it below to verify your identity."
+      <Dialog.Header
+        title="Verify your new email address"
+        description="To complete your email change, please verify your new address by entering the verification code we just sent to email@example.com"
       />
 
       <form
-        className={styles.form}
         onSubmit={handleSubmit(onSubmit)}
+        className={styles.form}
         noValidate
       >
         <TextField
@@ -86,13 +80,11 @@ export default function VerifyRecoveryCodeStep({
 
           <FormError error={formError} />
 
-          <Button type="submit" className={styles.button} loading={loading}>
-            Verify recovery code
-          </Button>
-
-          <Link href="/auth/signup" iconLeft="arrow-back">
-            Go back
-          </Link>
+          <Dialog.Buttons
+            onClose={onClose}
+            submitText="Verify email"
+            loading={loading}
+          />
         </div>
       </form>
     </>

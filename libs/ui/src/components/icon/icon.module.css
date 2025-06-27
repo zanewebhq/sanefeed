@@ -3,3 +3,56 @@
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+
+  background-color: transparent;
+  color: var(--color-text-dark-200);
+  transition: background-color var(--transition-micro);
+
+  &:hover,
+  &:focus-visible {
+    background-color: color-mix(in hsl, var(--color-button) 8%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--color-button);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    background-color: color-mix(in hsl, var(--color-button) 20%, transparent);
+  }
+}
+
+.xs {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.sm {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.md {
+  width: 2rem;
+  height: 2rem;
+}
+
+.lg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.xl {
+  width: 3rem;
+  height: 3rem;
+}
