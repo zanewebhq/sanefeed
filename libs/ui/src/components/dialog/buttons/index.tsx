@@ -5,12 +5,14 @@ export interface DialogButtonsProps {
   onClose: () => void;
   submitText: string;
   cancelText?: string;
+  loading?: boolean;
 }
 
 export function DialogButtons({
   onClose,
   submitText,
   cancelText,
+  loading,
 }: DialogButtonsProps) {
   return (
     <div className={styles.buttons}>
@@ -21,7 +23,7 @@ export function DialogButtons({
           {cancelText || 'Cancel'}
         </Button>
 
-        <Button type="submit" variant="primary">
+        <Button type="submit" variant="primary" loading={loading}>
           {submitText}
         </Button>
       </div>

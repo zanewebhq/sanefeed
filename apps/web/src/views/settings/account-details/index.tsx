@@ -1,16 +1,19 @@
 'use client';
 
-import { Link, PasswordField, Text, TextField } from '@sanefeed/ui';
+import { Link, Text, TextField } from '@sanefeed/ui';
 import styles from './styles.module.css';
+import { useState } from 'react';
+import ChangeEmailDialog from './change-email';
 
 interface AccountDetailsProps {
   user: { id: number; email: string };
 }
 
 export default function AccountDetails({ user }: AccountDetailsProps) {
-  const changeEmail = () => {
-    console.log('Change email');
-  };
+  const [isChangeEmailOpen, setChangeEmailOpen] = useState(false);
+
+  const onEmailChangeOpen = () => setChangeEmailOpen(true);
+  const onEmailChangeClose = () => setChangeEmailOpen(false);
 
   const changePassword = () => {
     console.log('Change password');
@@ -34,8 +37,13 @@ export default function AccountDetails({ user }: AccountDetailsProps) {
         />
 
         <div className={styles.linkWrapper}>
-          <Link onClick={changeEmail}>Change email</Link>
+          <Link onClick={onEmailChangeOpen}>Change email</Link>
         </div>
+
+        <ChangeEmailDialog
+          isOpen={isChangeEmailOpen}
+          onClose={onEmailChangeClose}
+        />
       </div>
 
       <div className={styles.fieldGroup}>
