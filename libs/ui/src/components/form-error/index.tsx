@@ -2,15 +2,21 @@ import Text from '../text';
 import styles from './form-error.module.css';
 
 export interface FormErrorProps {
-  children: React.ReactNode;
+  error?: string | null;
 }
 
-export const FormError = ({ children }: FormErrorProps) => (
-  <div className={styles.formError}>
-    <Text type="body" size="sm" className={styles.text}>
-      {children}
-    </Text>
-  </div>
-);
+export const FormError = ({ error }: FormErrorProps) => {
+  if (!error) {
+    return null;
+  }
+
+  return (
+    <div className={styles.formError}>
+      <Text type="body" size="sm" className={styles.text}>
+        {error}
+      </Text>
+    </div>
+  );
+};
 
 export default FormError;

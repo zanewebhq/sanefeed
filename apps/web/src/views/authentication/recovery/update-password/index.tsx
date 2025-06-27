@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  Button,
-  FormError,
-  Link,
-  PasswordField,
-} from '@sanefeed/ui';
+import { Button, FormError, Link, PasswordField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
 import { SubmitHandler } from 'react-hook-form';
@@ -86,7 +81,7 @@ export default function UpdatePasswordStep({
           withStrengthMeter
         />
 
-        {formError && <FormError>{formError}</FormError>}
+        <FormError error={formError} />
 
         <div className={styles.group}>
           <Button type="submit" className={styles.button} loading={loading}>

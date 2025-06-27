@@ -73,7 +73,7 @@ export default function SendRecoveryCodeStep({
           error={errors.email?.message}
         />
 
-        {formError && <FormError>{formError}</FormError>}
+        <FormError error={formError} />
 
         <div className={styles.group}>
           <Button type="submit" className={styles.button} loading={loading}>
