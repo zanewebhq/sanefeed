@@ -14,13 +14,18 @@ export default function ChangeEmailDialog({
 }: ChangeEmailDialogrops) {
   const [step, setStep] = useState(1);
 
+  const handleClose = () => {
+    onClose();
+    setStep(1);
+  };
+
   return (
-    <Dialog isOpen={isOpen} onClose={onClose}>
+    <Dialog isOpen={isOpen} onClose={handleClose}>
       {step === 1 && (
-        <RequestEmailChange onClose={onClose} next={() => setStep(2)} />
+        <RequestEmailChange onClose={handleClose} next={() => setStep(2)} />
       )}
 
-      {step === 2 && <ConfirmEmailChange onClose={onClose} />}
+      {step === 2 && <ConfirmEmailChange onClose={handleClose} />}
     </Dialog>
   );
 }

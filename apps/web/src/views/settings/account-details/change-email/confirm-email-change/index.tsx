@@ -4,6 +4,8 @@ import { useState } from 'react';
 import useConfirmEmailChangeForm, { Inputs } from './use-form';
 import { SubmitHandler } from 'react-hook-form';
 import request from 'apps/web/src/utils/request';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface ConfirmEmailChangeProps {
   onClose: () => void;
@@ -12,6 +14,7 @@ interface ConfirmEmailChangeProps {
 export default function ConfirmEmailChange({
   onClose,
 }: ConfirmEmailChangeProps) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState<string>();
 
@@ -40,7 +43,9 @@ export default function ConfirmEmailChange({
     if (!response.ok) {
       setFormError(result.message);
     } else {
-      window.location.reload();
+      onClose();
+      toast.success('Your email has been updated!');
+      router.refresh();
     }
   };
 
