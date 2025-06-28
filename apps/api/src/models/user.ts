@@ -14,6 +14,9 @@ export interface User {
   email_change_code: string | null;
   email_change_code_expires_at: Date | null;
   email_change_new: string | null;
+  password_change_code: string | null;
+  password_change_code_expires_at: Date | null;
+  password_change_new: string | null;
 }
 
 type GetUserById = (id: number) => Promise<User | null>;
@@ -69,6 +72,9 @@ export const updateUser: UpdateUser = async (id, data) => {
     'email_change_code',
     'email_change_code_expires_at',
     'email_change_new',
+    'password_change_code',
+    'password_change_code_expires_at',
+    'password_change_new',
     'updated_at',
   ]);
 
