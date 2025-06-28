@@ -4,6 +4,7 @@ import { Link, Text, TextField } from '@sanefeed/ui';
 import styles from './styles.module.css';
 import { useState } from 'react';
 import ChangeEmailDialog from './change-email';
+import ChangePasswordDialog from './change-password';
 
 interface AccountDetailsProps {
   user: { id: number; email: string };
@@ -11,13 +12,13 @@ interface AccountDetailsProps {
 
 export default function AccountDetails({ user }: AccountDetailsProps) {
   const [isChangeEmailOpen, setChangeEmailOpen] = useState(false);
+  const [isChangePasswordOpen, setChangePasswordOpen] = useState(false);
 
-  const onEmailChangeOpen = () => setChangeEmailOpen(true);
-  const onEmailChangeClose = () => setChangeEmailOpen(false);
+  const onChangeEmailOpen = () => setChangeEmailOpen(true);
+  const onChangeEmailClose = () => setChangeEmailOpen(false);
 
-  const changePassword = () => {
-    console.log('Change password');
-  };
+  const onChangePasswordOpen = () => setChangePasswordOpen(true);
+  const onChangePasswordClose = () => setChangePasswordOpen(false);
 
   return (
     <div className={styles.wrapper}>
@@ -37,12 +38,12 @@ export default function AccountDetails({ user }: AccountDetailsProps) {
         />
 
         <div className={styles.linkWrapper}>
-          <Link onClick={onEmailChangeOpen}>Change email</Link>
+          <Link onClick={onChangeEmailOpen}>Change email</Link>
         </div>
 
         <ChangeEmailDialog
           isOpen={isChangeEmailOpen}
-          onClose={onEmailChangeClose}
+          onClose={onChangeEmailClose}
         />
       </div>
 
@@ -57,8 +58,13 @@ export default function AccountDetails({ user }: AccountDetailsProps) {
         />
 
         <div className={styles.linkWrapper}>
-          <Link onClick={changePassword}>Change password</Link>
+          <Link onClick={onChangePasswordOpen}>Change password</Link>
         </div>
+
+        <ChangePasswordDialog
+          isOpen={isChangePasswordOpen}
+          onClose={onChangePasswordClose}
+        />
       </div>
     </div>
   );
