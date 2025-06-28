@@ -17,6 +17,8 @@ export interface User {
   password_change_code: string | null;
   password_change_code_expires_at: Date | null;
   password_change_new: string | null;
+  deletion_code: string | null;
+  deletion_code_expires_at: Date | null;
 }
 
 type GetUserById = (id: number) => Promise<User | null>;
@@ -75,6 +77,8 @@ export const updateUser: UpdateUser = async (id, data) => {
     'password_change_code',
     'password_change_code_expires_at',
     'password_change_new',
+    'deletion_code',
+    'deletion_code_expires_at',
     'updated_at',
   ]);
 
@@ -102,4 +106,16 @@ export const updateUser: UpdateUser = async (id, data) => {
   `;
 
   return await executeQuery(query, params);
+};
+
+type DeleteUser = (id: number) => Promise<User | null>;
+
+export const deleteUser: DeleteUser = async (id) => {
+  const query = `
+    DELETE FROM users
+    WHERE id = $1
+    RETURNING *
+  `;
+
+  return await executeQuery(query, [id]);
 };

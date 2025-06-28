@@ -28,4 +28,15 @@ router.post(
   controllers.user.confirmPasswordChange
 );
 
+router.post(
+  '/user/delete-account',
+  middleware.protect,
+  controllers.user.deleteAccount
+);
+router.post(
+  '/user/delete-account/confirm',
+  middleware.protect,
+  controllers.user.confirmAccountDeletion
+);
+
 export default router;
