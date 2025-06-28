@@ -17,4 +17,15 @@ router.post(
   controllers.user.confirmEmailChange
 );
 
+router.post(
+  '/user/change-password',
+  middleware.protect,
+  controllers.user.changePassword
+);
+router.post(
+  '/user/change-password/confirm',
+  middleware.protect,
+  controllers.user.confirmPasswordChange
+);
+
 export default router;
