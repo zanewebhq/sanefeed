@@ -19,7 +19,7 @@ export default async function SettingsView() {
 
       <AccountDetails user={user} />
 
-      <DeleteAccount user={user} />
+      <DeleteAccount />
     </div>
   );
 }

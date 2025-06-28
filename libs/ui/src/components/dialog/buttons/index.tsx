@@ -1,9 +1,10 @@
-import Button from '../../button';
+import Button, { ButtonTheme } from '../../button';
 import styles from './buttons.module.css';
 
 export interface DialogButtonsProps {
   onClose: () => void;
   submitText: string;
+  submitTheme?: ButtonTheme;
   cancelText?: string;
   loading?: boolean;
 }
@@ -11,6 +12,7 @@ export interface DialogButtonsProps {
 export function DialogButtons({
   onClose,
   submitText,
+  submitTheme,
   cancelText,
   loading,
 }: DialogButtonsProps) {
@@ -23,7 +25,12 @@ export function DialogButtons({
           {cancelText || 'Cancel'}
         </Button>
 
-        <Button type="submit" variant="primary" loading={loading}>
+        <Button
+          type="submit"
+          variant="primary"
+          theme={submitTheme}
+          loading={loading}
+        >
           {submitText}
         </Button>
       </div>

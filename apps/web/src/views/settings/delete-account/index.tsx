@@ -2,15 +2,14 @@
 
 import { Button, Text } from '@sanefeed/ui';
 import styles from './styles.module.css';
+import { useState } from 'react';
+import DeleteAccountDialog from './dialog';
 
-interface DeleteAccountProps {
-  user: { id: number; email: string };
-}
+export default function DeleteAccount() {
+  const [isDeleteAccountOpen, setDeleteAccountOpen] = useState(false);
 
-export default function DeleteAccount({ user }: DeleteAccountProps) {
-  const deleteAccount = () => {
-    console.log('Delete account');
-  };
+  const onDeleteAccountOpen = () => setDeleteAccountOpen(true);
+  const onDeleteAccountClose = () => setDeleteAccountOpen(false);
 
   return (
     <div className={styles.wrapper}>
@@ -32,11 +31,16 @@ export default function DeleteAccount({ user }: DeleteAccountProps) {
         type="button"
         theme="red"
         iconLeft="trash"
-        onClick={deleteAccount}
+        onClick={onDeleteAccountOpen}
         className={styles.button}
       >
         Delete account
       </Button>
+
+      <DeleteAccountDialog
+        isOpen={isDeleteAccountOpen}
+        onClose={onDeleteAccountClose}
+      />
     </div>
   );
 }
