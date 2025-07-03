@@ -244,8 +244,8 @@ importers:
         specifier: ^29.7.0
         version: 29.7.0
       node-pg-migrate:
-        specifier: ^8.0.3
-        version: 8.0.3(@types/pg@8.15.4)(pg@8.16.3)
+        specifier: ^7.9.1
+        version: 7.9.1(@types/pg@8.15.4)(pg@8.16.3)
       nx:
         specifier: 21.2.2
         version: 21.2.2(@swc-node/register@1.10.10(@swc/core@1.12.9(@swc/helpers@0.5.17))(@swc/types@0.1.23)(typescript@5.8.3))(@swc/core@1.12.9(@swc/helpers@0.5.17))
@@ -6219,9 +6219,9 @@ packages:
   node-machine-id@1.1.12:
     resolution: {integrity: sha512-QNABxbrPa3qEIfrE6GOJ7BYIuignnJw7iQ2YPbc3Nla1HzRJjXzZOiikfF8m7eAMfichLt3M4VgLOetqgDmgGQ==}
 
-  node-pg-migrate@8.0.3:
-    resolution: {integrity: sha512-oKzZyzTULTryO1jehX19VnyPCGf3G/3oWZg3gODphvID56T0WjPOShTVPVnxGdlcueaIW3uAVrr7M8xLZq5TcA==}
-    engines: {node: '>=20.11.0'}
+  node-pg-migrate@7.9.1:
+    resolution: {integrity: sha512-6z4OSN27ye8aYdX9ZU7NN2PTI5pOp34hTr+22Ej12djIYECq++gT7LPLZVOQXEeVCBOZQLqf87kC3Y36G434OQ==}
+    engines: {node: '>=18.19.0'}
     hasBin: true
     peerDependencies:
       '@types/pg': '>=6.0.0 <9.0.0'
@@ -15481,7 +15481,7 @@ snapshots:
 
   node-machine-id@1.1.12: {}
 
-  node-pg-migrate@8.0.3(@types/pg@8.15.4)(pg@8.16.3):
+  node-pg-migrate@7.9.1(@types/pg@8.15.4)(pg@8.16.3):
     dependencies:
       glob: 11.0.3
       pg: 8.16.3
