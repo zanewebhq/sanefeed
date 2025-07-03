@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import PasswordField, { PasswordFieldProps } from '.';
 
 const meta: Meta<typeof PasswordField> = {
