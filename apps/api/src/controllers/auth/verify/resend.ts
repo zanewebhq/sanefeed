@@ -1,11 +1,10 @@
 import { Response } from 'express';
-import crypto from 'crypto';
 import catchAsync from '../../../utils/catch-async';
-import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
 import sendEmail from '../../../utils/send-email';
 import { RequestWithUser } from '../../../types';
 import { updateUser } from '../../../models/user';
+import generateCode from '../../../utils/generate-code';
 import sanitizeUser from '../../../utils/sanitize-user';
 
 const resendVerification = catchAsync(
@@ -17,21 +16,17 @@ const resendVerification = catchAsync(
       });
     }
 
-    const verificationCode = crypto
-      .randomBytes(3)
-      .toString('hex')
-      .toUpperCase();
-    const verificationCodeExpiresAt = dayjs().add(1, 'hour').toDate();
+    const { code, expiresAt } = generateCode();
 
     const user = await updateUser(req.user.id, {
-      verification_code: verificationCode,
-      verification_code_expires_at: verificationCodeExpiresAt,
+      verification_code: code,
+      verification_code_expires_at: expiresAt,
     });
 
     await sendEmail({
       email: req.user.email,
       subject: 'Verification code',
-      text: `Your verification code is: ${verificationCode}.`,
+      text: `Your verification code is: ${code}.`,
     });
 
     const sanitizedUser = sanitizeUser(user);
