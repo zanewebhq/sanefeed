@@ -6,6 +6,7 @@ import { StatusCodes } from 'http-status-codes';
 import sendEmail from '../../../utils/send-email';
 import { RequestWithUser } from '../../../types';
 import { updateUser } from '../../../models/user';
+import sanitizeUser from '../../../utils/sanitize-user';
 
 const resendVerification = catchAsync(
   async (req: RequestWithUser, res: Response) => {
@@ -33,13 +34,15 @@ const resendVerification = catchAsync(
       text: `Your verification code is: ${verificationCode}.`,
     });
 
+    const sanitizedUser = sanitizeUser(user);
+
     res.status(StatusCodes.OK).json({
       status: 'success',
       data: {
-        user,
+        user: sanitizedUser,
       },
     });
-  }
+  },
 );
 
 export default resendVerification;
