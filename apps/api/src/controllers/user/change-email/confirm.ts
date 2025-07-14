@@ -27,7 +27,7 @@ const confirmEmailChange = catchAsync(
     const validCode = validateCode(
       code,
       req.user.email_change_code,
-      req.user.email_change_code_expires_at
+      req.user.email_change_code_expires_at,
     );
 
     if (!validCode) {
@@ -63,7 +63,7 @@ const confirmEmailChange = catchAsync(
         user: sanitizedUser,
       },
     });
-  }
+  },
 );
 
 export default confirmEmailChange;

@@ -27,7 +27,7 @@ const confirmPasswordChange = catchAsync(
     const validCode = validateCode(
       code,
       req.user.password_change_code,
-      req.user.password_change_code_expires_at
+      req.user.password_change_code_expires_at,
     );
 
     if (!validCode) {
@@ -63,7 +63,7 @@ const confirmPasswordChange = catchAsync(
         user: sanitizedUser,
       },
     });
-  }
+  },
 );
 
 export default confirmPasswordChange;

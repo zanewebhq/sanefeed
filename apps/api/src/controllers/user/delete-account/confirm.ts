@@ -26,7 +26,7 @@ const confirmAccountDeletion = catchAsync(
     const validCode = validateCode(
       code,
       req.user.deletion_code,
-      req.user.deletion_code_expires_at
+      req.user.deletion_code_expires_at,
     );
 
     if (!validCode) {
@@ -48,7 +48,7 @@ const confirmAccountDeletion = catchAsync(
       .json({
         status: 'success',
       });
-  }
+  },
 );
 
 export default confirmAccountDeletion;

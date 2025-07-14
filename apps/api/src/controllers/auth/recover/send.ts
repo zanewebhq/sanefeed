@@ -1,12 +1,26 @@
 import { Request, Response } from 'express';
+import * as z from 'zod/v4';
 import catchAsync from '../../../utils/catch-async';
 import { StatusCodes } from 'http-status-codes';
 import sendEmail from '../../../utils/send-email';
 import { getUserByEmail, updateUser } from '../../../models/user';
 import generateCode from '../../../utils/generate-code';
 
+const sendRecoverySchema = z.object({
+  email: z.email(),
+});
+
 export const sendRecovery = catchAsync(async (req: Request, res: Response) => {
-  const { email } = req.body;
+  const validation = sendRecoverySchema.safeParse(req.body);
+
+  if (validation.error) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      status: 'fail',
+      message: 'Invalid email.',
+    });
+  }
+
+  const { email } = validation.data;
 
   const user = await getUserByEmail(email);
 

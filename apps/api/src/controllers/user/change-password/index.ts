@@ -60,7 +60,7 @@ const changePassword = catchAsync(
         user: sanitizedUser,
       },
     });
-  }
+  },
 );
 
 export default changePassword;
