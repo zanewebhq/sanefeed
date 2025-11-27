@@ -56,11 +56,10 @@ export default function VerifyRecoveryCodeStep({
 
   return (
     <>
-      <AuthenticationHeader
-        heading="Check your email"
-        description="We've sent a password recovery code to email@example.com. Please enter
-          it below to verify your identity."
-      />
+      <AuthenticationHeader heading="Enter recovery code">
+        <Text as="p">A recovery code has been sent to your email.</Text>
+        <Text as="p">Enter it below to verify your identity and continue.</Text>
+      </AuthenticationHeader>
 
       <form
         className={styles.form}

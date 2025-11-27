@@ -51,10 +51,10 @@ export default function ConfirmPasswordChange({
 
   return (
     <>
-      <Dialog.Header
-        title="Verify your email address"
-        description="To complete the password change, please enter the verification code sent to your email."
-      />
+      <Dialog.Header title="Confirm password change">
+        <Text as="p">A verification code has been sent to your email.</Text>
+        <Text as="p">Enter it below to complete the password change.</Text>
+      </Dialog.Header>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -83,7 +83,7 @@ export default function ConfirmPasswordChange({
 
           <Dialog.Buttons
             onClose={onClose}
-            submitText="Verify email"
+            submitText="Confirm password"
             loading={loading}
           />
         </div>

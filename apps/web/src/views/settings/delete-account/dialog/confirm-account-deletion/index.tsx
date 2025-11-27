@@ -51,9 +51,11 @@ export default function ConfirmAccountDeletion({
   return (
     <>
       <Dialog.Header
-        title="Verify your email address"
-        description="To complete the account deletion, please enter the verification code sent to your email."
-      />
+        title="Confirm account deletion"
+      >
+        <Text as='p'>A confirmation code has been sent to your email.</Text>
+        <Text as='p'>Enter it below to delete your account.</Text>
+      </Dialog.Header>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -82,7 +84,7 @@ export default function ConfirmAccountDeletion({
 
           <Dialog.Buttons
             onClose={onClose}
-            submitText="Verify & delete"
+            submitText="Confirm deletion"
             submitTheme="red"
             loading={loading}
           />

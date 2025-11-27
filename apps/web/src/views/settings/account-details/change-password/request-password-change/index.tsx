@@ -54,7 +54,7 @@ export default function RequestPasswordChange({
     <>
       <Dialog.Header
         title="Change your password"
-        description="To update your password, please enter your current password and then choose a new one."
+        description="To change your password, enter your current password and then choose a new one."
       />
 
       <form
