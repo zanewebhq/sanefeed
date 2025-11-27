@@ -38,6 +38,7 @@ export default function EmailVerificationForm() {
     const result = await response.json();
 
     if (!response.ok) {
+      setLoading(false)
       setFormError(result.message);
     } else {
       router.push('/');
