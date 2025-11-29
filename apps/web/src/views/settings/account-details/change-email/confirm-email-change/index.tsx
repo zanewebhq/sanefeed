@@ -4,7 +4,7 @@ import { useState } from 'react';
 import useConfirmEmailChangeForm, { Inputs } from './use-form';
 import { SubmitHandler } from 'react-hook-form';
 import request from 'apps/web/src/utils/request';
-import { toast } from 'sonner';
+import { toast } from '@sanefeed/ui';
 import { useRouter } from 'next/navigation';
 
 interface ConfirmEmailChangeProps {

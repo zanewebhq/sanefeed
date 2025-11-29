@@ -4,7 +4,7 @@ import { useState } from 'react';
 import useConfirmAccountDeletionForm, { Inputs } from './use-form';
 import { SubmitHandler } from 'react-hook-form';
 import request from 'apps/web/src/utils/request';
-import { toast } from 'sonner';
+import { toast } from '@sanefeed/ui';
 import { useRouter } from 'next/navigation';
 
 interface ConfirmAccountDeletionProps {
@@ -50,11 +50,9 @@ export default function ConfirmAccountDeletion({
 
   return (
     <>
-      <Dialog.Header
-        title="Confirm account deletion"
-      >
-        <Text as='p'>A confirmation code has been sent to your email.</Text>
-        <Text as='p'>Enter it below to delete your account.</Text>
+      <Dialog.Header title="Confirm account deletion">
+        <Text as="p">A confirmation code has been sent to your email.</Text>
+        <Text as="p">Enter it below to delete your account.</Text>
       </Dialog.Header>
 
       <form
