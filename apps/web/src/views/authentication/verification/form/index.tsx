@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
-import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
+import { Button, FormError, Link, Text, TextField, toast } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
 import { useRouter } from 'next/navigation';
@@ -14,6 +14,7 @@ export default function EmailVerificationForm() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
   const methods = useEmailVerificationForm();
@@ -38,7 +39,7 @@ export default function EmailVerificationForm() {
     const result = await response.json();
 
     if (!response.ok) {
-      setLoading(false)
+      setLoading(false);
       setFormError(result.message);
     } else {
       router.push('/');
@@ -46,15 +47,20 @@ export default function EmailVerificationForm() {
   };
 
   const handleResend = async () => {
+    setResendLoading(true);
+
     const response = await request({
       endpoint: '/auth/verify/resend',
       method: 'GET',
     });
 
     const result = await response.json();
+    setResendLoading(false);
 
     if (!response.ok) {
       setFormError(result.message);
+    } else {
+      toast.success('Verification email has been resend!');
     }
   };
 
@@ -74,7 +80,10 @@ export default function EmailVerificationForm() {
           <Text as="p">Didn't receive the code?</Text>
           <Text as="p">
             Check your spam folder or{' '}
-            <Link onClick={handleResend}>resend the verification email</Link>.
+            <Link onClick={handleResend} loading={resendLoading}>
+              resend the verification email
+            </Link>
+            .
           </Text>
         </div>
 

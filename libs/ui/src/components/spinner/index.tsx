@@ -2,7 +2,7 @@ import { cx } from '../../utils';
 import styles from './spinner.module.css';
 
 export interface SpinnerProps {
-  size?: 'sm' | 'md';
+  size?: 'xs' | 'sm' | 'md';
   className?: string;
 }
 

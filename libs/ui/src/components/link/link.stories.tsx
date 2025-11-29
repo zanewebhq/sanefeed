@@ -28,6 +28,13 @@ export const AsButton: StoryObj<LinkProps> = {
     onClick: () => alert('Button clicked'),
     children: 'Go back',
     iconLeft: 'arrow-back',
-    openNewTab: true,
+  },
+};
+
+export const AsButtonLoading: StoryObj<LinkProps> = {
+  args: {
+    onClick: () => alert('Button clicked'),
+    children: 'Resend verification email',
+    loading: true,
   },
 };
