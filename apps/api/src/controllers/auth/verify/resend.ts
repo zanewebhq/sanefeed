@@ -39,7 +39,7 @@ const resendVerification = catchAsync(
         user,
       },
     });
-  }
+  },
 );
 
 export default resendVerification;

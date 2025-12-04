@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
+import { Button, FormError, Link, Text, TextField, toast } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
 import { SubmitHandler } from 'react-hook-form';
@@ -21,6 +21,7 @@ export default function VerifyRecoveryCodeStep({
   setCode,
 }: VerifyRecoveryCodeStepProps) {
   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
   const [formError, setFormError] = useState<string>();
 
   const methods = useVerifyRecoveryCodeForm();
@@ -54,6 +55,27 @@ export default function VerifyRecoveryCodeStep({
     }
   };
 
+  const handleResend = async () => {
+    setResendLoading(true);
+
+    const response = await request({
+      endpoint: '/auth/recover/send',
+      method: 'POST',
+      body: {
+        email: email || '',
+      },
+    });
+
+    const result = await response.json();
+    setResendLoading(false);
+
+    if (!response.ok) {
+      setFormError(result.message);
+    } else {
+      toast.success('Recovery email has been resend!');
+    }
+  };
+
   return (
     <>
       <AuthenticationHeader heading="Enter recovery code">
@@ -79,7 +101,11 @@ export default function VerifyRecoveryCodeStep({
           <div>
             <Text as="p">Didn't receive the code?</Text>
             <Text as="p">
-              Check your spam folder or <Link>resend the recovery code</Link>.
+              Check your spam folder or
+              <Link onClick={handleResend} loading={resendLoading}>
+                resend the recovery code
+              </Link>
+              .
             </Text>
           </div>
 
