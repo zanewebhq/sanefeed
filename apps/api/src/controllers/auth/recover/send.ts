@@ -12,7 +12,7 @@ export const sendRecovery = catchAsync(async (req: Request, res: Response) => {
   const user = await getUserByEmail(email);
 
   if (!user) {
-    res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.OK).json({
       status: 'success',
     });
   }
