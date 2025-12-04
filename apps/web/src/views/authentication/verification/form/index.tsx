@@ -6,7 +6,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { Button, FormError, Link, Text, TextField, toast } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import useEmailVerificationForm, { Inputs } from './use-form';
 import request from 'apps/web/src/utils/request';
 
@@ -64,6 +64,16 @@ export default function EmailVerificationForm() {
     }
   };
 
+  const logout = async () => {
+    setLoading(true);
+
+    await request({
+      endpoint: '/auth/logout',
+    });
+
+    redirect('/');
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form} noValidate>
       <TextField
@@ -93,8 +103,8 @@ export default function EmailVerificationForm() {
           Verify Email
         </Button>
 
-        <Link href="/auth/signup" iconLeft="arrow-back">
-          Go back
+        <Link onClick={logout} iconLeft="arrow-back">
+          Log out
         </Link>
       </div>
     </form>
