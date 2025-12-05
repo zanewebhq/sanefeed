@@ -1,4 +1,4 @@
-import { Dialog, FormError, PasswordField } from '@sanefeed/ui';
+import { Dialog, FormError, PasswordField, Text } from '@sanefeed/ui';
 import styles from './styles.module.css';
 import { useState } from 'react';
 import useRequestAccountDeletionForm, { Inputs } from './use-form';
@@ -48,10 +48,12 @@ export default function RequestAccountDeletion({
 
   return (
     <>
-      <Dialog.Header
-        title="Delete your account"
-        description="To delete your account, please enter your password. Deleting your account will permanently remove all your data. This action cannot be undone."
-      />
+      <Dialog.Header title="Delete your account">
+        <Text as="p">
+          Deleting your account will permanently remove all your data.
+        </Text>
+        <Text as="p">This action cannot be undone.</Text>
+      </Dialog.Header>
 
       <form
         onSubmit={handleSubmit(onSubmit)}

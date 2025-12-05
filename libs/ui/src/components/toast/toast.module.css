@@ -1,0 +1,54 @@
+.toast {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 16rem;
+  width: fit-content;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.content {
+  width: 100%;
+}
+
+.close {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid;
+  border-radius: 100%;
+  color: inherit;
+  background-color: inherit;
+  border-color: inherit;
+  cursor: pointer;
+}
+
+.success {
+  color: #0d770d;
+  background-color: #d8ffd8;
+  border-color: #81e381;
+}
+
+.error {
+  color: var(--color-danger-400);
+  background-color: var(--color-danger-100);
+  border-color: var(--color-danger-200);
+}
+
+.loading {
+  color: var(--color-primary-300);
+  background-color: var(--color-background-100);
+  border-color: var(--color-primary-300);
+}

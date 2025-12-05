@@ -51,7 +51,7 @@ export default function RequestEmailChange({
     <>
       <Dialog.Header
         title="Change email address"
-        description="To update your email address, please enter your current password and your new email address below."
+        description="To change your email address, enter your current password and the new email address below."
       />
 
       <form

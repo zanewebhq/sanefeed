@@ -18,6 +18,7 @@ import {
   MdBookmarkAdd,
   MdBookmarkRemove,
   MdCheck,
+  MdCheckCircle,
   MdChevronLeft,
   MdChevronRight,
   MdClose,
@@ -44,6 +45,7 @@ export const icons = {
   'caps-lock': BsCapslock,
   categories: BiCategory,
   checkmark: MdCheck,
+  'check-circle': MdCheckCircle,
   'chevron-down': IoChevronDownSharp,
   'chevron-left': MdChevronLeft,
   'chevron-left-light': BsChevronLeft,
@@ -88,5 +90,5 @@ export const sizes = {
   xl: '2.5rem',
 };
 
-export type IconName = keyof typeof icons
-export type IconSize = keyof typeof sizes
+export type IconName = keyof typeof icons;
+export type IconSize = keyof typeof sizes;

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, FormError, Link, TextField } from '@sanefeed/ui';
+import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
 
 import styles from '../styles.module.css';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -53,11 +53,12 @@ export default function SendRecoveryCodeStep({
 
   return (
     <>
-      <AuthenticationHeader
-        heading="Forgot password?"
-        description="Enter your email address below, and we'll send you a recovery code to
-          reset your password."
-      />
+      <AuthenticationHeader heading="Recover your password">
+        <Text as="p">Enter your email address below.</Text>
+        <Text as="p">
+          We'll send you a recovery code to reset your password.
+        </Text>
+      </AuthenticationHeader>
 
       <form
         className={styles.form}

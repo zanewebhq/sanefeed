@@ -3,7 +3,7 @@ import FieldIcons from './icons';
 import FieldLabel from './label';
 import FieldWrapper from './wrapper';
 import styles from './field.module.css';
-import { cx } from 'libs/ui/src/utils';
+import { cx } from '../../../utils';
 
 export interface FieldProps {
   children: React.ReactNode;

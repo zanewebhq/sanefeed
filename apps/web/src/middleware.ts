@@ -1,13 +1,16 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
 
-export async function middleware(request: NextRequest) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('token');
-  const routes = ['/auth/signup', '/auth/login'];
+export function middleware(request: NextRequest) {
+  const token = request.cookies.get('token')?.value;
+  const { pathname } = request.nextUrl;
 
-  if (token && routes.includes(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL('/', request.url));
+  const isProtected =
+    pathname.startsWith('/app') || pathname.startsWith('/auth/verify');
+
+  if (!token && isProtected) {
+    return NextResponse.redirect(new URL('/auth/login', request.url));
   }
+
+  return NextResponse.next();
 }
