@@ -11,7 +11,7 @@ export const verify = catchAsync(
     const validCode = validateCode(
       req.body.code,
       req.user.verification_code,
-      req.user.verification_code_expires_at
+      req.user.verification_code_expires_at,
     );
 
     if (!validCode) {
@@ -35,7 +35,7 @@ export const verify = catchAsync(
         user: sanitizedUser,
       },
     });
-  }
+  },
 );
 
 export default verify;

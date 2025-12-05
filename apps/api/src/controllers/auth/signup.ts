@@ -1,30 +1,43 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import crypto from 'crypto';
+import * as z from 'zod/v4';
 import catchAsync from '../../utils/catch-async';
-import dayjs from 'dayjs';
 import { StatusCodes } from 'http-status-codes';
 import sendEmail from '../../utils/send-email';
 import sanitizeUser from '../../utils/sanitize-user';
 import { createUser } from '../../models/user';
 import hashPassword from '../../utils/hash-password';
+import generateCode from '../../utils/generate-code';
 
 const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
 };
 
+const signupSchema = z.object({
+  email: z.email(),
+  password: z.string().min(8).max(128),
+});
+
 export const signup = catchAsync(async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const validation = signupSchema.safeParse(req.body);
+
+  if (validation.error) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      status: 'fail',
+      message: 'Invalid email or password.',
+    });
+  }
+
+  const { email, password } = validation.data;
 
   const hashedPassword = await hashPassword(password);
-  const verificationCode = crypto.randomBytes(3).toString('hex').toUpperCase();
-  const verificationCodeExpiresAt = dayjs().add(1, 'hour').toDate();
+  const { code, expiresAt } = generateCode();
 
   const user = await createUser({
     email,
     password: hashedPassword,
-    verification_code: verificationCode,
-    verification_code_expires_at: verificationCodeExpiresAt,
+    verification_code: code,
+    verification_code_expires_at: expiresAt,
   });
 
   const sanitizedUser = sanitizeUser(user);
@@ -35,7 +48,7 @@ export const signup = catchAsync(async (req: Request, res: Response) => {
   await sendEmail({
     email,
     subject: 'Verification code',
-    text: `Your verification code is: ${verificationCode}.`,
+    text: `Your verification code is: ${code}.`,
   });
 
   res

@@ -56,7 +56,7 @@ const deleteAccount = catchAsync(
         user: sanitizedUser,
       },
     });
-  }
+  },
 );
 
 export default deleteAccount;
