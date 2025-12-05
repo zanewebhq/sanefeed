@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
-import { Button, FormError, Link, Text, TextField } from '@sanefeed/ui';
+import { Button, FormError, Link, Text, TextField, toast } from '@sanefeed/ui';
 
 import styles from './styles.module.css';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import useEmailVerificationForm, { Inputs } from './use-form';
 import request from 'apps/web/src/utils/request';
 
@@ -14,6 +14,7 @@ export default function EmailVerificationForm() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
   const methods = useEmailVerificationForm();
@@ -38,6 +39,7 @@ export default function EmailVerificationForm() {
     const result = await response.json();
 
     if (!response.ok) {
+      setLoading(false);
       setFormError(result.message);
     } else {
       router.push('/');
@@ -45,16 +47,31 @@ export default function EmailVerificationForm() {
   };
 
   const handleResend = async () => {
+    setResendLoading(true);
+
     const response = await request({
       endpoint: '/auth/verify/resend',
       method: 'GET',
     });
 
     const result = await response.json();
+    setResendLoading(false);
 
     if (!response.ok) {
       setFormError(result.message);
+    } else {
+      toast.success('Verification email has been resend!');
     }
+  };
+
+  const logout = async () => {
+    setLoading(true);
+
+    await request({
+      endpoint: '/auth/logout',
+    });
+
+    redirect('/');
   };
 
   return (
@@ -73,7 +90,10 @@ export default function EmailVerificationForm() {
           <Text as="p">Didn't receive the code?</Text>
           <Text as="p">
             Check your spam folder or{' '}
-            <Link onClick={handleResend}>resend the verification email</Link>.
+            <Link onClick={handleResend} loading={resendLoading}>
+              resend the verification email
+            </Link>
+            .
           </Text>
         </div>
 
@@ -83,8 +103,8 @@ export default function EmailVerificationForm() {
           Verify Email
         </Button>
 
-        <Link href="/auth/signup" iconLeft="arrow-back">
-          Go back
+        <Link onClick={logout} iconLeft="arrow-back">
+          Log out
         </Link>
       </div>
     </form>

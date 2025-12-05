@@ -22,9 +22,6 @@ export default function DeleteAccount() {
           If you no longer want to use SaneFeed, you can permanently delete your
           account.
         </Text>
-        <Text as="p" className={styles.warning}>
-          WARNING: This action is irreversible!
-        </Text>
       </div>
 
       <Button

@@ -23,7 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={firaSans.className}>
       <body>
-        <Toaster position="top-center" />
+        <Toaster
+          position="bottom-center"
+          toastOptions={{ duration: 5000 }}
+          closeButton={false}
+          richColors
+        />
 
         {children}
       </body>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import useConfirmEmailChangeForm, { Inputs } from './use-form';
 import { SubmitHandler } from 'react-hook-form';
 import request from 'apps/web/src/utils/request';
-import { toast } from 'sonner';
+import { toast } from '@sanefeed/ui';
 import { useRouter } from 'next/navigation';
 
 interface ConfirmEmailChangeProps {
@@ -51,10 +51,12 @@ export default function ConfirmEmailChange({
 
   return (
     <>
-      <Dialog.Header
-        title="Verify your new email address"
-        description="To complete your email change, please verify your new address by entering the verification code we just sent to email@example.com"
-      />
+      <Dialog.Header title="Verify new email address">
+        <Text as="p">
+          A verification code has been sent to your new email address.
+        </Text>
+        <Text as="p">Enter it below to complete the email change.</Text>
+      </Dialog.Header>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -82,7 +84,7 @@ export default function ConfirmEmailChange({
 
           <Dialog.Buttons
             onClose={onClose}
-            submitText="Verify email"
+            submitText="Confirm email"
             loading={loading}
           />
         </div>

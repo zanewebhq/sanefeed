@@ -1,8 +1,14 @@
+import { cx } from '../../utils';
 import styles from './spinner.module.css';
 
-export function Spinner() {
+export interface SpinnerProps {
+  size?: 'xs' | 'sm' | 'md';
+  className?: string;
+}
+
+export function Spinner({ size = 'md', className }: SpinnerProps) {
   return (
-    <div className={styles.spinnerWrapper}>
+    <div className={cx(styles.spinnerWrapper, styles[size], className)}>
       <div className={styles.spinner} />
     </div>
   );
