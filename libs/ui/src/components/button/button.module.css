@@ -32,7 +32,8 @@
 .primary {
   background-color: var(--color-button);
   color: var(--color-text-light-100);
-  transition: background-color var(--transition-micro),
+  transition:
+    background-color var(--transition-micro),
     outline-color var(--transition-micro);
 
   &:hover,
@@ -60,8 +61,10 @@
   background-color: transparent;
   color: var(--color-button);
   border: 2px solid var(--color-button);
-  transition: background-color var(--transition-micro),
-    border-color var(--transition-micro), outline-color var(--transition-micro);
+  transition:
+    background-color var(--transition-micro),
+    border-color var(--transition-micro),
+    outline-color var(--transition-micro);
 
   &:hover,
   &:focus-visible {

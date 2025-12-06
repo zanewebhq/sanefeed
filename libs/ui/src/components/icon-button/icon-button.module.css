@@ -31,7 +31,8 @@
 .primary {
   background-color: var(--color-button);
   color: var(--color-text-light-100);
-  transition: background-color var(--transition-micro),
+  transition:
+    background-color var(--transition-micro),
     outline-color var(--transition-micro);
 
   &:hover,
@@ -59,12 +60,14 @@
   background-color: transparent;
   color: var(--color-button);
   border: 2px solid var(--color-button);
-  transition: background-color var(--transition-micro),
-    border-color var(--transition-micro), outline-color var(--transition-micro);
+  transition:
+    background-color var(--transition-micro),
+    border-color var(--transition-micro),
+    outline-color var(--transition-micro);
 
   &:hover,
   &:focus-visible {
-    background-color: color-mix(in hsl, var(--color-button) 10%, transparent);
+    background-color: color-mix(in hsl, var(--color-button) 8%, transparent);
   }
 
   &:focus-visible {
@@ -73,8 +76,7 @@
   }
 
   &:active {
-    color: var(--color-text-light-100);
-    background-color: var(--color-button);
+    background-color: color-mix(in hsl, var(--color-button) 20%, transparent);
   }
 
   &:disabled {

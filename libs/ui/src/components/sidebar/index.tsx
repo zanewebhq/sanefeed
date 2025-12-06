@@ -31,13 +31,21 @@ export function Sidebar({}: SidebarProps) {
 
       <div className={styles.footer}>
         <div className={styles.splitButton}>
-          <Button variant="primary" iconLeft="plus" className={styles.primaryButton}>
+          <Button
+            variant="primary"
+            iconLeft="plus"
+            className={styles.primaryButton}
+          >
             New feed
           </Button>
-          
+
           <div className={styles.splitButtonDivider} />
 
-          <IconButton variant="primary" icon="chevron-up" className={styles.primaryIconButton} />
+          <IconButton
+            variant="primary"
+            icon="chevron-up"
+            className={styles.primaryIconButton}
+          />
         </div>
 
         <IconButton variant="secondary" icon="settings" />
