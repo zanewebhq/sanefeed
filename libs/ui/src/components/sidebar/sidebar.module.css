@@ -38,6 +38,29 @@
 }
 
 .footer {
-  height: 2.5rem;
+  display: flex;
+  gap: 1rem;
   flex-shrink: 0;
+  height: 3rem;
+}
+
+.splitButton {
+  display: flex;
+  flex-shrink: 0;
+  width: 15.5rem;
+}
+
+.primaryButton {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.primaryIconButton {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.splitButtonDivider {
+  width: 1px;
+  height: 100%;
 }

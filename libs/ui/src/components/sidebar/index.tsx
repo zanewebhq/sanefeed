@@ -1,4 +1,6 @@
+import Button from '../button';
 import Icon from '../icon';
+import IconButton from '../icon-button';
 import Link from '../link';
 import Text from '../text';
 import styles from './sidebar.module.css';
@@ -27,7 +29,19 @@ export function Sidebar({}: SidebarProps) {
         </div>
       </div>
 
-      <div className={styles.footer}></div>
+      <div className={styles.footer}>
+        <div className={styles.splitButton}>
+          <Button variant="primary" iconLeft="plus" className={styles.primaryButton}>
+            New feed
+          </Button>
+          
+          <div className={styles.splitButtonDivider} />
+
+          <IconButton variant="primary" icon="chevron-up" className={styles.primaryIconButton} />
+        </div>
+
+        <IconButton variant="secondary" icon="settings" />
+      </div>
     </div>
   );
 }
