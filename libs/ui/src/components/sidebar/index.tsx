@@ -2,6 +2,7 @@ import Button from '../button';
 import Icon from '../icon';
 import IconButton from '../icon-button';
 import Link from '../link';
+import NextLink from 'next/link';
 import Text from '../text';
 import styles from './sidebar.module.css';
 
@@ -10,13 +11,13 @@ export interface SidebarProps {}
 export function Sidebar({}: SidebarProps) {
   return (
     <div className={styles.sidebar}>
-      <div className={styles.header}>
+      <NextLink href="/app" className={styles.header}>
         <Icon name="logo" size="xl" />
 
         <Text as="p" size="2xl" className={styles.headerText}>
           SaneFeed
         </Text>
-      </div>
+      </NextLink>
 
       <div className={styles.content}>
         <div className={styles.empty}>
@@ -48,7 +49,7 @@ export function Sidebar({}: SidebarProps) {
           />
         </div>
 
-        <IconButton variant="secondary" icon="settings" />
+        <IconButton href="/app/settings" variant="secondary" icon="settings" />
       </div>
     </div>
   );

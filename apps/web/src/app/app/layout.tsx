@@ -1,3 +1,4 @@
+import { Sidebar } from '@sanefeed/ui';
 import styles from './layout.module.css';
 
 interface AppLayoutProps {
@@ -7,7 +8,7 @@ interface AppLayoutProps {
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.sidebar} />
+      <Sidebar />
 
       {children}
     </div>

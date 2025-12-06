@@ -4,6 +4,7 @@ import { Button, Text } from '@sanefeed/ui';
 import styles from './styles.module.css';
 import request from '../../utils/request';
 import { useState } from 'react';
+import { redirect } from 'next/navigation';
 
 interface HomeViewProps {
   user: any;
@@ -19,7 +20,7 @@ export default function HomeView({ user }: HomeViewProps) {
       endpoint: '/auth/logout',
     });
 
-    window.location.href = '/';
+    redirect('/');
   };
 
   return (
@@ -37,7 +38,7 @@ export default function HomeView({ user }: HomeViewProps) {
               Log out
             </Button>
 
-            <Button href="/app/settings" loading={loading}>
+            <Button href="/app" loading={loading}>
               Go to app
             </Button>
           </div>
